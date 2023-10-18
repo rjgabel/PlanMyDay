@@ -4,15 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#11CA9D"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+    <ImageView
+        android:id="@+id/paperAirplane"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="135dp"
+        android:layout_marginTop="123dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginBottom="499dp"
+        android:contentDescription="Paper Airplane Icon"
+        android:src="@drawable/paper_airplane"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/planMyDayText"
+        android:layout_width="280dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="255dp"
+        android:layout_marginBottom="311dp"
+        android:text="Plan My Day"
+        android:textAlignment="center"
+        android:textColor="#FFD159"
+        android:textSize="55sp"
+        android:fontFamily="@font/rubikone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/loginButton"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="58dp"
+        android:background="#FDF6EC"
+        android:text="LOG IN"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:fontFamily="@font/ruda"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.621" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/signUpButton"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:background="#FDF6EC"
+        android:text="SIGN UP"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:fontFamily="@font/ruda"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton"
+        app:layout_constraintVertical_bias="0.5" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
