@@ -2,6 +2,7 @@ package com.example.planmyday;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -21,6 +22,19 @@ public class MainActivity extends AppCompatActivity {
 
         //create onClickListener for login/signup pages
 
+        //when clicking login button, call toLogin
+
+        //when clicking signup button, call toRegistration
+    }
+
+    private void toLogin(){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    private void toRegistration(){
+        Intent intent = new Intent(this, RegistrationActivity.class);
+        startActivity(intent);
     }
 
 
