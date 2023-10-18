@@ -19,18 +19,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //create onClickListener for login/signup
+        //create onClickListener for login/signup pages
 
     }
 
-    //TODO: Change return type to UserAccount
-    private void login(TextView email, TextView password){
-
-    }
-
-    //TODO: Change return type to UserAccount
-    private void signUp(TextView name, TextView email, TextView password){
-
-    }
 
 }
