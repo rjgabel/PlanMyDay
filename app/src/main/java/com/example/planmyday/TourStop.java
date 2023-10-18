@@ -1,6 +1,7 @@
 package com.example.planmyday;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class TourStop {
     private final Attraction attraction;
@@ -15,5 +16,13 @@ public class TourStop {
 
     public Attraction getAttraction() {
         return attraction;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
     }
 }
