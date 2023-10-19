@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">PlanMyDay</string>
     <string name="title_activity_login">LoginActivity</string>
-    <string name="prompt_name">Name</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="prompt_password2">Re-enter Password</string>
+    <string name="prompt_name">&#x1F464; Name</string>
+    <string name="prompt_email">&#x1F4E7; Email</string>
+    <string name="prompt_password">&#x1F512; Password</string>
+    <string name="prompt_password2">&#x1F513; Re-enter Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>

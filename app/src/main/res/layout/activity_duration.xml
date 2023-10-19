@@ -66,16 +66,19 @@
         app:layout_constraintTop_toBottomOf="@+id/multipleDaysButton"
         app:layout_constraintVertical_bias="0.465" />
 
-    <ImageView
+    <TextView
         android:id="@+id/imageView"
-        android:layout_width="171dp"
-        android:layout_height="98dp"
+        android:layout_width="168dp"
+        android:layout_height="114dp"
+        android:text="&#x1F552;"
+        android:textAlignment="center"
+        android:textSize="80sp"
         app:layout_constraintBottom_toTopOf="@+id/oneDayButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.894"
-        app:srcCompat="@drawable/clock" />
+        app:layout_constraintVertical_bias="0.871" />
 
     <TextView
         android:id="@+id/tourType"
