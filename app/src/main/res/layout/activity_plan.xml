@@ -4,52 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#11CA9D"
-    tools:context=".MainActivity">
-
-    <ImageView
-        android:id="@+id/paperAirplane"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="135dp"
-        android:layout_marginTop="123dp"
-        android:layout_marginEnd="136dp"
-        android:layout_marginBottom="499dp"
-        android:contentDescription="Paper Airplane Icon"
-        android:src="@drawable/paper_airplane"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/planMyDayText"
-        android:layout_width="280dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="255dp"
-        android:layout_marginBottom="311dp"
-        android:fontFamily="@font/rubikone"
-        android:text="Plan My Day"
-        android:textAlignment="center"
-        android:textColor="#FFD159"
-        android:textSize="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.314" />
+    tools:context=".PlanActivity">
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/loginButton"
+        android:id="@+id/uscButton"
         android:background="@drawable/round"
         android:layout_width="230dp"
         android:layout_height="50dp"
         android:layout_marginTop="150dp"
         android:layout_marginBottom="58dp"
         android:backgroundTint="#FDF6EC"
-        android:text="LOG IN"
+        android:text="USC Tour"
         android:textColor="#000000"
         android:textSize="30sp"
         android:fontFamily="@font/ruda"
@@ -61,7 +26,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:background="@drawable/round"
-        android:id="@+id/signUpButton"
+        android:id="@+id/laButton"
         android:layout_width="230dp"
         android:layout_height="50dp"
         android:elevation="0dp"
@@ -69,15 +34,14 @@
         android:foreground="?attr/selectableItemBackground"
         android:backgroundTint="#FDF6EC"
         android:fontFamily="@font/ruda"
-        android:text="SIGN UP"
+        android:text="LA Tour"
         android:textColor="#000000"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton"
+        app:layout_constraintTop_toBottomOf="@+id/uscButton"
         app:layout_constraintVertical_bias="0.245" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
