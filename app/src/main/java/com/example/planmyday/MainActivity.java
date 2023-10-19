@@ -1,9 +1,11 @@
 package com.example.planmyday;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
@@ -15,16 +17,29 @@ Contains login and sign up
  */
 public class MainActivity extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance("https://planmyday-16506-default-rtdb.firebaseio.com/");
+    AppCompatButton login, signUp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        login = findViewById(R.id.loginButton);
+        signUp = findViewById(R.id.signUpButton);
+
         //create onClickListener for login/signup pages
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toLogin();
+            }
+        });
 
-        //when clicking login button, call toLogin
-
-        //when clicking signup button, call toRegistration
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toRegistration();
+            }
+        });
     }
 
     private void toLogin(){
