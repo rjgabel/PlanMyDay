@@ -4,45 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F5F5"
     tools:context=".HomepageActivity">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/saved_itinerary"
-        android:background="@drawable/round"
-        android:layout_width="230dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="58dp"
-        android:backgroundTint="#FDF6EC"
-        android:text="Saved Itineraries"
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="315dp"
+        android:layout_height="94dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/rubikone"
+        android:text="Welcome to PLAN MY DAY"
+        android:textAlignment="center"
+        android:textColor="#11CA9D"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toTopOf="@+id/desc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.03" />
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="285dp"
+        android:layout_height="36dp"
+        android:fontFamily="@font/rubikone"
+        android:text="Previous itineraries..."
+        android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="30sp"
-        android:fontFamily="@font/ruda"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.621" />
+        app:layout_constraintVertical_bias="0.243" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:background="@drawable/round"
-        android:id="@+id/new_itinerary"
-        android:layout_width="230dp"
-        android:layout_height="50dp"
-        android:elevation="0dp"
-        android:stateListAnimator="@null"
-        android:foreground="?attr/selectableItemBackground"
-        android:backgroundTint="#FDF6EC"
+
+    <TextView
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="339dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="699dp"
         android:fontFamily="@font/ruda"
-        android:text="New Itineraries"
-        android:textColor="#000000"
-        android:textSize="30sp"
+        android:text="Logout"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/saved_itinerary"
-        app:layout_constraintVertical_bias="0.245" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/newitinerary"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="298dp"
+        android:layout_marginTop="588dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="68dp"
+        android:background="@drawable/circlebutton"
+        android:gravity="center"
+        android:text="+"
+        android:textColor="#FFFFFF"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
