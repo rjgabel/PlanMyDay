@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -28,8 +29,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class RegistrationActivity extends AppCompatActivity {
-    TextInputEditText emailView, passwordView;
-    Button login_btn;
+    TextInputEditText emailView, passwordView, confirmPasswordView, nameView;
+    Button login_btn, reroute;
     //FirebaseAuth mAuth;
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://planmyday-16506-default-rtdb.firebaseio.com/");
     @Override
@@ -38,18 +39,35 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
         //TODO: add name for registration
 
+        nameView = findViewById(R.id.name);
         emailView = findViewById(R.id.email);
         passwordView = findViewById(R.id.password);
+        confirmPasswordView = findViewById(R.id.password_check);
         login_btn = findViewById(R.id.btn_login);
+        reroute = findViewById(R.id.reroute_login);
 
-        //set of registration when
+        reroute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toLogin();
+            }
+        });
+
+        //set off registration when button is clicked
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email, password;
+                String email, password, confirmPassword, name;
                 email = String.valueOf(emailView.getText());
                 password = String.valueOf(passwordView.getText());
+                confirmPassword = String.valueOf(confirmPasswordView.getText());
+                name = String.valueOf(nameView.getText());
+
                 //check if they are empty
+                if (TextUtils.isEmpty(name)){
+                    Toast.makeText(RegistrationActivity.this,"Enter name", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (TextUtils.isEmpty(email)){
                     Toast.makeText(RegistrationActivity.this,"Enter email", Toast.LENGTH_SHORT).show();
                     return;
@@ -58,9 +76,13 @@ public class RegistrationActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationActivity.this,"Enter password", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                ArrayList<Integer> temp = new ArrayList<>();
-                temp.add(1);
-                UserAccount user = new UserAccount("",email, password, temp);
+                if (!password.equals(confirmPassword)){
+                    Toast.makeText(RegistrationActivity.this,"Passwords do not match", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                ArrayList<TourPlan> temp = new ArrayList<>();
+                //temp.add();
+                UserAccount user = new UserAccount(name, email, password, temp);
 
                 dbRef.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -72,7 +94,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         else {
                             dbRef.child("users").child(email).setValue(user);
                             Toast.makeText(RegistrationActivity.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
-                            //TODO: intent to go to choice
+                            toHome();
                             finish();
                         }
                     }
@@ -105,5 +127,16 @@ public class RegistrationActivity extends AppCompatActivity {
         });
 
 
+
+    }
+    private void toLogin(){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    private void toHome(){
+        Intent intent = new Intent(this, HomepageActivity.class);
+        //TODO: add user information to intent
+        startActivity(intent);
     }
 }
