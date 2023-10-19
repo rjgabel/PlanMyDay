@@ -5,59 +5,139 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
+    android:background="#11CA9D"
     android:orientation="vertical"
     android:padding="15dp"
     tools:context=".RegistrationActivity">
 
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:hint="@string/prompt_email"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/paperAirplane"
+        android:layout_width="102dp"
+        android:layout_height="84dp"
+        android:layout_marginStart="78dp"
+        android:layout_marginEnd="216dp"
+        android:contentDescription="Paper Airplane Icon"
+        android:src="@drawable/paper_airplane"
+        app:layout_constraintBottom_toTopOf="@+id/planMyDayText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.395" />
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:gravity="center"
-        android:text="@string/register"
-        android:textSize="20dp"
+        android:id="@+id/planMyDayText"
+        android:layout_width="284dp"
+        android:layout_height="50dp"
+        android:fontFamily="@font/rubikone"
+        android:text="Plan My Day"
+        android:textAlignment="center"
+        android:textColor="#FFD159"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paperAirplane"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/name"
+        android:layout_width="285dp"
+        android:layout_height="50dp"
+        android:background="#FDF6EC"
+        android:fontFamily="@font/ruda"
+        android:hint="@string/prompt_name"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/planMyDayText"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/email"
+        android:layout_width="285dp"
+        android:layout_height="50dp"
+        android:background="#FDF6EC"
+        android:fontFamily="@font/ruda"
+        android:hint="@string/prompt_email"
+        android:textColor="#000000"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.349" />
+        app:layout_constraintVertical_bias="0.477" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_width="285dp"
+        android:layout_height="50dp"
+        android:background="#FDF6EC"
+        android:fontFamily="@font/ruda"
         android:hint="@string/prompt_password"
+        android:textColor="#000000"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.46"></com.google.android.material.textfield.TextInputEditText>
+        app:layout_constraintVertical_bias="0.599"></com.google.android.material.textfield.TextInputEditText>
 
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/password_check"
+        android:layout_width="285dp"
+        android:layout_height="50dp"
+        android:background="#FDF6EC"
+        android:fontFamily="@font/ruda"
+        android:hint="@string/prompt_password2"
+        android:textColor="#000000"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.594" />
+        app:layout_constraintVertical_bias="0.718"></com.google.android.material.textfield.TextInputEditText>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_login"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="58dp"
+        android:background="@drawable/round"
+        android:backgroundTint="#FFD159"
+        android:fontFamily="@font/ruda"
+        android:text="SIGN UP"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.936" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/reroute_login"
+        android:layout_width="300dp"
+        android:layout_height="20dp"
+        android:background="@drawable/round"
+        android:backgroundTint="#11CA9D"
+        android:fontFamily="@font/ruda"
+        android:text="Already have an account? LOG IN"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.921" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

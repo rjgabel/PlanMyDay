@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FDF6EC"
+    tools:context=".DurationActivity">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/oneDayButton"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="58dp"
+        android:background="@drawable/round"
+        android:backgroundTint="#FFD159"
+        android:fontFamily="@font/ruda"
+        android:text="ONE DAY"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.46" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/multipleDaysButton"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:background="@drawable/round"
+        android:backgroundTint="#FFD159"
+        android:elevation="0dp"
+        android:fontFamily="@font/ruda"
+        android:foreground="?attr/selectableItemBackground"
+        android:stateListAnimator="@null"
+        android:text="MULTIPLE DAYS"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/oneDayButton"
+        app:layout_constraintVertical_bias="0.064" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/reviewItineraryButton"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:background="@drawable/round"
+        android:backgroundTint="#11CA9D"
+        android:elevation="0dp"
+        android:fontFamily="@font/ruda"
+        android:foreground="?attr/selectableItemBackground"
+        android:stateListAnimator="@null"
+        android:text="REVIEW ITINERARY"
+        android:textColor="#FFFFFF"
+        android:textSize="27sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/multipleDaysButton"
+        app:layout_constraintVertical_bias="0.465" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="171dp"
+        android:layout_height="98dp"
+        app:layout_constraintBottom_toTopOf="@+id/oneDayButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.894"
+        app:srcCompat="@drawable/clock" />
+
+    <TextView
+        android:id="@+id/tourType"
+        android:layout_width="279dp"
+        android:layout_height="68dp"
+        android:fontFamily="@font/rubikone"
+        android:text="Tour Type"
+        android:textAlignment="center"
+        android:textColor="#11CA9D"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.493" />
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="285dp"
+        android:layout_height="36dp"
+        android:fontFamily="@font/rubikone"
+        android:text="Let’s plan an itinerary..."
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tourType"
+        app:layout_constraintVertical_bias="0.225" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="93dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="318dp"
+        android:layout_marginBottom="668dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
