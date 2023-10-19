@@ -25,12 +25,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class RegistrationActivity extends AppCompatActivity {
     TextInputEditText emailView, passwordView;
     Button login_btn;
-    FirebaseAuth mAuth;
-    FirebaseDatabase db = FirebaseDatabase.getInstance("https://planmyday-16506-default-rtdb.firebaseio.com/");
-    DatabaseReference dbRef = db.getReference();
+    //FirebaseAuth mAuth;
+    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://planmyday-16506-default-rtdb.firebaseio.com/");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +41,6 @@ public class RegistrationActivity extends AppCompatActivity {
         emailView = findViewById(R.id.email);
         passwordView = findViewById(R.id.password);
         login_btn = findViewById(R.id.btn_login);
-        mAuth = FirebaseAuth.getInstance();
 
         //set of registration when
         login_btn.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +58,9 @@ public class RegistrationActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationActivity.this,"Enter password", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                UserAccount user = new UserAccount("",email, password);
+                ArrayList<Integer> temp = new ArrayList<>();
+                temp.add(1);
+                UserAccount user = new UserAccount("",email, password, temp);
 
                 dbRef.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -66,6 +68,12 @@ public class RegistrationActivity extends AppCompatActivity {
                         //check if email has been registered before
                         if (snapshot.hasChild(email)){
                             Toast.makeText(RegistrationActivity.this, "Email is already registered", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            dbRef.child("users").child(email).setValue(user);
+                            Toast.makeText(RegistrationActivity.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
+                            //TODO: intent to go to choice
+                            finish();
                         }
                     }
 
@@ -75,7 +83,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     }
                 });
 
-                dbRef.child("users").child(email).setValue(user);
+
 
 //                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 //                    @Override
