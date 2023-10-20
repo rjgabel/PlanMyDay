@@ -8,7 +8,7 @@
     android:background="#11CA9D"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context=".RegistrationActivity">
+    tools:context=".activities.RegistrationActivity">
 
 
     <ImageView

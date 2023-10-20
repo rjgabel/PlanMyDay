@@ -1,4 +1,4 @@
-package com.example.planmyday;
+package com.example.planmyday.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.planmyday.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,12 +43,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        //TODO: make button for forget password and make new page0
+
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email, password;
                 email = String.valueOf(emailView.getText());
                 password = String.valueOf(passwordView.getText());
+                //TODO: add forget password option
+
                 //check if they are empty
                 if (TextUtils.isEmpty(email)){
                     Toast.makeText(LoginActivity.this,"Enter email", Toast.LENGTH_SHORT).show();
@@ -64,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (snapshot.hasChild(email)){
                             final String getPassword = snapshot.child(email).child("password").getValue(String.class);
                             if (getPassword.equals(password)){
+                                //TODO: add firebase auth to login
                                 Toast.makeText(LoginActivity.this,"Successfully Logged in", Toast.LENGTH_SHORT).show();
                                 toHome();
                                 finish();

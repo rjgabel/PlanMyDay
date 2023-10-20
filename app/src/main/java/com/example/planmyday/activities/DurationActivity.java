@@ -1,8 +1,10 @@
-package com.example.planmyday;
+package com.example.planmyday.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.planmyday.R;
 
 public class DurationActivity extends AppCompatActivity {
 
