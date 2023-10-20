@@ -1,39 +1,95 @@
 package com.example.planmyday;
 
-public class Attraction {
-    public final static Attraction[] ATTRACTIONS = {new Attraction("Ronald Tutor Campus Center", "3607 Trousdale Pkwy, Los Angeles, CA 90089"), new Attraction("Fertitta Hall", "610 Childs Way, Los Angeles, CA 90089"),
-//            new Location("Epstein Family Plaza"),
-//            new Location("School of Cinematic Arts"),
-//            new Location("USC Fisher Museum of Art"),
-//            new Location("Leavey Library"),
-//            new Location("Allyson Felix Field"),
-//            new Location("USC Village"),
-//            new Location("Griffith Observatory"),
-//            new Location("The Last Bookstore"),
-//            new Location("Santa Monica Beach"),
-//            new Location("Universal Studios"),
-//            new Location("LACMA"),
-//            new Location("The Getty"),
-//            new Location("The Grove"),
-//            new Location("Natural History Museum"),
-//            new Location("The Broad Museum"),
-//            new Location("Little Tokyo"),
-//            new Location("Venice Beach"),
-//            new Location("Chinese Theater")
-    };
-    private final String name;
-    private final String address;
+import com.google.firebase.database.IgnoreExtraProperties;
 
-    Attraction(String name, String address) {
+import java.util.ArrayList;
+import java.util.HashMap;
+
+@IgnoreExtraProperties
+public class Attraction {
+
+    private String name;
+    private String address;
+
+    //whether it is usc or not (LA)
+    private boolean usc;
+    private String description;
+
+    //estimated time spent in minutes
+    private int time;
+    //distance from USC in miles
+    private double distUSC;
+    //0:mon, 1:tues...6:sun
+    //hours are formatted as an int as HHMM
+    private HashMap<Integer, ArrayList<Integer>> hours;
+
+    public Attraction(){
+
+    }
+
+    public Attraction(String name, String address, Boolean usc, String description, int time, double distUSC, HashMap<Integer, ArrayList<Integer>> hours) {
         this.name = name;
         this.address = address;
+        this.usc = usc;
+        this.description = description;;
+        this.time = time;
+        this.distUSC = distUSC;
+        this.hours = hours;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getAddress() {
         return address;
     }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    public boolean isUsc() {
+        return usc;
+    }
+
+    public void setUsc(boolean usc) {
+        this.usc = usc;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
+    public double getDistUSC() {
+        return distUSC;
+    }
+
+    public void setDistUSC(double distUSC) {
+        this.distUSC = distUSC;
+    }
+
+    public HashMap<Integer, ArrayList<Integer>> getHours() {
+        return hours;
+    }
+
+    public void setHours(HashMap<Integer, ArrayList<Integer>> hours) {
+        this.hours = hours;
+    }
+
 }

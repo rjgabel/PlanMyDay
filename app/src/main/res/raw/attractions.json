@@ -1,0 +1,36 @@
+[
+  {
+    "name": "Ronald Tutor Campus Center",
+    "address": "3607 Trousdale Pkwy, Los Angeles, CA 90089",
+    "usc": true,
+    "description": "A great place to get food on campus!",
+    "time": 45,
+    "distUSC": 0.0,
+    "hours": {
+      "0": [700, 2200],
+      "1": [700, 2200],
+      "2": [700, 2200],
+      "3": [700, 2200],
+      "4": [700, 2200],
+      "5": [700, 2200],
+      "6": [700, 2200]
+    }
+  },
+  {
+    "name": "Fertitta Hall",
+    "address": "610 Childs Way, Los Angeles, CA 90089",
+    "usc": true,
+    "description": "A serene attraction",
+    "time": 120,
+    "distUSC": 0.0,
+    "hours": {
+      "0": [730, 2300],
+      "1": [730, 2300],
+      "2": [730, 2300],
+      "3": [730, 2300],
+      "4": [730, 2300],
+      "5": [900, 2000],
+      "6": [1200, 2000]
+    }
+  }
+]
