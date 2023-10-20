@@ -6,21 +6,25 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class TourPlan {
-    private ArrayList<TourStop> stops;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private final ArrayList<TourStop> stops;
+    private int startTime;
+    private int endTime;
     private int durationChoice;
     private ArrayList<LocalTime> acceptableTimes;
+
+    public TourPlan(ArrayList<TourStop> stops) {
+        this.stops = stops;
+    }
 
     public ArrayList<TourStop> getStops() {
         return stops;
     }
 
-    public LocalTime getStartTime() {
+    public int getStartTime() {
         return startTime;
     }
 
-    public LocalTime getEndTime() {
+    public int getEndTime() {
         return endTime;
     }
 }

@@ -6,10 +6,10 @@ import java.time.LocalTime;
 
 public class TourStop {
     private final Attraction attraction;
-    private final LocalTime startTime;
-    private final LocalTime endTime;
+    private final int startTime;
+    private final int endTime;
 
-    TourStop(Attraction attraction, LocalTime startTime, LocalTime endTime) {
+    TourStop(Attraction attraction, int startTime, int endTime) {
         this.attraction = attraction;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -19,11 +19,11 @@ public class TourStop {
         return attraction;
     }
 
-    public LocalTime getStartTime() {
+    public int getStartTime() {
         return startTime;
     }
 
-    public LocalTime getEndTime() {
+    public int getEndTime() {
         return endTime;
     }
 }
