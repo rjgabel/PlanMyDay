@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.planmyday.CreateAttractions;
+import com.example.planmyday.activities.CreateAttractions;
 import com.example.planmyday.R;
 import com.google.firebase.database.FirebaseDatabase;
 
