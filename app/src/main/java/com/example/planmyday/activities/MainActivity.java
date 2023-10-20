@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.planmyday.TourOptimizer;
 import com.example.planmyday.activities.CreateAttractions;
 import com.example.planmyday.R;
 import com.google.firebase.database.FirebaseDatabase;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         //TODO: comment out next two lines once attractions are in database
         CreateAttractions ca = new CreateAttractions(this);
         ca.generate();
+        TourOptimizer.optimizeTour(ca.attractions);
 
         //create onClickListener for login/signup pages
         login.setOnClickListener(new View.OnClickListener() {

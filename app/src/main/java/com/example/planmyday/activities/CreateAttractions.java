@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 //Class used to generate attractions into the database
 //adds attraction objects to ensure app compatibility
@@ -60,9 +61,19 @@ public class CreateAttractions {
             //TODO: add to database once all parts are filled in
             //dbRef.child("attractions").child(attraction.getName()).setValue(attraction);
             Log.d("Names", attraction.getName());
+            // Convert hours from HHMM to minutes since midnight
+            HashMap<Integer, ArrayList<Integer>> hours = attraction.getHours();
+            for (int i = 0; i < 7; i++) {
+                ArrayList<Integer> hour = hours.get(i);
+                for (int j = 0; j < hour.size(); j++) {
+                    int time = hour.get(j);
+                    hour.set(j, (time / 100) * 60 + (time % 100));
+                }
+                hours.put(i, hour);
+            }
+            this.attractions.add(attraction);
         }
         Log.d("JSONRESULT",jsonString);
-
     }
 
     public void addToDB(Attraction attraction){
