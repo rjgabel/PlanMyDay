@@ -1,4 +1,4 @@
-package com.example.planmyday;
+package com.example.planmyday.models;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
@@ -22,12 +22,13 @@ public class Attraction {
     //0:mon, 1:tues...6:sun
     //hours are formatted as an int as HHMM
     private HashMap<Integer, ArrayList<Integer>> hours;
+    private String imageUrl;
 
     public Attraction(){
 
     }
 
-    public Attraction(String name, String address, Boolean usc, String description, int time, double distUSC, HashMap<Integer, ArrayList<Integer>> hours) {
+    public Attraction(String name, String address, Boolean usc, String description, int time, double distUSC, HashMap<Integer, ArrayList<Integer>> hours, String imageUrl) {
         this.name = name;
         this.address = address;
         this.usc = usc;
@@ -35,6 +36,7 @@ public class Attraction {
         this.time = time;
         this.distUSC = distUSC;
         this.hours = hours;
+        this.imageUrl = imageUrl;
     }
 
     public String getName() {

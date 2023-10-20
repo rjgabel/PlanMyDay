@@ -1,7 +1,8 @@
 package com.example.planmyday;
 
+import com.example.planmyday.models.Attraction;
+
 import java.time.LocalTime;
-import java.util.ArrayList;
 
 public class TourStop {
     private final Attraction attraction;

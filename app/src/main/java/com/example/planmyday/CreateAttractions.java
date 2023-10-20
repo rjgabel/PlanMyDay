@@ -1,25 +1,25 @@
 package com.example.planmyday;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.util.Log;
-import android.widget.Toast;
 
+import com.example.planmyday.models.Attraction;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 //Class used to generate attractions into the database
 //adds attraction objects to ensure app compatibility
 public class CreateAttractions {
     Context context;
     ArrayList<Attraction> attractions;
+    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://planmyday-16506-default-rtdb.firebaseio.com/");
 
     CreateAttractions(Context context){
         attractions = new ArrayList<>();
@@ -52,25 +52,12 @@ public class CreateAttractions {
         }
 
         Gson gs = new Gson();
-//        String json = "{\n" +
-//                "      \"name\": \"Ronald Tutor Campus Center\",\n" +
-//                "      \"address\": \"3607 Trousdale Pkwy, Los Angeles, CA 90089\",\n" +
-//                "      \"usc\": true,\n" +
-//                "      \"description\": \"A great place to get food on campus!\",\n" +
-//                "      \"time\": 45,\n" +
-//                "      \"distUSC\": 0.0,\n" +
-//                "      \"hours\": {\n" +
-//                "        \"0\": [700, 2200],\n" +
-//                "        \"1\": [700, 2200],\n" +
-//                "        \"2\": [700, 2200],\n" +
-//                "        \"3\": [700, 2200],\n" +
-//                "        \"4\": [700, 2200],\n" +
-//                "        \"5\": [700, 2200],\n" +
-//                "        \"6\": [700, 2200]\n" +
-//                "      }\n" +
-//                "    }";
+
         Attraction[] attractions = gs.fromJson(jsonString, Attraction[].class);
+
         for (Attraction attraction : attractions){
+            //TODO: add to database once all parts are filled in
+            //dbRef.child("attractions").child(attraction.getName()).setValue(attraction);
             Log.d("Names", attraction.getName());
         }
         Log.d("JSONRESULT",jsonString);

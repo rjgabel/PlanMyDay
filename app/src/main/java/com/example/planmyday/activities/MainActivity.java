@@ -1,4 +1,4 @@
-package com.example.planmyday;
+package com.example.planmyday.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -6,9 +6,9 @@ import androidx.appcompat.widget.AppCompatButton;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
-import com.google.firebase.database.DatabaseReference;
+import com.example.planmyday.CreateAttractions;
+import com.example.planmyday.R;
 import com.google.firebase.database.FirebaseDatabase;
 
 /*
@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         login = findViewById(R.id.loginButton);
         signUp = findViewById(R.id.signUpButton);
+        //TODO: comment out next two lines once attractions are in database
         CreateAttractions ca = new CreateAttractions(this);
         ca.generate();
 

@@ -1,4 +1,4 @@
-package com.example.planmyday;
+package com.example.planmyday.models;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 

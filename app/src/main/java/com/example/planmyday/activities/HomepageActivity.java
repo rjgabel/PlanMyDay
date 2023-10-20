@@ -1,4 +1,4 @@
-package com.example.planmyday;
+package com.example.planmyday.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -6,6 +6,8 @@ import androidx.appcompat.widget.AppCompatButton;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.planmyday.R;
 
 public class HomepageActivity extends AppCompatActivity {
 
