@@ -31,6 +31,10 @@ public class LoginActivity extends AppCompatActivity {
         login_btn = findViewById(R.id.btn_login);
         reroute = findViewById(R.id.reroute_login);
 
+        //TODO: forgot password option
+        //TODO: email format verification
+        //String str = String.valueOf(R.id.email);
+
         reroute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
         login = findViewById(R.id.loginButton);
         signUp = findViewById(R.id.signUpButton);
+        CreateAttractions ca = new CreateAttractions(this);
+        ca.generate();
 
         //create onClickListener for login/signup pages
         login.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
     private void toRegistration(){
         Intent intent = new Intent(this, RegistrationActivity.class);
         startActivity(intent);
+    }
+
+    private void createAttractions(){
+
     }
 
 
