@@ -1,8 +1,9 @@
-package com.example.planmyday;
+package com.example.planmyday.activities;
 
 import android.content.Context;
 import android.util.Log;
 
+import com.example.planmyday.R;
 import com.example.planmyday.models.Attraction;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
