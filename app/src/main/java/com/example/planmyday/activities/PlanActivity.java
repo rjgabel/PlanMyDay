@@ -16,6 +16,14 @@ public class PlanActivity extends AppCompatActivity {
     }
 
     public void toUsc(){
-        //Intent intent = new Intent(this, )
+        //Intent intent = new Intent(this, );
+        //intent.putExtra();
+        //startActivity(intent);
+    }
+
+    public void toLA(){
+        //intent intent = new Intent(this, );
+        //intent.putExtra();
+        //startActivity(intent);
     }
 }
