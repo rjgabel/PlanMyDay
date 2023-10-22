@@ -15,7 +15,7 @@ import java.util.Map;
 public class LATour extends TourType {
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://planmyday-16506-default-rtdb.firebaseio.com/");
     @Override
-    public Attraction[] getAttractions() {
+    public ArrayList<Attraction> getAttractions() {
         //return attractions that are only in at LA
         dbRef.child("attractions").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -28,7 +28,7 @@ public class LATour extends TourType {
 
             }
         });
-        return new Attraction[0];
+        return new ArrayList<Attraction>();
     }
 
     public void attractionsHelper(Map<String, Object> attractions){

@@ -2,8 +2,10 @@ package com.example.planmyday;
 
 import com.example.planmyday.models.Attraction;
 
-public abstract class TourType {
-    private Attraction[] attractions;
+import java.util.ArrayList;
 
-    public abstract Attraction[] getAttractions();
+public abstract class TourType {
+    private ArrayList<Attraction> attractions;
+
+    public abstract ArrayList<Attraction> getAttractions();
 }
