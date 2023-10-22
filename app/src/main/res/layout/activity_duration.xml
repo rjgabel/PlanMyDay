@@ -111,16 +111,15 @@
         app:layout_constraintVertical_bias="0.225" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/arrow"
         android:layout_width="93dp"
         android:layout_height="59dp"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="318dp"
-        android:layout_marginBottom="668dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tourType"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
         app:srcCompat="@drawable/arrow" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

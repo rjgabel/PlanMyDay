@@ -1,10 +1,12 @@
 package com.example.planmyday;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
@@ -16,12 +18,22 @@ import java.util.ArrayList;
 public class LocationsActivity extends AppCompatActivity {
     TourType tourType;
     ArrayList<Attraction> attractions;
+    AppCompatButton next;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_locations);
         Intent intent = getIntent();
         String type = intent.getStringExtra(Intent.EXTRA_TEXT);
+
+        next = findViewById(R.id.nextButton);
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toDuration();
+            }
+        });
 
         //make the correct type of Tour
         if (type.equals("usc")){
@@ -31,7 +43,7 @@ public class LocationsActivity extends AppCompatActivity {
             tourType = new LATour();
         }
         //get the right type of attractions from database
-        attractions = tourType.getAttractions();
+        //attractions = tourType.getAttractions();
 
         //create all buttons
         LayoutInflater li = LayoutInflater.from(this);
