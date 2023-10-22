@@ -7,5 +7,5 @@ import java.util.ArrayList;
 public abstract class TourType {
     private ArrayList<Attraction> attractions;
 
-    public abstract ArrayList<Attraction> getAttractions();
+    public abstract ArrayList<Attraction> filter(ArrayList<Attraction> rawAttractions);
 }
