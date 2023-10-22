@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.planmyday.R;
@@ -26,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
 
     TextInputEditText emailView, passwordView;
     Button login_btn, reroute;
+    TextView forgot;
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://planmyday-16506-default-rtdb.firebaseio.com/");
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     @Override
@@ -36,6 +38,33 @@ public class LoginActivity extends AppCompatActivity {
         passwordView = findViewById(R.id.password);
         login_btn = findViewById(R.id.btn_login);
         reroute = findViewById(R.id.reroute_login);
+        forgot = findViewById(R.id.forgotPassword);
+
+        forgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = String.valueOf(emailView.getText());
+                if (TextUtils.isEmpty(email)){
+                    Toast.makeText(LoginActivity.this,"Please enter your email to send a reset link", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                mAuth.sendPasswordResetEmail(email)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(LoginActivity.this,"Email Sent if account exists", Toast.LENGTH_SHORT).show();
+
+                                }
+                                else {
+                                    String str = task.getException().getMessage();
+                                    Toast.makeText(LoginActivity.this, str,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }
+        });
 
         reroute.setOnClickListener(new View.OnClickListener() {
             @Override
