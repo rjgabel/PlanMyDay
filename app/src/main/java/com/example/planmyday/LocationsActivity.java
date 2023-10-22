@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.planmyday.activities.DurationActivity;
@@ -32,6 +33,14 @@ public class LocationsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 toDuration();
+            }
+        });
+
+        ImageView arrow = findViewById(R.id.arrow);
+
+        arrow.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
 

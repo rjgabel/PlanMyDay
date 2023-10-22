@@ -10,10 +10,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/nextButton"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="561dp"
-        android:layout_marginBottom="70dp"
+        android:layout_width="197dp"
+        android:layout_height="48dp"
         android:background="@drawable/round"
         android:backgroundTint="#11CA9D"
         android:elevation="0dp"
@@ -25,24 +23,25 @@
         android:textSize="27sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/scrollbar"
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/tourType"
-        android:layout_width="279dp"
-        android:layout_height="68dp"
+        android:layout_width="282dp"
+        android:layout_height="47dp"
         android:fontFamily="@font/rubikone"
         android:text="Tour Type"
         android:textAlignment="center"
         android:textColor="#11CA9D"
-        android:textSize="50sp"
+        android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/nextButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.146" />
+        app:layout_constraintVertical_bias="0.106" />
 
     <TextView
         android:id="@+id/desc"
@@ -52,20 +51,21 @@
         android:text="Let’s plan an itinerary..."
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/nextButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.262" />
+        app:layout_constraintVertical_bias="0.181" />
 
     <ScrollView
         android:id="@+id/scrollbar"
-        android:layout_width="315dp"
-        android:layout_height="356dp"
+        android:layout_width="327dp"
+        android:layout_height="379dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/nextButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/desc"
         app:layout_constraintVertical_bias="0.781">
@@ -73,7 +73,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
         </LinearLayout>
     </ScrollView>
@@ -85,9 +85,10 @@
         android:layout_marginEnd="318dp"
         app:layout_constraintBottom_toTopOf="@+id/tourType"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/arrow" />
 
 

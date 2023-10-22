@@ -36,6 +36,14 @@ public class PlanActivity extends AppCompatActivity {
             }
         });
 
+        ImageView arrow = findViewById(R.id.arrow);
+
+        arrow.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
     }
 
     public void toUsc(){
