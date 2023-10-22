@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-
+import android.widget.GridLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 import com.example.planmyday.R;
 import com.example.planmyday.models.Attraction;
 
@@ -37,6 +39,14 @@ public class LocationsActivity extends AppCompatActivity {
         CreateAttractions ca = new CreateAttractions(this);
         ca.generate();
         ArrayList<Attraction> rawAttractions = ca.attractions;
+        ImageView arrow = findViewById(R.id.arrow);
+
+        arrow.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         //make the correct type of Tour
         if (type.equals("usc")){
             tourType = new USCTour();
