@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -33,24 +34,30 @@ public class LocationsActivity extends AppCompatActivity {
             }
         });
 
+        CreateAttractions ca = new CreateAttractions(this);
+        ca.generate();
+        ArrayList<Attraction> rawAttractions = ca.attractions;
         //make the correct type of Tour
         if (type.equals("usc")){
             tourType = new USCTour();
         }
-        else if (type.equals("LA")){
+        else if (type.equals("la")){
             tourType = new LATour();
         }
         //get the right type of attractions from database
-        //attractions = tourType.getAttractions();
+        attractions = tourType.filter(rawAttractions);
+        for (Attraction attraction : attractions){
+            Log.d("Attractions", attraction.getName());
+        }
 
         //create all buttons
         LayoutInflater li = LayoutInflater.from(this);
         //make a new grid layout to be included in the xml
 //        GridLayout grid = (GridLayout) findViewById(R.id.gridLayout);
-//        for (int i = 0; i < attractions.size(); i++){
-//            //TODO: create a custom attractions layout
+        for (int i = 0; i < attractions.size(); i++){
+            //TODO: create a custom attractions layout
 //            TextView tv = (TextView) li.inflate(R.layout.attractions_layout, grid, false);
-//        }
+        }
 
     }
 

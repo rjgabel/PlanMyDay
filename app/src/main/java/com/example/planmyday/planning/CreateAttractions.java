@@ -1,4 +1,4 @@
-package com.example.planmyday.home;
+package com.example.planmyday.planning;
 
 import android.content.Context;
 import android.util.Log;

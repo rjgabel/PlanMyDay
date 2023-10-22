@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.example.planmyday.map.TourOptimizer;
 import com.example.planmyday.R;
+import com.example.planmyday.planning.CreateAttractions;
 import com.example.planmyday.registration.LoginActivity;
 import com.example.planmyday.registration.RegistrationActivity;
 import com.google.firebase.FirebaseApp;
@@ -30,9 +31,9 @@ public class MainActivity extends AppCompatActivity {
         login = findViewById(R.id.loginButton);
         signUp = findViewById(R.id.signUpButton);
         //TODO: comment out next two lines once attractions are in database
-        CreateAttractions ca = new CreateAttractions(this);
-        ca.generate();
-        TourOptimizer.optimizeTour(ca.attractions);
+        //CreateAttractions ca = new CreateAttractions(this);
+        //ca.generate();
+        //TourOptimizer.optimizeTour(ca.attractions);
         FirebaseApp.initializeApp(this);
         mAuth = FirebaseAuth.getInstance();
 
