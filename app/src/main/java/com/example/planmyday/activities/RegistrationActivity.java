@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -13,7 +14,13 @@ import android.widget.Toast;
 import com.example.planmyday.R;
 import com.example.planmyday.models.TourPlan;
 import com.example.planmyday.models.UserAccount;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,18 +34,22 @@ public class RegistrationActivity extends AppCompatActivity {
     Button login_btn, reroute;
     //FirebaseAuth mAuth;
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://planmyday-16506-default-rtdb.firebaseio.com/");
+    FirebaseAuth mAuth;
+    String uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         //TODO: add name for registration
-
+        mAuth = FirebaseAuth.getInstance();
         nameView = findViewById(R.id.name);
         emailView = findViewById(R.id.email);
         passwordView = findViewById(R.id.password);
         confirmPasswordView = findViewById(R.id.password_check);
         login_btn = findViewById(R.id.btn_login);
         reroute = findViewById(R.id.reroute_login);
+
+        FirebaseApp.initializeApp(this);
 
         reroute.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +68,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 confirmPassword = String.valueOf(confirmPasswordView.getText());
                 name = String.valueOf(nameView.getText());
 
+
                 //check if they are empty
                 if (TextUtils.isEmpty(name)){
                     Toast.makeText(RegistrationActivity.this,"Enter name", Toast.LENGTH_SHORT).show();
@@ -66,8 +78,13 @@ public class RegistrationActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationActivity.this,"Enter email", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                //TODO: check for email formatting
                 if (TextUtils.isEmpty(password)){
                     Toast.makeText(RegistrationActivity.this,"Enter password", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (password.length() < 6){
+                    Toast.makeText(RegistrationActivity.this,"Password must be at least 6 characters long", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (!password.equals(confirmPassword)){
@@ -76,58 +93,51 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
                 ArrayList<TourPlan> temp = new ArrayList<>();
                 //temp.add();
-                UserAccount user = new UserAccount(name, email, password, temp);
+                UserAccount userAccount = new UserAccount(name, email, password, temp);
 
-                dbRef.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        //check if email has been registered before
-                        if (snapshot.hasChild(email)){
-                            Toast.makeText(RegistrationActivity.this, "Email is already registered", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            //TODO: fix issue with unique email containing @ and .
-                            //TODO: add user to firebase auth
-                            dbRef.child("users").child(email).setValue(user);
-                            Toast.makeText(RegistrationActivity.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
-                            toHome();
-                            finish();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-
-
-//                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if (task.isSuccessful()) {
-//                            // Sign in success, update UI with the signed-in user's information
-//                            FirebaseUser user = mAuth.getCurrentUser();
-//                        }
-//                        else {
-//                            // If sign in fails, display a message to the user
-//                            Toast.makeText(RegistrationActivity.this, "Authentication failed.",
-//                                    Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-
-
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    String uid = user.getUid();
+                                    dbRef.child("users").child(uid).setValue(userAccount);
+                                    Toast.makeText(RegistrationActivity.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
+                                    toHome();
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    if (task.getException() != null) {
+                                        Log.e("FirebaseAuth", task.getException().getMessage());
+                                        String str = task.getException().getMessage();
+                                        Toast.makeText(RegistrationActivity.this, str,
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                        });
             }
         });
 
 
 
     }
+
+
     private void toLogin(){
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            toHome();
+        }
     }
 
     private void toHome(){
