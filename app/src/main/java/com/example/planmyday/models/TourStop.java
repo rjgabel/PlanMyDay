@@ -1,4 +1,4 @@
-package com.example.planmyday;
+package com.example.planmyday.models;
 
 import com.example.planmyday.models.Attraction;
 
@@ -9,7 +9,7 @@ public class TourStop {
     private final int startTime;
     private final int endTime;
 
-    TourStop(Attraction attraction, int startTime, int endTime) {
+    public TourStop(Attraction attraction, int startTime, int endTime) {
         this.attraction = attraction;
         this.startTime = startTime;
         this.endTime = endTime;

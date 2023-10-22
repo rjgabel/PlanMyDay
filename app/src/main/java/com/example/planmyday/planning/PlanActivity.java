@@ -1,14 +1,13 @@
-package com.example.planmyday.activities;
+package com.example.planmyday.planning;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
-import com.example.planmyday.LocationsActivity;
+import com.example.planmyday.planning.LocationsActivity;
 import com.example.planmyday.R;
 
 public class PlanActivity extends AppCompatActivity {

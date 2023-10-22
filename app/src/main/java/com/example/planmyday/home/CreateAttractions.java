@@ -1,4 +1,4 @@
-package com.example.planmyday.activities;
+package com.example.planmyday.home;
 
 import android.content.Context;
 import android.util.Log;
@@ -23,7 +23,7 @@ public class CreateAttractions {
     ArrayList<Attraction> attractions;
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://planmyday-16506-default-rtdb.firebaseio.com/");
 
-    CreateAttractions(Context context){
+    public CreateAttractions(Context context){
         attractions = new ArrayList<>();
         this.context = context;
     }
