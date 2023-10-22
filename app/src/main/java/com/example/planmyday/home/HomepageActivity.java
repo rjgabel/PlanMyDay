@@ -1,4 +1,4 @@
-package com.example.planmyday.activities;
+package com.example.planmyday.home;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.planmyday.R;
 import com.example.planmyday.models.UserAccount;
+import com.example.planmyday.planning.PlanActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,7 +28,7 @@ public class HomepageActivity extends AppCompatActivity {
     UserAccount userAccount;
     String uid;
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://planmyday-16506-default-rtdb.firebaseio.com/");
-    TextView welcome;
+    TextView welcome, logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +38,14 @@ public class HomepageActivity extends AppCompatActivity {
         //dbRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://planmyday-16506-default-rtdb.firebaseio.com/");
 
         welcome = findViewById(R.id.welcome);
+        logout = findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.signOut();
+                toHome();
+            }
+        });
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
         uid = currentUser.getUid();
@@ -88,6 +97,11 @@ public class HomepageActivity extends AppCompatActivity {
 
     private void toPlan(){
         Intent intent = new Intent(this, PlanActivity.class);
+        startActivity(intent);
+    }
+
+    private void toHome(){
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }

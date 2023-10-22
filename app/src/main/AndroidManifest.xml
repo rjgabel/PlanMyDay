@@ -13,32 +13,32 @@
         android:theme="@style/Theme.PlanMyDay"
         tools:targetApi="31" >
         <activity
-            android:name=".ItineraryActivity"
+            android:name=".map.ItineraryActivity"
             android:exported="false" />
         <activity
-            android:name=".LocationsActivity"
+            android:name=".planning.LocationsActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.PlanActivity"
+            android:name=".planning.PlanActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.DurationActivity"
+            android:name=".planning.DurationActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.HomepageActivity"
+            android:name=".home.HomepageActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.RegistrationActivity"
+            android:name=".registration.RegistrationActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".registration.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_login" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".home.MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

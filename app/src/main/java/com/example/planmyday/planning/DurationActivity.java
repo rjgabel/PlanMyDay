@@ -1,4 +1,4 @@
-package com.example.planmyday.activities;
+package com.example.planmyday.planning;
 
 import androidx.appcompat.app.AppCompatActivity;
 

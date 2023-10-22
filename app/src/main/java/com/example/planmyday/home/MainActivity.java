@@ -1,4 +1,4 @@
-package com.example.planmyday.activities;
+package com.example.planmyday.home;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -7,13 +7,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.planmyday.TourOptimizer;
-import com.example.planmyday.activities.CreateAttractions;
+import com.example.planmyday.map.TourOptimizer;
 import com.example.planmyday.R;
+import com.example.planmyday.registration.LoginActivity;
+import com.example.planmyday.registration.RegistrationActivity;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 
 /*
 HOME PAGE
