@@ -3,7 +3,7 @@
     "name": "Ronald Tutor Campus Center",
     "address": "3607 Trousdale Pkwy, Los Angeles, CA 90089",
     "usc": true,
-    "description": "A great place to get food on campus!",
+    "description": "A great place to get food on campus.",
     "time": 45,
     "distUSC": 0.0,
     "hours": {
@@ -15,13 +15,13 @@
       "5": [700, 2200],
       "6": [700, 2200]
     },
-    "imageUrl": ""
+    "imageUrl": "https://live.staticflickr.com/566/21399550558_7522a62227_b.jpg"
   },
   {
-    "name": "Fertitta Hall",
+    "name": "Jill and Frank Fertitta Hall",
     "address": "610 Childs Way, Los Angeles, CA 90089",
     "usc": true,
-    "description": "A serene attraction",
+    "description": "A business hub, perfect for studying.",
     "time": 120,
     "distUSC": 0.0,
     "hours": {
@@ -33,6 +33,330 @@
       "5": [900, 2000],
       "6": [1200, 2000]
     },
-    "imageUrl": ""
+    "imageUrl": "https://dailytrojan.com/wp-content/uploads/2016/08/web-build.jpg"
+  },
+  {
+    "name": "Epstein Family Plaza",
+    "address": "950 Downey Way, Los Angeles, CA 90089",
+    "usc": true,
+    "description": "An engineering hub, perfect for studying.",
+    "time": 60,
+    "distUSC": 0.0,
+    "hours": {
+      "0": [700, 2100],
+      "1": [700, 2100],
+      "2": [700, 2100],
+      "3": [700, 2100],
+      "4": [700, 2100],
+      "5": [700, 2100],
+      "6": [700, 2100]
+    },
+    "imageUrl": "https://viterbicareers.usc.edu/wp-content/uploads/2019/04/viterbi-on-campus.jpg"
+  },
+  {
+    "name": "USC School of Cinematic Arts",
+    "address": "900 W 34th St, Los Angeles, CA 90007",
+    "usc": true,
+    "description": "A cinematic hub, perfect for movives and studying.",
+    "time": 90,
+    "distUSC": 0.0,
+    "hours": {
+      "0": [0, 0],
+      "1": [800, 1700],
+      "2": [800, 1700],
+      "3": [800, 1700],
+      "4": [800, 1700],
+      "5": [800, 1700],
+      "6": [0, 0]
+    },
+    "imageUrl": "https://live.staticflickr.com/7057/6867618443_1f5af96985_b.jpg"
+  },
+  {
+    "name": "USC Fisher Museum of Art",
+    "address": "823 W Exposition Blvd, Los Angeles, CA 90089",
+    "usc": true,
+    "description": "A great collection of art.",
+    "time": 45,
+    "distUSC": 0.0,
+    "hours": {
+      "0": [0, 0],
+      "1": [0, 0],
+      "2": [1200, 1700],
+      "3": [1200, 1700],
+      "4": [1200, 1700],
+      "5": [1200, 1700],
+      "6": [1200, 1600]
+    },
+    "imageUrl": "https://live.staticflickr.com/5733/20964794654_0087fbbe76_b.jpg"
+  },
+  {
+    "name": "Leavey Library",
+    "address": "651 W 35th St, Los Angeles, CA 90089",
+    "usc": true,
+    "description": "A quiet learning environment for students.",
+    "time": 120,
+    "distUSC": 0.0,
+    "hours": {
+      "0": [1200, 2000],
+      "1": [900, 2100],
+      "2": [900, 2100],
+      "3": [900, 2100],
+      "4": [900, 2100],
+      "5": [900, 2100],
+      "6": [900, 1700]
+    },
+    "imageUrl": "https://live.staticflickr.com/583/21587309925_503cb7dbeb_b.jpg"
+  },
+  {
+    "name": "Allyson Felix Field",
+    "address": "3505 McClintock Avenue, Los Angeles, CA 90089",
+    "usc": true,
+    "description": "Great for exercising.",
+    "time": 45,
+    "distUSC": 0.0,
+    "hours": {
+      "0": [600, 2400],
+      "1": [1800, 2400],
+      "2": [1800, 2400],
+      "3": [1800, 2400],
+      "4": [1800, 2400],
+      "5": [1800, 2400],
+      "6": [600, 2400]
+    },
+    "imageUrl": "https://live.staticflickr.com/583/21576077862_cdd7fdcb53_b.jpg"
+  },
+  {
+    "name": "USC Village",
+    "address": "929 W Jefferson Blvd Los Angeles, CA 90089",
+    "usc": true,
+    "description": "Campus hub for dining, shopping, and housing.",
+    "time": 90,
+    "distUSC": 0.0,
+    "hours": {
+      "0": [800, 2200],
+      "1": [800, 2200],
+      "2": [800, 2200],
+      "3": [800, 2200],
+      "4": [800, 2200],
+      "5": [800, 2200],
+      "6": [800, 2200]
+    },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6d/University_of_Southern_California_2_2019-05-05.jpg"
+  },
+  {
+    "name": "Griffith Observatory",
+    "address": "2800 E Observatory Rd, Los Angeles, CA 90027",
+    "usc": false,
+    "description": "Observatory with city views, stargazing, and exhibits.",
+    "time": 120,
+    "distUSC": 7.8,
+    "hours": {
+      "0": [1000, 2200],
+      "1": [0, 0],
+      "2": [1200, 2200],
+      "3": [1200, 2200],
+      "4": [1200, 2200],
+      "5": [1200, 2200],
+      "6": [1000, 2200]
+    },
+    "imageUrl": "https://live.staticflickr.com/5268/5645080530_98835a3d22_b.jpg"
+  },
+  {
+    "name": "The Last Bookstore",
+    "address": "453 S Spring St Ground Floor, Los Angeles, CA 90013",
+    "usc": false,
+    "description": "Indie bookstore featuring books and art.",
+    "time": 60,
+    "distUSC": 3.8,
+    "hours": {
+      "0": [1100, 2000],
+      "1": [1100, 2000],
+      "2": [1100, 2000],
+      "3": [1100, 2000],
+      "4": [1100, 2000],
+      "5": [1100, 2000],
+      "6": [1100, 2000]
+    },
+    "imageUrl": "https://live.staticflickr.com/1557/24663281152_d9ee216ef2_b.jpg"
+  },
+  {
+    "name": "Santa Monica Beach",
+    "address": "200 Santa Monica Pier, Santa Monica, CA 90401",
+    "usc": false,
+    "description": "Beach with a fun pier.",
+    "time": 190,
+    "distUSC": 13.5,
+    "hours": {
+      "0": [600, 2200],
+      "1": [600, 2200],
+      "2": [600, 2200],
+      "3": [600, 2200],
+      "4": [600, 2200],
+      "5": [600, 2200],
+      "6": [600, 2200]
+    },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/be/Santa_Monica_Pier_from_Santa_Monica_State_Beach_03.jpg"
+  },
+  {
+    "name": "Universal Studios Hollywood",
+    "address": "100 Universal City Plaza, Universal City, CA 91608",
+    "usc": false,
+    "description": "Theme park with thrilling rides and movie magic.",
+    "time": 180,
+    "distUSC": 10.4,
+    "hours": {
+      "0": [1000, 1800],
+      "1": [1000, 1800],
+      "2": [1000, 1800],
+      "3": [1000, 1800],
+      "4": [1000, 1800],
+      "5": [1000, 1800],
+      "6": [1000, 1800]
+    },
+    "imageUrl": "https://live.staticflickr.com/8145/7266342004_6bde6d2c1c_b.jpg"
+  },
+  {
+    "name": "Los Angeles County Museum of Art",
+    "address": "5905 Wilshire Blvd, Los Angeles, CA 90036",
+    "usc": false,
+    "description": "Modern art museum with diverse art collections.",
+    "time": 120,
+    "distUSC": 6.8,
+    "hours": {
+      "0": [1000, 1900],
+      "1": [1100, 1800],
+      "2": [1100, 1800],
+      "3": [0, 0],
+      "4": [1100, 1800],
+      "5": [1100, 2000],
+      "6": [1000, 1900]
+    },
+    "imageUrl": "https://cdn4.picryl.com/photo/2012/01/01/the-los-angeles-county-museum-of-art-lacma-is-an-art-museum-in-los-angeles-1024.jpg"
+  },
+  {
+    "name": "The Getty Center",
+    "address": "1200 Getty Center Dr, Los Angeles, CA 90049",
+    "usc": false,
+    "description": "Architectural masterpiece with art collections.",
+    "time": 120,
+    "distUSC": 14.3,
+    "hours": {
+      "0": [1000, 1730],
+      "1": [0, 0],
+      "2": [1000, 1730],
+      "3": [1000, 1730],
+      "4": [1000, 1730],
+      "5": [1000, 1730],
+      "6": [1000, 2000]
+    },
+    "imageUrl": "https://live.staticflickr.com/580/20985280249_8b0f682268_b.jpg"
+  },
+  {
+    "name": "The Grove LA",
+    "address": "189 The Grove Dr, Los Angeles, CA 90036",
+    "usc": false,
+    "description": "Shopping, dining, and entertainment destination.",
+    "time": 120,
+    "distUSC": 7.0,
+    "hours": {
+      "0": [1100, 2000],
+      "1": [1000, 2100],
+      "2": [1000, 2100],
+      "3": [1000, 2100],
+      "4": [1000, 2100],
+      "5": [1000, 2200],
+      "6": [1000, 2200]
+    },
+    "imageUrl": "https://hips.hearstapps.com/hmg-prod/images/014-the-grove-the-edit-caruso-stewart-and-connie-photography-1648143290.jpg?crop=0.888888888888889xw:1xh;center,top&resize=1200:*"
+  },
+  {
+    "name": "Natural History Museum",
+    "address": "900 Exposition Blvd, Los Angeles, CA 90007",
+    "usc": false,
+    "description": "Exhibits and historic artifacts.",
+    "time": 90,
+    "distUSC": 0.4,
+    "hours": {
+      "0": [930, 1700],
+      "1": [930, 1700],
+      "2": [930, 1700],
+      "3": [930, 1700],
+      "4": [930, 1700],
+      "5": [930, 1700],
+      "6": [930, 1700]
+    },
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/43/Carnotaurus_Los_Angeles%2C_Natural_History_Museum.jpg"
+  },
+  {
+    "name": "The Broad Museum",
+    "address": "221 S Grand Ave, Los Angeles, CA 90012",
+    "usc": false,
+    "description": "Contemporary art museum.",
+    "time": 60,
+    "distUSC": 4.0,
+    "hours": {
+      "0": [1000, 1800],
+      "1": [0, 0],
+      "2": [1100, 1700],
+      "3": [1100, 1700],
+      "4": [1100, 2000],
+      "5": [1100, 1700],
+      "6": [1000, 1800]
+    },
+    "imageUrl": "https://live.staticflickr.com/65535/52613034889_851ea6c8ee_b.jpg"
+  },
+  {
+    "name": "Little Tokyo",
+    "address": "131 S Central Ave, Los Angeles, 90012",
+    "usc": false,
+    "description": "Cultural hub with rich heritage and Japanese cuisine.",
+    "time": 120,
+    "distUSC": 5.1,
+    "hours": {
+      "0": [900, 2400],
+      "1": [900, 2400],
+      "2": [900, 2400],
+      "3": [900, 2400],
+      "4": [900, 2400],
+      "5": [900, 2400],
+      "6": [900, 2400]
+    },
+    "imageUrl": "https://live.staticflickr.com/65535/51128840653_eac8a66575_b.jpg"
+  },
+  {
+    "name": "Venice Beach",
+    "address": "1817 Ocean Front Walk, Venice, CA 90291",
+    "usc": false,
+    "description": "Vibrant, beachside community",
+    "time": 120,
+    "distUSC": 14.0,
+    "hours": {
+      "0": [600, 2200],
+      "1": [600, 2200],
+      "2": [600, 2200],
+      "3": [600, 2200],
+      "4": [600, 2200],
+      "5": [600, 2200],
+      "6": [600, 2200]
+    },
+    "imageUrl": "https://images.pexels.com/photos/5849680/pexels-photo-5849680.jpeg"
+  },
+  {
+    "name": "TCL Chinese Theater",
+    "address": "6925 Hollywood Blvd, Hollywood, CA 90028",
+    "usc": false,
+    "description": "Movie theater with famous handprints.",
+    "time": 30,
+    "distUSC": 8.3,
+    "hours": {
+      "0": [1200, 2200],
+      "1": [1200, 2200],
+      "2": [1200, 2200],
+      "3": [1200, 2200],
+      "4": [1200, 2200],
+      "5": [1200, 2200],
+      "6": [1200, 2200]
+    },
+    "imageUrl": "https://live.staticflickr.com/7344/10356085064_e77ebfcfc6_b.jpg"
   }
 ]

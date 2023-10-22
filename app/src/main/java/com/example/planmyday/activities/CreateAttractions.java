@@ -51,6 +51,7 @@ public class CreateAttractions {
 
         } catch (IOException e){
             e.printStackTrace();
+            Log.d("SAMCHECK", e.getMessage());
         }
 
         Gson gs = new Gson();

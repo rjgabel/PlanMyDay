@@ -23,21 +23,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.702" />
 
-    <ImageView
-        android:id="@+id/arrow"
-        android:layout_width="93dp"
-        android:layout_height="59dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="302dp"
-        android:layout_marginBottom="656dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/arrow" />
 
     <ImageView
         android:id="@+id/uscButton"
@@ -79,5 +64,17 @@
         app:layout_constraintTop_toBottomOf="@+id/uscButton"
         app:layout_constraintVertical_bias="0.198"
         app:srcCompat="@drawable/lapolaroid" />
+
+    <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="93dp"
+        android:layout_height="59dp"
+        android:layout_marginEnd="318dp"
+        app:layout_constraintBottom_toTopOf="@+id/readyText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        app:srcCompat="@drawable/arrow" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
