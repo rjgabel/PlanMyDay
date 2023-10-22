@@ -2,9 +2,11 @@ package com.example.planmyday;
 
 import com.example.planmyday.models.Attraction;
 
+import java.util.ArrayList;
+
 public class USCTour extends TourType{
     @Override
-    public Attraction[] getAttractions() {
-        return new Attraction[0];
+    public ArrayList<Attraction> getAttractions() {
+        return new ArrayList<>();
     }
 }
