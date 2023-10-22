@@ -1,7 +1,5 @@
 package com.example.planmyday.models;
 
-import com.example.planmyday.TourStop;
-
 import java.time.LocalTime;
 import java.util.ArrayList;
 

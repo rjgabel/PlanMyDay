@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FDF6EC"
-    tools:context=".activities.DurationActivity">
+    tools:context=".planning.DurationActivity">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/oneDayButton"

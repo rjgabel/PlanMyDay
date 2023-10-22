@@ -1,4 +1,4 @@
-package com.example.planmyday;
+package com.example.planmyday.planning;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -10,8 +10,7 @@ import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.example.planmyday.activities.DurationActivity;
+import com.example.planmyday.R;
 import com.example.planmyday.models.Attraction;
 
 import java.util.ArrayList;

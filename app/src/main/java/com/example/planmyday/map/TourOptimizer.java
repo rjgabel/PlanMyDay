@@ -1,9 +1,10 @@
-package com.example.planmyday;
+package com.example.planmyday.map;
 
 import android.util.Log;
 
 import com.example.planmyday.models.Attraction;
 import com.example.planmyday.models.TourPlan;
+import com.example.planmyday.models.TourStop;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.planmyday.activities;
+package com.example.planmyday.registration;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,18 +11,22 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.planmyday.R;
+import com.example.planmyday.home.HomepageActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
     TextInputEditText emailView, passwordView;
     Button login_btn, reroute;
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://planmyday-16506-default-rtdb.firebaseio.com/");
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +36,6 @@ public class LoginActivity extends AppCompatActivity {
         login_btn = findViewById(R.id.btn_login);
         reroute = findViewById(R.id.reroute_login);
 
-        //TODO: forgot password option
-        //TODO: email format verification
-        //String str = String.valueOf(R.id.email);
-
         reroute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,7 +43,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        //TODO: make button for forget password and make new page0
+        //TODO: make button for forget password and make new page
+
+        //TODO: add forget password option
 
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +53,6 @@ public class LoginActivity extends AppCompatActivity {
                 String email, password;
                 email = String.valueOf(emailView.getText());
                 password = String.valueOf(passwordView.getText());
-                //TODO: add forget password option
 
                 //check if they are empty
                 if (TextUtils.isEmpty(email)){
@@ -63,32 +64,22 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 //login
-                dbRef.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.hasChild(email)){
-                            final String getPassword = snapshot.child(email).child("password").getValue(String.class);
-                            if (getPassword.equals(password)){
-                                //TODO: add firebase auth to login
-                                Toast.makeText(LoginActivity.this,"Successfully Logged in", Toast.LENGTH_SHORT).show();
-                                toHome();
-                                finish();
+                mAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    Toast.makeText(LoginActivity.this,"Successfully Logged in", Toast.LENGTH_SHORT).show();
+                                    toHome();
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Toast.makeText(LoginActivity.this, "Invalid Login",
+                                            Toast.LENGTH_SHORT).show();
+                                }
                             }
-                            else {
-                                Toast.makeText(LoginActivity.this,"Invalid Login", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        else {
-                            Toast.makeText(LoginActivity.this,"Invalid Login", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
+                        });
             }
         });
     }
@@ -96,6 +87,16 @@ public class LoginActivity extends AppCompatActivity {
     private void toRegistration(){
         Intent intent = new Intent(this, RegistrationActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            toHome();
+        }
     }
 
     private void toHome(){
