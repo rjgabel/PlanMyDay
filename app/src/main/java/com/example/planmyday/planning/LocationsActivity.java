@@ -20,6 +20,8 @@ public class LocationsActivity extends AppCompatActivity {
     TourType tourType;
     ArrayList<Attraction> attractions;
     AppCompatButton next;
+
+    TextView tt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,19 +29,9 @@ public class LocationsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String type = intent.getStringExtra(Intent.EXTRA_TEXT);
 
-        next = findViewById(R.id.nextButton);
-
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toDuration();
-            }
-        });
-
-        CreateAttractions ca = new CreateAttractions(this);
-        ca.generate();
-        ArrayList<Attraction> rawAttractions = ca.attractions;
         ImageView arrow = findViewById(R.id.arrow);
+
+        tt = findViewById(R.id.tourType);
 
         arrow.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -47,12 +39,27 @@ public class LocationsActivity extends AppCompatActivity {
             }
         });
 
+        next = findViewById(R.id.nextButton);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toDuration(type);
+            }
+        });
+
+        CreateAttractions ca = new CreateAttractions(this);
+        ca.generate();
+        ArrayList<Attraction> rawAttractions = ca.attractions;
+
+
         //make the correct type of Tour
         if (type.equals("usc")){
             tourType = new USCTour();
+            tt.setText("USC Tour");
         }
         else if (type.equals("la")){
             tourType = new LATour();
+            tt.setText("LA Tour");
         }
         //get the right type of attractions from database
         attractions = tourType.filter(rawAttractions);
@@ -72,8 +79,16 @@ public class LocationsActivity extends AppCompatActivity {
     }
 
     //intent to set up how long
-    public void toDuration(){
+    public void toDuration(String type){
         Intent intent = new Intent(this, DurationActivity.class);
+
+        if (type.equals("usc")){
+            intent.putExtra(Intent.EXTRA_TEXT, "usc");
+        }
+        else if (type.equals("la")){
+            intent.putExtra(Intent.EXTRA_TEXT, "la");
+        }
+
         startActivity(intent);
     }
 }
