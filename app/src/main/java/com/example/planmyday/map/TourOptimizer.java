@@ -58,4 +58,9 @@ public class TourOptimizer {
         plans.add(new TourPlan(stops));
         return plans;
     }
+
+    public static void getRouteMatrix(ArrayList<Attraction> attractions){
+
+    }
+
 }

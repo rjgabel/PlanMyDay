@@ -13,4 +13,5 @@
     <string name="login_failed">"Login failed"</string>
     <string name="login">Login</string>
     <string name="register">register</string>
+    <string name="maps_key">AIzaSyAjx18ChIHx-QNZ0T1NJj4Qtg52UB6jn7Y</string>
 </resources>
