@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/locationImage"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginBottom="550dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/lapolaroid"
+        />
+
+    <TextView
+        android:id="@+id/locationName"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:fontFamily="@font/ruda"
+        android:text="Location Name"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/locationDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="500dp"
+        android:fontFamily="@font/ruda"
+        android:text="Location Description"
+        android:textSize="12sp"
+        />
+
+</LinearLayout>

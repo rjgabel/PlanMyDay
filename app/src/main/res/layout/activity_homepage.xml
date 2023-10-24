@@ -10,11 +10,11 @@
 
     <TextView
         android:id="@+id/welcome"
-        android:layout_width="315dp"
-        android:layout_height="94dp"
+        android:layout_width="313dp"
+        android:layout_height="79dp"
         android:layout_marginTop="60dp"
         android:fontFamily="@font/rubikone"
-        android:text="Welcome to PLAN MY DAY"
+        android:text="Welcome!"
         android:textAlignment="center"
         android:textColor="#11CA9D"
         android:textSize="35sp"
@@ -23,6 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.03" />
+
 
     <TextView
         android:id="@+id/desc"
@@ -37,8 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.243" />
-
+        app:layout_constraintVertical_bias="0.185" />
 
     <TextView
         android:id="@+id/logout"
