@@ -50,7 +50,7 @@
         android:backgroundTint="#11CA9D"
         android:textSize="12sp"
         android:fontFamily="@font/rubikone"
-        android:text="Add" />
+        android:text="Add"
         android:layout_marginLeft="20dp"
     />
 
