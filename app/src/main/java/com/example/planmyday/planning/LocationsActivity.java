@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import com.example.planmyday.R;
 import com.example.planmyday.models.Attraction;
@@ -20,18 +21,19 @@ public class LocationsActivity extends AppCompatActivity {
     TourType tourType;
     ArrayList<Attraction> attractions;
     AppCompatButton next;
-
     TextView tt;
+    ImageView arrow;
+    ListView locationList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_locations);
         Intent intent = getIntent();
         String type = intent.getStringExtra(Intent.EXTRA_TEXT);
-
-        ImageView arrow = findViewById(R.id.arrow);
-
+        arrow = findViewById(R.id.arrow);
         tt = findViewById(R.id.tourType);
+        next = findViewById(R.id.nextButton);
+        locationList = findViewById(R.id.locationList);
 
         arrow.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -39,7 +41,6 @@ public class LocationsActivity extends AppCompatActivity {
             }
         });
 
-        next = findViewById(R.id.nextButton);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,16 +68,16 @@ public class LocationsActivity extends AppCompatActivity {
             Log.d("Attractions", attraction.getName());
         }
 
-        //create all buttons
-        LayoutInflater li = LayoutInflater.from(this);
-        //make a new grid layout to be included in the xml
-//        GridLayout grid = (GridLayout) findViewById(R.id.gridLayout);
-        for (int i = 0; i < attractions.size(); i++){
-            //TODO: create a custom attractions layout
-//            TextView tv = (TextView) li.inflate(R.layout.attractions_layout, grid, false);
-        }
+        Attraction[] aattractions = new Attraction[attractions.size()];
+        aattractions = attractions.toArray(aattractions);
+
+        MyAdapter myAdapter = new MyAdapter(LocationsActivity.this, aattractions);
+        locationList.setAdapter(myAdapter);
 
     }
+
+
+
 
     //intent to set up how long
     public void toDuration(String type){
@@ -88,7 +89,6 @@ public class LocationsActivity extends AppCompatActivity {
         else if (type.equals("la")){
             intent.putExtra(Intent.EXTRA_TEXT, "la");
         }
-
         startActivity(intent);
     }
 }

@@ -94,4 +94,12 @@ public class Attraction {
         this.hours = hours;
     }
 
+    public String getImageURL() {
+        return imageUrl;
+    }
+
+    public void setImageURL(String url) {
+        this.imageUrl = url;
+    }
+
 }
