@@ -51,5 +51,8 @@
         android:textSize="12sp"
         android:fontFamily="@font/rubikone"
         android:text="Add" />
+        android:layout_marginLeft="20dp"
+    />
+
 
 </LinearLayout>
