@@ -2,11 +2,12 @@ package com.example.planmyday.models;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 @IgnoreExtraProperties
-public class Attraction {
+public class Attraction implements Serializable {
 
     private String name;
     private String address;

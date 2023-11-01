@@ -36,6 +36,10 @@ public class DurationActivity extends AppCompatActivity {
             }
         });
 
+        if (type == null) {
+            type = new String();
+        }
+
         if (type.equals("usc")){
             tt.setText("USC Tour");
         }
