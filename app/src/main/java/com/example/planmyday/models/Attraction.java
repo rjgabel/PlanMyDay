@@ -24,11 +24,14 @@ public class Attraction {
     private HashMap<Integer, ArrayList<Integer>> hours;
     private String imageUrl;
 
+    private double latitude;
+    private double longitude;
+
     public Attraction(){
 
     }
 
-    public Attraction(String name, String address, Boolean usc, String description, int time, double distUSC, HashMap<Integer, ArrayList<Integer>> hours, String imageUrl) {
+    public Attraction(String name, String address, Boolean usc, String description, int time, double distUSC, HashMap<Integer, ArrayList<Integer>> hours, String imageUrl, double latitude, double longitude) {
         this.name = name;
         this.address = address;
         this.usc = usc;
@@ -37,6 +40,8 @@ public class Attraction {
         this.distUSC = distUSC;
         this.hours = hours;
         this.imageUrl = imageUrl;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public String getName() {
@@ -98,8 +103,22 @@ public class Attraction {
         return imageUrl;
     }
 
-    public void setImageURL(String url) {
-        this.imageUrl = url;
+    public void setImageURL(String url) { this.imageUrl = url;}
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double lat) {
+        this.latitude = lat;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
 }

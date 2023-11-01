@@ -15,7 +15,9 @@
       "5": [1800, 2400],
       "6": [600, 2400]
     },
-    "imageUrl": "https://live.staticflickr.com/583/21576077862_cdd7fdcb53_b.jpg"
+    "imageUrl": "https://live.staticflickr.com/583/21576077862_cdd7fdcb53_b.jpg",
+    "latitude": 34.022256234206694,
+    "longitude": -118.28781362439533
   },
   {
     "name": "Epstein Family Plaza",
@@ -33,7 +35,9 @@
       "5": [700, 2100],
       "6": [700, 2100]
     },
-    "imageUrl": "https://viterbicareers.usc.edu/wp-content/uploads/2019/04/viterbi-on-campus.jpg"
+    "imageUrl": "https://viterbicareers.usc.edu/wp-content/uploads/2019/04/viterbi-on-campus.jpg",
+    "latitude": 34.02060887282352,
+    "longitude": -118.28892513560453
   },
   {
     "name": "Jill and Frank Fertitta Hall",
@@ -51,7 +55,9 @@
       "5": [900, 2000],
       "6": [1200, 2000]
     },
-    "imageUrl": "https://cdnassets.hw.net/a3/cf/bf6348d246458c9585050983a1d2/ef78a7b93bd34564bca2a59d0451df93.png"
+    "imageUrl": "https://cdnassets.hw.net/a3/cf/bf6348d246458c9585050983a1d2/ef78a7b93bd34564bca2a59d0451df93.png",
+    "latitude": 34.0189441695629,
+    "longitude": -118.28237224909729
   },
   {
     "name": "Leavey Library",
@@ -69,7 +75,9 @@
       "5": [900, 2100],
       "6": [900, 1700]
     },
-    "imageUrl": "https://live.staticflickr.com/583/21587309925_503cb7dbeb_b.jpg"
+    "imageUrl": "https://live.staticflickr.com/583/21587309925_503cb7dbeb_b.jpg",
+    "latitude": 34.02206276923932,
+    "longitude": -118.28283396258534
   },
   {
     "name": "Ronald Tutor Campus Center",
@@ -87,7 +95,9 @@
       "5": [700, 2200],
       "6": [700, 2200]
     },
-    "imageUrl": "https://live.staticflickr.com/566/21399550558_7522a62227_b.jpg"
+    "imageUrl": "https://live.staticflickr.com/566/21399550558_7522a62227_b.jpg",
+    "latitude": 34.02051081065975,
+    "longitude": -118.28630622026478
   },
   {
     "name": "USC Fisher Museum of Art",
@@ -105,7 +115,9 @@
       "5": [1200, 1700],
       "6": [1200, 1600]
     },
-    "imageUrl": "https://live.staticflickr.com/5733/20964794654_0087fbbe76_b.jpg"
+    "imageUrl": "https://live.staticflickr.com/5733/20964794654_0087fbbe76_b.jpg",
+    "latitude": 34.01901413494375,
+    "longitude": -118.28716483928956
   },
   {
     "name": "USC School of Cinematic Arts",
@@ -123,7 +135,9 @@
       "5": [800, 1700],
       "6": [0, 0]
     },
-    "imageUrl": "https://live.staticflickr.com/7057/6867618443_1f5af96985_b.jpg"
+    "imageUrl": "https://live.staticflickr.com/7057/6867618443_1f5af96985_b.jpg",
+    "latitude": 34.023716028031814,
+    "longitude": -118.28645292025776
   },
   {
     "name": "USC Village",
@@ -141,7 +155,9 @@
       "5": [800, 2200],
       "6": [800, 2200]
     },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6d/University_of_Southern_California_2_2019-05-05.jpg"
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6d/University_of_Southern_California_2_2019-05-05.jpg",
+    "latitude": 34.026302742548886,
+    "longitude": -118.28462694910044
   },
   {
     "name": "Griffith Observatory",
@@ -159,7 +175,9 @@
       "5": [1200, 2200],
       "6": [1000, 2200]
     },
-    "imageUrl": "https://live.staticflickr.com/5268/5645080530_98835a3d22_b.jpg"
+    "imageUrl": "https://live.staticflickr.com/5268/5645080530_98835a3d22_b.jpg",
+    "latitude": 34.11951221080845,
+    "longitude": -118.3003282071752
   },
   {
     "name": "Little Tokyo",
@@ -177,7 +195,9 @@
       "5": [900, 2400],
       "6": [900, 2400]
     },
-    "imageUrl": "https://live.staticflickr.com/65535/51128840653_eac8a66575_b.jpg"
+    "imageUrl": "https://live.staticflickr.com/65535/51128840653_eac8a66575_b.jpg",
+    "latitude": 34.05076598955775,
+    "longitude": -118.24268097684681
   },
   {
     "name": "Los Angeles County Museum of Art",
@@ -195,7 +215,9 @@
       "5": [1100, 2000],
       "6": [1000, 1900]
     },
-    "imageUrl": "https://cdn4.picryl.com/photo/2012/01/01/the-los-angeles-county-museum-of-art-lacma-is-an-art-museum-in-los-angeles-1024.jpg"
+    "imageUrl": "https://cdn4.picryl.com/photo/2012/01/01/the-los-angeles-county-museum-of-art-lacma-is-an-art-museum-in-los-angeles-1024.jpg",
+    "latitude": 34.064925589376045,
+    "longitude": -118.35919288883923
   },
   {
     "name": "Natural History Museum",
@@ -213,7 +235,9 @@
       "5": [930, 1700],
       "6": [930, 1700]
     },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/43/Carnotaurus_Los_Angeles%2C_Natural_History_Museum.jpg"
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/43/Carnotaurus_Los_Angeles%2C_Natural_History_Museum.jpg",
+    "latitude": 34.018425440788775,
+    "longitude": -118.28896893051581
   },
   {
     "name": "Santa Monica Beach",
@@ -231,7 +255,9 @@
       "5": [600, 2200],
       "6": [600, 2200]
     },
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/be/Santa_Monica_Pier_from_Santa_Monica_State_Beach_03.jpg"
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/be/Santa_Monica_Pier_from_Santa_Monica_State_Beach_03.jpg",
+    "latitude": 34.012667343526935,
+    "longitude": -118.49468956219927
   },
   {
     "name": "TCL Chinese Theater",
@@ -249,7 +275,9 @@
       "5": [1200, 2200],
       "6": [1200, 2200]
     },
-    "imageUrl": "https://live.staticflickr.com/7344/10356085064_e77ebfcfc6_b.jpg"
+    "imageUrl": "https://live.staticflickr.com/7344/10356085064_e77ebfcfc6_b.jpg",
+    "latitude": 34.10268684795875,
+    "longitude": -118.34085765578442
   },
   {
     "name": "The Broad Museum",
@@ -267,7 +295,9 @@
       "5": [1100, 1700],
       "6": [1000, 1800]
     },
-    "imageUrl": "https://live.staticflickr.com/65535/52613034889_851ea6c8ee_b.jpg"
+    "imageUrl": "https://live.staticflickr.com/65535/52613034889_851ea6c8ee_b.jpg",
+    "latitude": 34.055194996489305,
+    "longitude": -118.25034120515858
   },
   {
     "name": "The Getty Center",
@@ -285,7 +315,9 @@
       "5": [1000, 1730],
       "6": [1000, 2000]
     },
-    "imageUrl": "https://live.staticflickr.com/580/20985280249_8b0f682268_b.jpg"
+    "imageUrl": "https://live.staticflickr.com/580/20985280249_8b0f682268_b.jpg",
+    "latitude": 34.078904602200815,
+    "longitude": -118.47381545689575
   },
   {
     "name": "The Grove LA",
@@ -303,7 +335,9 @@
       "5": [1000, 2200],
       "6": [1000, 2200]
     },
-    "imageUrl": "https://hips.hearstapps.com/hmg-prod/images/014-the-grove-the-edit-caruso-stewart-and-connie-photography-1648143290.jpg?crop=0.888888888888889xw:1xh;center,top&resize=1200:*"
+    "imageUrl": "https://hips.hearstapps.com/hmg-prod/images/014-the-grove-the-edit-caruso-stewart-and-connie-photography-1648143290.jpg?crop=0.888888888888889xw:1xh;center,top&resize=1200:*",
+    "latitude": 34.07368248599555,
+    "longitude": -118.35670813630543
   },
   {
     "name": "The Last Bookstore",
@@ -321,7 +355,9 @@
       "5": [1100, 2000],
       "6": [1100, 2000]
     },
-    "imageUrl": "https://live.staticflickr.com/1557/24663281152_d9ee216ef2_b.jpg"
+    "imageUrl": "https://live.staticflickr.com/1557/24663281152_d9ee216ef2_b.jpg",
+    "latitude": 34.048784301570265,
+    "longitude": -118.24991676934233
   },
   {
     "name": "Venice Beach",
@@ -339,7 +375,9 @@
       "5": [600, 2200],
       "6": [600, 2200]
     },
-    "imageUrl": "https://images.pexels.com/photos/5849680/pexels-photo-5849680.jpeg"
+    "imageUrl": "https://images.pexels.com/photos/5849680/pexels-photo-5849680.jpeg",
+    "latitude": 33.98575557625593,
+    "longitude": -118.47273526249991
   },
   {
     "name": "Universal Studios Hollywood",
@@ -357,6 +395,8 @@
       "5": [1000, 1800],
       "6": [1000, 1800]
     },
-    "imageUrl": "https://live.staticflickr.com/8145/7266342004_6bde6d2c1c_b.jpg"
+    "imageUrl": "https://live.staticflickr.com/8145/7266342004_6bde6d2c1c_b.jpg",
+    "latitude": 34.138248830429326,
+    "longitude": -118.35333737527269
   }
 ]
