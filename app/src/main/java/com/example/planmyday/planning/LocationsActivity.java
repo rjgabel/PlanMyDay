@@ -92,7 +92,7 @@ public class LocationsActivity extends AppCompatActivity {
 //                    mySnackbar.show();
                 } else {
                     selectedAttractions.add(clickedAttraction);
-                    view.setBackgroundColor(Color.parseColor("#11CA9D159"));
+                    view.setBackgroundColor(Color.parseColor("#1CA9D159"));
 //                    Snackbar mySnackbar2 = Snackbar.make(locationList, "Added", Snackbar.LENGTH_SHORT);
 //                    mySnackbar2.show();
                 }
