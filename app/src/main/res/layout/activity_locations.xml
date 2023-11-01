@@ -48,7 +48,7 @@
         android:layout_width="283dp"
         android:layout_height="21dp"
         android:fontFamily="@font/rubikone"
-        android:text="Let’s plan an itinerary..."
+        android:text="Select locations to visit"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="15sp"
