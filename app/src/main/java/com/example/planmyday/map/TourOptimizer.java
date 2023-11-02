@@ -68,6 +68,9 @@ public class TourOptimizer {
 
     public static int calculateTotalTime(TourPlan plan) {
         ArrayList<TourStop> stops = plan.getStops();
+        if (stops.isEmpty()) {
+            return 0;
+        }
         TourStop first_stop = stops.get(0);
         TourStop last_stop = stops.get(stops.size() - 1);
         return last_stop.getEndTime() - first_stop.getStartTime();
