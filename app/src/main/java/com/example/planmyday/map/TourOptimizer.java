@@ -66,6 +66,13 @@ public class TourOptimizer {
         return plans;
     }
 
+    public static int calculateTotalTime(TourPlan plan) {
+        ArrayList<TourStop> stops = plan.getStops();
+        TourStop first_stop = stops.get(0);
+        TourStop last_stop = stops.get(stops.size() - 1);
+        return last_stop.getEndTime() - first_stop.getStartTime();
+    }
+
     private static int getAttractionID(Attraction attraction) {
         for (int i = 0; i < attraction_names.length; i++) {
             if (attraction_names[i].equals(attraction.getName())) {
