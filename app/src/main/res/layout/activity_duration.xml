@@ -7,49 +7,47 @@
     android:background="#FDF6EC"
     tools:context=".planning.DurationActivity">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/oneDayButton"
-        android:layout_width="180dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="58dp"
-        android:background="@drawable/round"
-        android:backgroundTint="#FFD159"
-        android:fontFamily="@font/ruda"
-        android:text="ONE DAY"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.496" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/multipleDaysButton"
-        android:layout_width="180dp"
-        android:layout_height="60dp"
-        android:background="@drawable/round"
-        android:backgroundTint="#FFD159"
-        android:elevation="0dp"
+    <TextView
+        android:id="@+id/plusButton"
+        android:layout_width="77dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="292dp"
+        android:layout_marginBottom="359dp"
+        android:backgroundTint="#FDF6EC"
         android:fontFamily="@font/ruda"
-        android:foreground="?attr/selectableItemBackground"
-        android:stateListAnimator="@null"
-        android:text="MULTIPLE DAYS"
+        android:text="&#65291;"
+        android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/day"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/subtractButton"
+        android:layout_width="77dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="292dp"
+        android:layout_marginBottom="359dp"
+        android:backgroundTint="#FDF6EC"
+        android:fontFamily="@font/ruda"
+        android:text="─"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/day"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/oneDayButton"
-        app:layout_constraintVertical_bias="0.177" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/reviewItineraryButton"
-        android:layout_width="196dp"
-        android:layout_height="99dp"
+        android:layout_width="191dp"
+        android:layout_height="95dp"
         android:background="@drawable/round"
         android:backgroundTint="#11CA9D"
         android:elevation="0dp"
@@ -62,37 +60,25 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/multipleDaysButton"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <TextView
-        android:id="@+id/clock"
-        android:layout_width="164dp"
-        android:layout_height="138dp"
-        android:text="&#x1F552;"
-        android:textAlignment="center"
-        android:textSize="100sp"
-        app:layout_constraintBottom_toTopOf="@+id/oneDayButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.859" />
+        app:layout_constraintTop_toBottomOf="@+id/day"
+        app:layout_constraintVertical_bias="0.788" />
 
     <TextView
         android:id="@+id/tourType"
         android:layout_width="279dp"
         android:layout_height="50dp"
+        android:layout_marginTop="56dp"
         android:fontFamily="@font/rubikone"
         android:text="Tour Type"
         android:textAlignment="center"
         android:textColor="#11CA9D"
         android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/clock"
+        app:layout_constraintBottom_toTopOf="@+id/day"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.387" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/arrow"
@@ -116,11 +102,28 @@
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/clock"
+        app:layout_constraintBottom_toTopOf="@+id/day"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tourType"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.07" />
+
+    <TextView
+        android:id="@+id/day"
+        android:layout_width="221dp"
+        android:layout_height="93dp"
+        android:layout_marginTop="292dp"
+        android:layout_marginBottom="346dp"
+        android:fontFamily="@font/ruda"
+        android:text="1 DAY"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="75sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/plusButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/subtractButton"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

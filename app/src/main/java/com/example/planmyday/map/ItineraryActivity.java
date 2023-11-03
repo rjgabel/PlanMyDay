@@ -24,7 +24,6 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         setContentView(R.layout.activity_itinerary);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
     }
 
     @Override

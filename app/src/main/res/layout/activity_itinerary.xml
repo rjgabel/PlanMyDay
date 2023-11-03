@@ -7,10 +7,37 @@
     android:layout_height="match_parent"
     tools:context=".map.ItineraryActivity">
 
-  <fragment
+
+
+  <com.sothree.slidinguppanel.SlidingUpPanelLayout
+      xmlns:sothree="http://schemas.android.com/apk/res-auto"
+      android:id="@+id/sliding_layout"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:id="@+id/map"
-      android:name="com.google.android.gms.maps.SupportMapFragment" />
+      android:gravity="bottom"
+      android:background="#FDF6EC"
+      sothree:umanoPanelHeight="68dp"
+      sothree:umanoShadowHeight="0dp">
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="50dp"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-2dp"
+        tools:layout_editor_absoluteY="99dp" />
+
+
+    <include
+        android:id="@+id/custom_panel_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="300dp"
+        layout="@layout/activity_itinerarypanel" />
+
+
+  </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

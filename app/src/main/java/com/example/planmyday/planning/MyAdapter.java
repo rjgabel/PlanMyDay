@@ -3,6 +3,9 @@ package com.example.planmyday.planning;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import androidx.appcompat.widget.AppCompatButton;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +51,8 @@ public class MyAdapter extends ArrayAdapter<String> {
             mViewHolder.locationImage = (ImageView) convertView.findViewById(R.id.locationImage);
             mViewHolder.locationName = (TextView) convertView.findViewById(R.id.locationName);
             mViewHolder.locationDesc = (TextView) convertView.findViewById(R.id.locationDescription);
+            mViewHolder.favoritesButton = convertView.findViewById(R.id.favoritesButton);
+
             convertView.setTag(mViewHolder);
         }
         else{
@@ -64,6 +69,16 @@ public class MyAdapter extends ArrayAdapter<String> {
             mViewHolder.locationName.setText(attractions[position].getName());
             mViewHolder.locationDesc.setText(attractions[position].getDescription());
 
+            mViewHolder.favoritesButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+
+                    if (mContext instanceof LocationsActivity) {
+                        ((LocationsActivity) mContext).addToFavorites(attractions[position]);
+                    }
+                    Log.d("LocationsActivity", "Clicked");
+                }
+            });
+
        return convertView;
     }
 
@@ -71,6 +86,7 @@ public class MyAdapter extends ArrayAdapter<String> {
         ImageView locationImage;
         TextView locationName;
         TextView locationDesc;
+        androidx.appcompat.widget.AppCompatButton favoritesButton;
 
     }
 }
