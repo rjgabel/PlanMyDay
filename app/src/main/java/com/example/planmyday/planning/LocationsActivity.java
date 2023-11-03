@@ -17,9 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.planmyday.R;
+import com.example.planmyday.map.ItineraryActivity;
 import com.example.planmyday.models.Attraction;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class LocationsActivity extends AppCompatActivity {
@@ -109,13 +111,15 @@ public class LocationsActivity extends AppCompatActivity {
         else {
             Intent intent = new Intent(this, DurationActivity.class);
 
-            if (type.equals("usc")) {
-                intent.putExtra(Intent.EXTRA_TEXT, "usc");
-            } else if (type.equals("la")) {
-                intent.putExtra(Intent.EXTRA_TEXT, "la");
-            }
-
-//        intent.putExtra(Intent.EXTRA_TEXT, selectedAttractions);
+//        if (type.equals("usc")){
+//            intent.putExtra(Intent.EXTRA_TEXT, "usc");
+//        }
+//        else if (type.equals("la")){
+//            intent.putExtra(Intent.EXTRA_TEXT, "la");
+//        }
+            Bundle args = new Bundle();
+            args.putSerializable("ARRAYLIST", (Serializable) selectedAttractions);
+            intent.putExtra("BUNDLE", args);
 
             startActivity(intent);
         }
