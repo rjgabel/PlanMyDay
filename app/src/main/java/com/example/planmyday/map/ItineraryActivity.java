@@ -62,7 +62,6 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         //getLastKnownLocation();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
     }
 
     private void setCameraView(double lat, double lon) {

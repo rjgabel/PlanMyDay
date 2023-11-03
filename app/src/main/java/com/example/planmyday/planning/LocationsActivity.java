@@ -14,6 +14,7 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.planmyday.R;
 import com.example.planmyday.map.ItineraryActivity;
@@ -30,6 +31,9 @@ public class LocationsActivity extends AppCompatActivity {
     TextView tt;
     ImageView arrow;
     ListView locationList;
+
+
+
 
     ArrayList<Attraction> selectedAttractions = new ArrayList<Attraction>();
 
@@ -82,34 +86,30 @@ public class LocationsActivity extends AppCompatActivity {
 
         MyAdapter myAdapter = new MyAdapter(LocationsActivity.this, aattractions);
         locationList.setAdapter(myAdapter);
-        locationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Attraction clickedAttraction = attractions.get(i);
-
-                if (selectedAttractions.contains(clickedAttraction)) {
-                    selectedAttractions.remove(clickedAttraction);
-                    view.setBackgroundColor(Color.parseColor("#80FFD159"));
-//                    Snackbar mySnackbar = Snackbar.make(locationList, "Removed", Snackbar.LENGTH_SHORT);
-//                    mySnackbar.show();
-                } else {
-                    selectedAttractions.add(clickedAttraction);
-                    view.setBackgroundColor(Color.parseColor("#1CA9D159"));
-//                    Snackbar mySnackbar2 = Snackbar.make(locationList, "Added", Snackbar.LENGTH_SHORT);
-//                    mySnackbar2.show();
-                }
-            }
-        });
-
     }
 
-
+    public void addToFavorites(Attraction attraction) {
+        if (selectedAttractions.contains(attraction)) {
+            selectedAttractions.remove(attraction);
+            Toast.makeText(this, "Removed from favorites: " + attraction.getName(), Toast.LENGTH_SHORT).show();
+            Log.d("LocationsActivity", "removed, Item clicked at position: ");
+        } else {
+            selectedAttractions.add(attraction);
+            Toast.makeText(this, "Added to favorites: " + attraction.getName(), Toast.LENGTH_SHORT).show();
+            Log.d("LocationsActivity", "Item clicked at position: " );
+        }
+        Log.d("LocationsActivity", "received");
+    }
 
 
     //intent to set up how long
     public void toDuration(String type){
-        Intent intent = new Intent(this, DurationActivity.class);
 
+        if(selectedAttractions.size() == 0){
+            Toast.makeText(this, "No selected attractions", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Intent intent = new Intent(this, DurationActivity.class);
 
 //        if (type.equals("usc")){
 //            intent.putExtra(Intent.EXTRA_TEXT, "usc");
@@ -117,11 +117,11 @@ public class LocationsActivity extends AppCompatActivity {
 //        else if (type.equals("la")){
 //            intent.putExtra(Intent.EXTRA_TEXT, "la");
 //        }
-        Bundle args = new Bundle();
-        args.putSerializable("ARRAYLIST", (Serializable) selectedAttractions);
-        intent.putExtra("BUNDLE", args);
+            Bundle args = new Bundle();
+            args.putSerializable("ARRAYLIST", (Serializable) selectedAttractions);
+            intent.putExtra("BUNDLE", args);
 
-        startActivity(intent);
-
+            startActivity(intent);
+        }
     }
 }
