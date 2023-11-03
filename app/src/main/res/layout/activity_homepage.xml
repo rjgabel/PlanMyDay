@@ -11,7 +11,7 @@
     <TextView
         android:id="@+id/welcome"
         android:layout_width="313dp"
-        android:layout_height="79dp"
+        android:layout_height="82dp"
         android:layout_marginTop="60dp"
         android:fontFamily="@font/rubikone"
         android:text="Welcome!"
@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.185" />
+        app:layout_constraintVertical_bias="0.223" />
 
     <TextView
         android:id="@+id/logout"
@@ -73,6 +73,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/oldPlansList"
+        android:layout_width="343dp"
+        android:layout_height="476dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/desc"
+        app:layout_constraintVertical_bias="0.5"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
