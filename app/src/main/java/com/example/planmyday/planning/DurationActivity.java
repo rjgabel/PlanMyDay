@@ -30,6 +30,7 @@ public class DurationActivity extends AppCompatActivity {
     TextView dayTextView;
 
     int currentDay = 1;
+    String type;
     ArrayList<Attraction> attractions = new ArrayList<>();
 
     @Override
@@ -37,6 +38,7 @@ public class DurationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_duration);
         Intent intent = getIntent();
+        type = intent.getStringExtra(Intent.EXTRA_TEXT);
         Bundle args = intent.getBundleExtra("BUNDLE");
         attractions = (ArrayList<Attraction>) args.getSerializable("ARRAYLIST");
         Log.d("Sizer1", String.valueOf(attractions.size()));
@@ -65,16 +67,15 @@ public class DurationActivity extends AppCompatActivity {
             }
         });
 
-//        if (type == null) {
-//            type = new String();
-//        }
-//
-//        if (type.equals("usc")){
-//            tt.setText("USC Tour");
-//        }
-//        else if (type.equals("la")){
-//            tt.setText("LA Tour");
-//        }
+        if (type == null) {
+            type = new String();
+        }
+        if (type.equals("usc")){
+            tt.setText("USC Tour");
+        }
+        else if (type.equals("la")){
+            tt.setText("LA Tour");
+        }
 
         arrow.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -99,6 +100,13 @@ public class DurationActivity extends AppCompatActivity {
 
     private void toMap(ArrayList<Attraction> attractions){
         Intent intent = new Intent(this, ItineraryActivity.class);
+        if (type.equals("usc")){
+            intent.putExtra(Intent.EXTRA_TEXT, "usc");
+        }
+        else if (type.equals("la")){
+            intent.putExtra(Intent.EXTRA_TEXT, "la");
+        }
+
         Bundle args2 = new Bundle();
         Log.d("SIZER", String.valueOf(attractions.size()));
         args2.putSerializable("ARRAYLIST2", (Serializable) attractions);
@@ -113,7 +121,7 @@ public class DurationActivity extends AppCompatActivity {
     }
 
     private void incrementDay() {
-        if (currentDay < 7) {
+        if (currentDay < 5) {
             currentDay++;
             updateDayTextView();
         } else {

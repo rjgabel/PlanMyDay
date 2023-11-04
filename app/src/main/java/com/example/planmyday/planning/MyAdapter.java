@@ -28,6 +28,7 @@ import java.net.URL;
 public class MyAdapter extends ArrayAdapter<String> {
 
     Attraction[] attractions;
+
     Context mContext;
     public MyAdapter(Context context, Attraction[] attractions) {
         super(context, R.layout.individual_location);
@@ -69,7 +70,8 @@ public class MyAdapter extends ArrayAdapter<String> {
             mViewHolder.locationName.setText(attractions[position].getName());
             mViewHolder.locationDesc.setText(attractions[position].getDescription());
 
-            mViewHolder.favoritesButton.setOnClickListener(new View.OnClickListener() {
+        ViewHolder finalMViewHolder = mViewHolder;
+        mViewHolder.favoritesButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
 
                     if (mContext instanceof LocationsActivity) {
