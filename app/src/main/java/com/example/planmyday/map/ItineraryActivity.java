@@ -3,16 +3,19 @@ package com.example.planmyday.map;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +25,8 @@ import android.widget.Toast;
 import com.example.planmyday.R;
 import com.example.planmyday.home.HomepageActivity;
 import com.example.planmyday.models.Attraction;
+import com.example.planmyday.models.TourPlan;
+import com.example.planmyday.models.TourStop;
 import com.example.planmyday.models.UserAccount;
 import com.example.planmyday.planning.LATour;
 import com.example.planmyday.planning.USCTour;
@@ -40,6 +45,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.maps.GeoApiContext;
 import com.google.maps.android.data.geojson.GeoJsonPoint;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -61,6 +67,10 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     int currDay = 1;
     TextView day;
 
+    ArrayList<Attraction> attractions;
+    ArrayList<TourPlan> tourPlans;
+
+
     //TODO: check for all permissions
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +83,8 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         for (int i = 0; i < attractions.size(); i++){
             Log.d("SA2", attractions.get(i).getName());
         }
+        ArrayList<Attraction> attractionsCopy = new ArrayList<>(attractions);
+        tourPlans = TourOptimizer.optimizeTour(attractionsCopy);
 
         String type = intent.getStringExtra(Intent.EXTRA_TEXT);
         tt = findViewById(R.id.itinerary);
@@ -135,6 +147,9 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                 //getLastKnownLocation();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        toGoogleMaps(tourPlans.get(0));
+
     }
 
     private void setCameraView(double lat, double lon) {
@@ -174,6 +189,56 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         }
         setCameraView(34.0224, 118.2851);
         map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(34.0224, -118.2851)));
+    }
+
+    public void toGoogleMaps(TourPlan tp){
+        ArrayList<TourStop> stops = tp.getStops();
+        stops.get(0).getAttraction().getLatitude();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Open Google Maps?")
+                .setCancelable(true)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        String origin = "34.0224,-118.2851";
+                        //last location
+                        //String destination = "34.136555,-118.294197";
+                        Attraction lastDest = stops.get(stops.size()-1).getAttraction();
+                        String dest = lastDest.getLatitude() + "," + lastDest.getLongitude();
+                        //intermediary
+                        String waypts = "";
+                        for (TourStop stop : stops) {
+                            waypts += "|" + stop.getAttraction().getLatitude() + "," + stop.getAttraction().getLongitude();
+                            break;
+                        }
+                        //String query = "origin=my location"+ "&destination=" + dest + "&waypoints=" + waypts;
+                        String query = "origin="+ origin + "&destination=" + dest + "&waypoints=" + waypts;
+
+                        String latitude = String.valueOf(stops.get(0).getAttraction().getLatitude());
+                        String longitude = String.valueOf(stops.get(0).getAttraction().getLongitude());
+                        Uri gmmIntentUri = Uri.parse("https://www.google.com/maps/dir/?api=1&" + query);
+                        //Uri gmmIntentUri = Uri.parse("https://www.google.com/maps/dir/?api=1&" + query);
+
+                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                        mapIntent.setPackage("com.google.android.apps.maps");
+
+                        try{
+                            if (mapIntent.resolveActivity(getPackageManager()) != null) {
+                                startActivity(mapIntent);
+                            }
+                        }catch (NullPointerException e){
+                            Log.e("MapErr", "onClick: NullPointerException: Couldn't open map." + e.getMessage() );
+                            //Toast.makeText("Please allow permissions to view map", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @Override
