@@ -123,12 +123,12 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         tt = findViewById(R.id.itinerary);
         if (type.equals("usc")){
             tt.setText("USC Itinerary");
-            type = "usc";
+            this.type = "usc";
             bounds = 0.0075;
         }
         else if (type.equals("la")){
             tt.setText("LA Itinerary");
-            type = "la";
+            this.type = "la";
             bounds = 0.1;
         }
 
@@ -214,6 +214,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                     .build();
         }
 
+        //mAuth = FirebaseAuth.getInstance();
                 //getLastKnownLocation();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -321,9 +322,12 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                         oLng
                 )
         );
-
+        Log.d("TOURTYPE", type);
         if (type != null && type.equals("usc")){
             directions.mode(TravelMode.WALKING);
+        }
+        else {
+            directions.mode(TravelMode.DRIVING);
         }
 
         Log.d(TAG, "calculateDirections: destination: " + destination.toString());
