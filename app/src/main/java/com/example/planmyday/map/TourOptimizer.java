@@ -101,10 +101,8 @@ public class TourOptimizer {
                 }
             }
             if (best_attraction != -1) {
-                cur_attraction_id = getAttractionID(attractions.get(best_attraction));
                 plans.get(cur_day).add(new TourStop(attractions.get(best_attraction), best_arrival_time, best_departure_time));
                 attractions.remove(best_attraction);
-                cur_time = best_departure_time;
                 num_consecutive_failures = 0;
             } else {
                 if (num_consecutive_failures > num_days) {
@@ -113,14 +111,17 @@ public class TourOptimizer {
                 num_consecutive_failures++;
             }
             // Go to next day
-            cur_day = (cur_day + 1) % num_days;
+            cur_day = cur_day + 1;
+            if (cur_day == num_days) {
+                cur_day = 0;
+            }
             int plan_size = plans.get(cur_day).size();
             if (plan_size == 0) {
                 cur_time = 0;
                 cur_attraction_id = -1;
             } else {
-                cur_time = plans.get(cur_day).get(plan_size).getEndTime();
-                cur_attraction_id = getAttractionID(plans.get(cur_day).get(plan_size).getAttraction());
+                cur_time = plans.get(cur_day).get(plan_size - 1).getEndTime();
+                cur_attraction_id = getAttractionID(plans.get(cur_day).get(plan_size - 1).getAttraction());
             }
         }
         ArrayList<TourPlan> plan_list = new ArrayList<>();
