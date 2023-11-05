@@ -58,6 +58,7 @@ public class ItineraryAdapter extends ArrayAdapter<TourStop> {
 //            mViewHolder.timeStart = (TextView) convertView.findViewById(R.id.timeStart);
 //            mViewHolder.timeEnd= (TextView) convertView.findViewById(R.id.timeEnd);
             mViewHolder.time = (TextView) convertView.findViewById(R.id.timeTextView);
+            mViewHolder.time2= (TextView) convertView.findViewById(R.id.timeTextView2);
             mViewHolder.location = (TextView) convertView.findViewById(R.id.locationNameTextView);
             mViewHolder.address = (TextView) convertView.findViewById(R.id.locationAddressTextView);
             mViewHolder.travel = (TextView) convertView.findViewById(R.id.travelTimeTextView);
@@ -75,8 +76,10 @@ public class ItineraryAdapter extends ArrayAdapter<TourStop> {
 //        mViewHolder.timeStart.setText(stop.getStartTime());
 //        mViewHolder.timeEnd.setText(stop.getEndTime());
 
-        mViewHolder.time.setText(stop.getStartTime() + " - " + stop.getEndTime());
+
+        mViewHolder.time.setText(TourOptimizer.getTimeDisplayString(stop.getStartTime()));
         Log.d("adapter", att.getName());
+        mViewHolder.time2.setText(TourOptimizer.getTimeDisplayString(stop.getEndTime()));
         mViewHolder.location.setText(att.getName());
         mViewHolder.address.setText(att.getAddress());
         if(position == stops.length - 1){
@@ -92,9 +95,8 @@ public class ItineraryAdapter extends ArrayAdapter<TourStop> {
     }
 
     static class ViewHolder{
-        TextView timeStart;
-        TextView timeEnd;
         TextView time;
+        TextView time2;
         TextView location;
         TextView address;
         TextView travel;
