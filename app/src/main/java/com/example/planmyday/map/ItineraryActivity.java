@@ -17,6 +17,8 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -42,11 +44,17 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
+import com.google.maps.PendingResult;
 import com.google.maps.android.data.geojson.GeoJsonPoint;
+import com.google.maps.internal.PolylineEncoding;
+import com.google.maps.model.DirectionsResult;
+import com.google.maps.model.DirectionsRoute;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -63,12 +71,11 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
 
     TextView back;
     TextView front;
-
-    int currDay = 1;
     TextView day;
 
-    ArrayList<Attraction> attractions;
     ArrayList<TourPlan> tourPlans;
+    GeoApiContext mGeoApiContext;
+    int currDay = 0;
 
 
     //TODO: check for all permissions
@@ -167,6 +174,24 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         //map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(userLocation.getLatitude(), userLocation.getLongitude())));
     }
 
+
+    public void updateDay(int diff){
+        currDay += diff;
+    }
+
+    public void updateStops(){
+        //reset the map markers
+        map.clear();
+        //set the new stops
+        ArrayList<TourStop> stops = tourPlans.get(currDay).getStops();
+        for (TourStop stop : stops){
+            Attraction currAttraction = stop.getAttraction();
+            LatLng curr = new LatLng(currAttraction.getLatitude(), currAttraction.getLongitude());
+            map.addMarker(new MarkerOptions().position(curr).title(currAttraction.getName()));
+        }
+        //create lines
+    }
+
     public void goHome(){
         Intent intentHome = new Intent(ItineraryActivity.this, HomepageActivity.class);
         startActivity(intentHome);
@@ -183,21 +208,64 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
 
         //Log.d("AtLat", String.valueOf(attractions.get(0).getLatitude()));
         map = googleMap;
-        for (int i = 0; i < attractions.size(); i++){
-            LatLng curr = new LatLng(attractions.get(i).getLatitude(), attractions.get(i).getLongitude());
-            map.addMarker(new MarkerOptions().position(curr).title(attractions.get(i).getName()));
+        ArrayList<TourStop> stops = tourPlans.get(currDay).getStops();
+        for (TourStop stop : stops){
+            Attraction currAttraction = stop.getAttraction();
+            LatLng curr = new LatLng(currAttraction.getLatitude(), currAttraction.getLongitude());
+            map.addMarker(new MarkerOptions().position(curr).title(currAttraction.getName()));
         }
+//        if (mGeoApiContext == null){
+//            mGeoApiContext = new GeoApiContext.Builder()
+//                    .apiKey("")
+//                    .build();
+//        }
         setCameraView(34.0224, 118.2851);
         map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(34.0224, -118.2851)));
     }
 
+//    private void calculateDirections(LatLng ll){
+//        String TAG = "Dir";
+//        Log.d(TAG, "calculateDirections: calculating directions.");
+//
+//        com.google.maps.model.LatLng destination = new com.google.maps.model.LatLng(
+//                marker.getPosition().latitude,
+//                marker.getPosition().longitude
+//        );
+//        DirectionsApiRequest directions = new DirectionsApiRequest(mGeoApiContext);
+//
+//        directions.alternatives(true);
+//        directions.origin(
+//                new com.google.maps.model.LatLng(
+//                        mUserPosition.getGeo_point().getLatitude(),
+//                        mUserPosition.getGeo_point().getLongitude()
+//                )
+//        );
+//        Log.d(TAG, "calculateDirections: destination: " + destination.toString());
+//        directions.destination(destination).setCallback(new PendingResult.Callback<DirectionsResult>() {
+//            @Override
+//            public void onResult(DirectionsResult result) {
+//                Log.d(TAG, "calculateDirections: routes: " + result.routes[0].toString());
+//                Log.d(TAG, "calculateDirections: duration: " + result.routes[0].legs[0].duration);
+//                Log.d(TAG, "calculateDirections: distance: " + result.routes[0].legs[0].distance);
+//                Log.d(TAG, "calculateDirections: geocodedWayPoints: " + result.geocodedWaypoints[0].toString());
+//            }
+//
+//            @Override
+//            public void onFailure(Throwable e) {
+//                Log.e(TAG, "calculateDirections: Failed to get directions: " + e.getMessage() );
+//
+//            }
+//        });
+//    }
+
+
     public void toGoogleMaps(TourPlan tp){
         ArrayList<TourStop> stops = tp.getStops();
-        stops.get(0).getAttraction().getLatitude();
+        stops.get(currDay).getAttraction().getLatitude();
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Open Google Maps?")
+        builder.setMessage("Where would you like to see the your route??")
                 .setCancelable(true)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Google Maps", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         String origin = "34.0224,-118.2851";
                         //last location
@@ -205,10 +273,10 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                         Attraction lastDest = stops.get(stops.size()-1).getAttraction();
                         String dest = lastDest.getLatitude() + "," + lastDest.getLongitude();
                         //intermediary
+                        Log.d("SS1", String.valueOf(stops.size()));
                         String waypts = "";
-                        for (TourStop stop : stops) {
-                            waypts += "|" + stop.getAttraction().getLatitude() + "," + stop.getAttraction().getLongitude();
-                            break;
+                        for (int i = 0; i < stops.size() - 1; i++) {
+                            waypts += "|" + stops.get(i).getAttraction().getLatitude() + "," + stops.get(i).getAttraction().getLongitude();
                         }
                         //String query = "origin=my location"+ "&destination=" + dest + "&waypoints=" + waypts;
                         String query = "origin="+ origin + "&destination=" + dest + "&waypoints=" + waypts;
@@ -232,7 +300,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
 
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         dialog.cancel();
                     }
