@@ -21,6 +21,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,6 +73,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     TextView back;
     TextView front;
     TextView day;
+    Button dir;
 
     ArrayList<TourPlan> tourPlans;
     GeoApiContext mGeoApiContext;
@@ -103,6 +105,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
             tt.setText("LA Itinerary");
         }
 
+
         home = findViewById(R.id.homeButton);
 
         home.setOnClickListener(new View.OnClickListener() {
@@ -115,18 +118,24 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         back = findViewById(R.id.back);
         front = findViewById(R.id.forward);
         day = findViewById(R.id.day);
+        dir = findViewById(R.id.redirect);
+
+        if(tourPlans.size() == 1){
+            front.setText("");
+        }
 
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(currDay >1) {
+                if(currDay > 0) {
 
-                    if(currDay == 5){
+                    if(currDay < tourPlans.size()){
                         front.setText("→");
                     }
                     currDay--;
-                    day.setText("Day " + currDay);
+                    updateStops();
+                    day.setText("Day " + (currDay+1));
 
-                    if(currDay == 1){
+                    if(currDay == 0){
                         back.setText("");
                     }
                 }
@@ -136,26 +145,31 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         front.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                if(currDay == 1){
+                if(currDay < tourPlans.size() - 1) {
+                    currDay++;
+                    updateStops();
+                    day.setText("Day "+(currDay+1));
+                }
+                if(currDay > 0){
                     back.setText("←");
                 }
 
-                if(currDay <5) {
-                    currDay++;
-                    day.setText("Day "+currDay);
-
-                    if(currDay == 5){
-                        front.setText("");
-                    }
+                if(currDay == tourPlans.size() - 1){
+                    front.setText("");
                 }
             }
         });
 
+        dir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toGoogleMaps(tourPlans.get(currDay));
+            }
+        });
                 //getLastKnownLocation();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        toGoogleMaps(tourPlans.get(0));
 
     }
 
