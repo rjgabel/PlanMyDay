@@ -31,6 +31,7 @@ import android.widget.Toast;
 
 import com.example.planmyday.R;
 import com.example.planmyday.home.HomepageActivity;
+import com.example.planmyday.home.MainActivity;
 import com.example.planmyday.models.Attraction;
 import com.example.planmyday.models.TourPlan;
 import com.example.planmyday.models.TourStop;
@@ -54,6 +55,10 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
 import com.google.maps.PendingResult;
@@ -61,6 +66,7 @@ import com.google.maps.android.data.geojson.GeoJsonPoint;
 import com.google.maps.internal.PolylineEncoding;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
+import com.google.maps.model.TravelMode;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -73,9 +79,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     //FusedLocationProviderClient mFusionLocationProviderClient;
     LatLngBounds mMapBoundary;
     Location userLocation;
-
     TextView tt;
-
     ArrayList<Attraction> attractions;
     AppCompatButton home;
     ListView itineraryList;
@@ -84,11 +88,15 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     TextView front;
     TextView day;
     Button dir;
-
     ArrayList<TourPlan> tourPlans;
     GeoApiContext mGeoApiContext;
     int currDay = 0;
     double bounds;
+    FirebaseAuth mAuth;
+    UserAccount userAccount;
+    String uid;
+    String type;
+    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://planmyday-16506-default-rtdb.firebaseio.com/");
 
 
     //TODO: check for all permissions
@@ -105,17 +113,22 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
             Log.d("SA2", attractions.get(i).getName());
         }
         //Set TourOptimizer
+        int numDays = intent.getIntExtra("Days", -1);
         ArrayList<Attraction> attractionsCopy = new ArrayList<>(attractions);
-        tourPlans = TourOptimizer.optimizeTour(attractionsCopy, 7); // TODO PASS THE CORRECT PARAMETER
+        Log.d("DaysIntent", String.valueOf(numDays));
+        tourPlans = TourOptimizer.optimizeTour(attractionsCopy, numDays); // TODO PASS THE CORRECT PARAMETER
+        if (tourPlans == null) return;
 
         String type = intent.getStringExtra(Intent.EXTRA_TEXT);
         tt = findViewById(R.id.itinerary);
         if (type.equals("usc")){
             tt.setText("USC Itinerary");
+            type = "usc";
             bounds = 0.0075;
         }
         else if (type.equals("la")){
             tt.setText("LA Itinerary");
+            type = "la";
             bounds = 0.1;
         }
 
@@ -207,7 +220,23 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
 
 
     }
+    //save TourPlan to user's file
+    public void saveToDB(){
 
+    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        // Check if user is signed in (non-null) and update UI accordingly.
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        uid = currentUser.getUid();
+//
+//        if(currentUser == null){
+//            //send to mainActivity
+//            startActivity(new Intent(this, MainActivity.class));
+//        }
+//
+//    }
     private void setCameraView(double lat, double lon, double bounds) {
         //Overall map view window: 0.2 * 0.2 = 0.04
         double bottomBoundary = lat - bounds;
@@ -222,7 +251,6 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         map.moveCamera(CameraUpdateFactory.newLatLngBounds(mMapBoundary, 0));
         //map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(userLocation.getLatitude(), userLocation.getLongitude())));
     }
-
 
     public void updateDay(int diff){
         currDay += diff;
@@ -275,6 +303,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(34.0224, -118.2851)));
     }
 
+    //must give credit to coding w mitch
     private void calculateDirections(double oLat, double oLng, double dLat, double dLng, boolean first){
         String TAG = "Dir";
         Log.d(TAG, "calculateDirections: calculating directions.");
@@ -292,14 +321,19 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                         oLng
                 )
         );
+
+        if (type.equals("usc")){
+            directions.mode(TravelMode.WALKING);
+        }
+
         Log.d(TAG, "calculateDirections: destination: " + destination.toString());
         directions.destination(destination).setCallback(new PendingResult.Callback<DirectionsResult>() {
             @Override
             public void onResult(DirectionsResult result) {
-                Log.d(TAG, "calculateDirections: routes: " + result.routes[0].toString());
-                Log.d(TAG, "calculateDirections: duration: " + result.routes[0].legs[0].duration);
-                Log.d(TAG, "calculateDirections: distance: " + result.routes[0].legs[0].distance);
-                Log.d(TAG, "calculateDirections: geocodedWayPoints: " + result.geocodedWaypoints[0].toString());
+//                Log.d(TAG, "calculateDirections: routes: " + result.routes[0].toString());
+//                Log.d(TAG, "calculateDirections: duration: " + result.routes[0].legs[0].duration);
+//                Log.d(TAG, "calculateDirections: distance: " + result.routes[0].legs[0].distance);
+//                Log.d(TAG, "calculateDirections: geocodedWayPoints: " + result.geocodedWaypoints[0].toString());
                 addPolylinesToMap(result, first);
             }
 
