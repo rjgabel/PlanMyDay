@@ -1,7 +1,5 @@
 package com.example.planmyday.map;
 
-import android.util.Log;
-
 import com.example.planmyday.models.Attraction;
 import com.example.planmyday.models.TourPlan;
 import com.example.planmyday.models.TourStop;
@@ -77,6 +75,7 @@ public class TourOptimizer {
         int cur_day = 0;
         int cur_time = 0;
         int cur_attraction_id = -1;
+        int num_consecutive_failures = 0;
         while (!attractions.isEmpty()) {
             int best_attraction = -1;
             int best_arrival_time = -1;
@@ -106,6 +105,12 @@ public class TourOptimizer {
                 plans.get(cur_day).add(new TourStop(attractions.get(best_attraction), best_arrival_time, best_departure_time));
                 attractions.remove(best_attraction);
                 cur_time = best_departure_time;
+                num_consecutive_failures = 0;
+            } else {
+                if (num_consecutive_failures > num_days) {
+                    return null;
+                }
+                num_consecutive_failures++;
             }
             // Go to next day
             cur_day = (cur_day + 1) % num_days;
@@ -136,6 +141,31 @@ public class TourOptimizer {
         return last_stop.getEndTime() - first_stop.getStartTime();
     }
 
+    public static int getTravelTime(TourStop a, TourStop b) {
+        int travel_time = 0;
+        if (a.getStartTime() - b.getEndTime() > travel_time) {
+            travel_time = a.getStartTime() - b.getEndTime();
+        }
+        if (b.getStartTime() - a.getEndTime() > travel_time) {
+            travel_time = b.getStartTime() - a.getEndTime();
+        }
+        return travel_time;
+    }
+
+    public static String getTimeDisplayString(int time) {
+        int hours = time / 60;
+        int minutes = time % 60;
+        String hours_string = Integer.toString(hours);
+        if (hours_string.length() == 1) {
+            hours_string = "0" + hours_string;
+        }
+        String minutes_string = Integer.toString(minutes);
+        if (minutes_string.length() == 1) {
+            minutes_string = "0" + minutes_string;
+        }
+        return hours_string + ":" + minutes_string;
+    }
+
     private static int getAttractionID(Attraction attraction) {
         for (int i = 0; i < attraction_names.length; i++) {
             if (attraction_names[i].equals(attraction.getName())) {
@@ -148,9 +178,4 @@ public class TourOptimizer {
     private static int getDuration(int src, int dest) {
         return src < 0 || dest < 0 ? 0 : duration_matrix[src][dest];
     }
-
-    public static void getRouteMatrix(ArrayList<Attraction> attractions) {
-
-    }
-
 }
