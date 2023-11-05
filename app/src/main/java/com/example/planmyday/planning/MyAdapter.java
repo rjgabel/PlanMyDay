@@ -5,11 +5,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import androidx.appcompat.widget.AppCompatButton;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
@@ -24,16 +27,24 @@ import com.example.planmyday.models.Attraction;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class MyAdapter extends ArrayAdapter<String> {
 
     Attraction[] attractions;
-
+    String[] isAdded;
     Context mContext;
     public MyAdapter(Context context, Attraction[] attractions) {
         super(context, R.layout.individual_location);
         this.attractions=attractions;
         this.mContext=context;
+        this.isAdded = new String[attractions.length];
+        Arrays.fill(isAdded, "ADD");
+        for (String str : isAdded) {
+            Log.d("str13", str);
+        }
     }
 
     @Override
@@ -69,11 +80,32 @@ public class MyAdapter extends ArrayAdapter<String> {
 
             mViewHolder.locationName.setText(attractions[position].getName());
             mViewHolder.locationDesc.setText(attractions[position].getDescription());
+            mViewHolder.favoritesButton.setText(isAdded[position]);
+
+        // Get background drawable
+        Drawable buttonBackground = mViewHolder.favoritesButton.getBackground();
+
+        if(isAdded[position].equals("ADD")) {
+            // Set color on drawable
+            buttonBackground.setColorFilter(Color.parseColor("#c2c4c3"), PorterDuff.Mode.SRC_IN);
+
+        } else {
+            buttonBackground.setColorFilter(Color.parseColor("#11CA9D"), PorterDuff.Mode.SRC_IN);
+        }
+
+// Set colored drawable as background
+        mViewHolder.favoritesButton.setBackground(buttonBackground);
 
         ViewHolder finalMViewHolder = mViewHolder;
         mViewHolder.favoritesButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-
+                    if (isAdded[position].equals("ADD")){
+                        isAdded[position] = "ADDED";
+                    }
+                    else{
+                        isAdded[position] = "ADD";
+                    }
+                    notifyDataSetChanged();
                     if (mContext instanceof LocationsActivity) {
                         ((LocationsActivity) mContext).addToFavorites(attractions[position]);
                     }

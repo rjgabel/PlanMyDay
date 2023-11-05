@@ -10,9 +10,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Geocoder;
 import android.location.Location;
 import android.net.Uri;
@@ -23,6 +25,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +48,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.maps.DirectionsApiRequest;
@@ -82,6 +88,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     ArrayList<TourPlan> tourPlans;
     GeoApiContext mGeoApiContext;
     int currDay = 0;
+    double bounds;
 
 
     //TODO: check for all permissions
@@ -90,26 +97,31 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_itinerary);
 
+        //GET INTENTS
         Intent intent = getIntent();
         Bundle args2 = intent.getBundleExtra("BUNDLE2");
         attractions = (ArrayList<Attraction>) args2.getSerializable("ARRAYLIST2");
         for (int i = 0; i < attractions.size(); i++){
             Log.d("SA2", attractions.get(i).getName());
         }
+        //Set TourOptimizer
         ArrayList<Attraction> attractionsCopy = new ArrayList<>(attractions);
         tourPlans = TourOptimizer.optimizeTour(attractionsCopy);
 
         String type = intent.getStringExtra(Intent.EXTRA_TEXT);
         tt = findViewById(R.id.itinerary);
-
         if (type.equals("usc")){
             tt.setText("USC Itinerary");
+            bounds = 0.0075;
         }
         else if (type.equals("la")){
             tt.setText("LA Itinerary");
+            bounds = 0.1;
         }
 
 
+
+        //VIEWS AND ONCLICKLISTENERS
         home = findViewById(R.id.homeButton);
 
         home.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +143,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
             front.setText("");
         }
 
+        //set onClickListeners
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(currDay > 0) {
@@ -181,6 +194,13 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         goToAdapter();
 
 
+
+        if (mGeoApiContext == null){
+            mGeoApiContext = new GeoApiContext.Builder()
+                    .apiKey(getString(R.string.maps_key))
+                    .build();
+        }
+
                 //getLastKnownLocation();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -188,12 +208,12 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
 
     }
 
-    private void setCameraView(double lat, double lon) {
+    private void setCameraView(double lat, double lon, double bounds) {
         //Overall map view window: 0.2 * 0.2 = 0.04
-        double bottomBoundary = lat - 0.1;
-        double leftBoundary = lon - 0.1;
-        double topBoundary = lat + 0.1;
-        double rightBoundary = lon + 0.1;
+        double bottomBoundary = lat - bounds;
+        double leftBoundary = lon - bounds;
+        double topBoundary = lat + bounds;
+        double rightBoundary = lon + bounds;
         mMapBoundary = new LatLngBounds(
                 new LatLng(bottomBoundary, leftBoundary),
                 new LatLng(topBoundary, rightBoundary)
@@ -213,10 +233,23 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         map.clear();
         //set the new stops
         ArrayList<TourStop> stops = tourPlans.get(currDay).getStops();
+        Attraction lastAttraction = null;
+        int num = 1;
         for (TourStop stop : stops){
             Attraction currAttraction = stop.getAttraction();
             LatLng curr = new LatLng(currAttraction.getLatitude(), currAttraction.getLongitude());
-            map.addMarker(new MarkerOptions().position(curr).title(currAttraction.getName()));
+            Marker marker = map.addMarker(new MarkerOptions().position(curr).title(num+": "+currAttraction.getName()));
+            //create path between curr and last one
+            if (num == 2){
+                calculateDirections(lastAttraction.getLatitude(), lastAttraction.getLongitude(),
+                        currAttraction.getLatitude(), currAttraction.getLongitude(), true);
+            }
+            else if (num > 2) {
+                calculateDirections(lastAttraction.getLatitude(), lastAttraction.getLongitude(),
+                        currAttraction.getLatitude(), currAttraction.getLongitude(), false);
+            }
+            lastAttraction = currAttraction;
+            num++;
         }
         //create lines
     }
@@ -237,64 +270,81 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
 
         //Log.d("AtLat", String.valueOf(attractions.get(0).getLatitude()));
         map = googleMap;
-        ArrayList<TourStop> stops = tourPlans.get(currDay).getStops();
-        for (TourStop stop : stops){
-            Attraction currAttraction = stop.getAttraction();
-            LatLng curr = new LatLng(currAttraction.getLatitude(), currAttraction.getLongitude());
-            map.addMarker(new MarkerOptions().position(curr).title(currAttraction.getName()));
-        }
-//        if (mGeoApiContext == null){
-//            mGeoApiContext = new GeoApiContext.Builder()
-//                    .apiKey("")
-//                    .build();
-//        }
-        setCameraView(34.0224, 118.2851);
+        updateStops();
+        setCameraView(34.0224, 118.2851, bounds);
         map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(34.0224, -118.2851)));
     }
 
-//    private void calculateDirections(LatLng ll){
-//        String TAG = "Dir";
-//        Log.d(TAG, "calculateDirections: calculating directions.");
-//
-//        com.google.maps.model.LatLng destination = new com.google.maps.model.LatLng(
-//                marker.getPosition().latitude,
-//                marker.getPosition().longitude
-//        );
-//        DirectionsApiRequest directions = new DirectionsApiRequest(mGeoApiContext);
-//
-//        directions.alternatives(true);
-//        directions.origin(
-//                new com.google.maps.model.LatLng(
-//                        mUserPosition.getGeo_point().getLatitude(),
-//                        mUserPosition.getGeo_point().getLongitude()
-//                )
-//        );
-//        Log.d(TAG, "calculateDirections: destination: " + destination.toString());
-//        directions.destination(destination).setCallback(new PendingResult.Callback<DirectionsResult>() {
-//            @Override
-//            public void onResult(DirectionsResult result) {
-//                Log.d(TAG, "calculateDirections: routes: " + result.routes[0].toString());
-//                Log.d(TAG, "calculateDirections: duration: " + result.routes[0].legs[0].duration);
-//                Log.d(TAG, "calculateDirections: distance: " + result.routes[0].legs[0].distance);
-//                Log.d(TAG, "calculateDirections: geocodedWayPoints: " + result.geocodedWaypoints[0].toString());
-//            }
-//
-//            @Override
-//            public void onFailure(Throwable e) {
-//                Log.e(TAG, "calculateDirections: Failed to get directions: " + e.getMessage() );
-//
-//            }
-//        });
-//    }
+    private void calculateDirections(double oLat, double oLng, double dLat, double dLng, boolean first){
+        String TAG = "Dir";
+        Log.d(TAG, "calculateDirections: calculating directions.");
 
+        com.google.maps.model.LatLng destination = new com.google.maps.model.LatLng(
+                dLat,
+                dLng
+        );
+        DirectionsApiRequest directions = new DirectionsApiRequest(mGeoApiContext);
 
+        //directions.alternatives(true);
+        directions.origin(
+                new com.google.maps.model.LatLng(
+                        oLat,
+                        oLng
+                )
+        );
+        Log.d(TAG, "calculateDirections: destination: " + destination.toString());
+        directions.destination(destination).setCallback(new PendingResult.Callback<DirectionsResult>() {
+            @Override
+            public void onResult(DirectionsResult result) {
+                Log.d(TAG, "calculateDirections: routes: " + result.routes[0].toString());
+                Log.d(TAG, "calculateDirections: duration: " + result.routes[0].legs[0].duration);
+                Log.d(TAG, "calculateDirections: distance: " + result.routes[0].legs[0].distance);
+                Log.d(TAG, "calculateDirections: geocodedWayPoints: " + result.geocodedWaypoints[0].toString());
+                addPolylinesToMap(result, first);
+            }
+
+            @Override
+            public void onFailure(Throwable e) {
+                Log.e(TAG, "calculateDirections: Failed to get directions: " + e.getMessage() );
+
+            }
+        });
+    }
+
+    private void addPolylinesToMap(final DirectionsResult result, boolean first){
+        Context context = this;
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                String TAG = "POLYLINE";
+                Log.d(TAG, "run: result routes: " + result.routes.length);
+                for(DirectionsRoute route: result.routes){
+                    Log.d(TAG, "run: leg: " + route.legs[0].toString());
+                    List<com.google.maps.model.LatLng> decodedPath = PolylineEncoding.decode(route.overviewPolyline.getEncodedPath());
+                    List<LatLng> newDecodedPath = new ArrayList<>();
+// This loops through all the LatLng coordinates of ONE polyline.
+                    for(com.google.maps.model.LatLng latLng: decodedPath){
+//                        Log.d(TAG, "run: latlng: " + latLng.toString());
+                        newDecodedPath.add(new LatLng(
+                                latLng.lat,
+                                latLng.lng
+                        ));
+                    }
+                    Polyline polyline = map.addPolyline(new PolylineOptions().addAll(newDecodedPath));
+                    polyline.setColor(ContextCompat.getColor(context, R.color.primary));
+                    if (first) polyline.setColor(ContextCompat.getColor(context, R.color.primary1));
+                    polyline.setClickable(true);
+                }
+            }
+        });
+    }
     public void toGoogleMaps(TourPlan tp){
         ArrayList<TourStop> stops = tp.getStops();
         stops.get(currDay).getAttraction().getLatitude();
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Where would you like to see the your route??")
+        builder.setMessage("Open itinerary in Google Maps?")
                 .setCancelable(true)
-                .setPositiveButton("Google Maps", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         String origin = "34.0224,-118.2851";
                         //last location
