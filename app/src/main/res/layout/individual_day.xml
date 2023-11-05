@@ -1,32 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#80FFD159"
+    android:layout_height="150dp"
     android:orientation="vertical">
+
 
     <TextView
         android:id="@+id/timeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="28dp"
-        android:text="Time duration"
+        android:layout_width="50dp"
+        android:layout_height="17dp"
         android:fontFamily="@font/rubikone"
-        android:textSize="15dp"
-        android:layout_marginBottom="5dp"
-        android:textColor="#000000" />
+        android:text="0:00"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.187" />
 
+    <TextView
+        android:id="@+id/timeTextView2"
+        android:layout_width="50dp"
+        android:layout_height="17dp"
+        android:fontFamily="@font/rubikone"
+        android:text="24:00"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.503" />
+
+    <TextView
+        android:id="@+id/arrow"
+        android:layout_width="10dp"
+        android:layout_height="20dp"
+        android:fontFamily="@font/rubikone"
+        android:text="|"
+        android:textColor="#000000"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/timeTextView2"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.396"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeTextView"
+        app:layout_constraintVertical_bias="1.0" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="300dp"
         android:layout_height="80dp"
         android:layout_below="@+id/timeTextView"
         android:layout_gravity="center_horizontal"
         android:background="#11CA9D"
         android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/travelTimeTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
 
 
         <TextView
@@ -37,7 +80,7 @@
             android:fontFamily="@font/ruda"
             android:text="Location Name"
             android:textColor="#FFFFFF"
-            android:textSize="22dp" />
+            android:textSize="18dp" />
 
 
         <TextView
@@ -52,19 +95,19 @@
     </LinearLayout>
 
     <TextView
-            android:id="@+id/travelTimeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="Travel Time"
-            android:textColor="#000000"
-            android:fontFamily="@font/rubikone"
-            android:textSize="18dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="32dp"
-            android:layout_gravity="end"/>
+        android:id="@+id/travelTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end"
+        android:fontFamily="@font/rubikone"
+        android:text="Travel Time"
+        android:textColor="#000000"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.945"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
