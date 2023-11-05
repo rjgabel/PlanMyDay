@@ -46,11 +46,11 @@ public class DurationActivity extends AppCompatActivity {
             Log.d("SA1", attractions.get(i).getName());
         }
         ArrayList<Attraction> attractionsCopy = new ArrayList<>(attractions);
-        ArrayList<TourPlan> tourPlan = TourOptimizer.optimizeTour(attractionsCopy, 7);// TODO PASS CORRECT PARAMETER
-        ArrayList<TourStop> stops = tourPlan.get(0).getStops();
-        for (int i = 0; i < stops.size(); i++){
-            Log.d("Stops", stops.get(i).getAttraction().getName());
-        }
+//        ArrayList<TourPlan> tourPlan = TourOptimizer.optimizeTour(attractionsCopy);// TODO PASS CORRECT PARAMETER
+//        ArrayList<TourStop> stops = tourPlan.get(0).getStops();
+//        for (int i = 0; i < stops.size(); i++){
+//            Log.d("Stops", stops.get(i).getAttraction().getName());
+//        }
 
         tt = findViewById(R.id.tourType);
 
