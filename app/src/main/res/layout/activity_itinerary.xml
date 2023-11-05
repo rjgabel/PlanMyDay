@@ -126,7 +126,7 @@
           android:id="@+id/back"
           android:layout_width="40dp"
           android:layout_height="40dp"
-          android:text="←"
+          android:text=""
           android:textColor="#000000"
           android:textSize="35sp"
           app:layout_constraintBottom_toTopOf="@+id/itineraryList"
