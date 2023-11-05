@@ -40,7 +40,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/favoritesButton"
-        android:layout_width="50dp"
+        android:layout_width="75dp"
         android:layout_height="30dp"
         android:layout_gravity="end"
         android:layout_marginRight="20dp"
