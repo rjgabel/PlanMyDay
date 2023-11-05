@@ -84,6 +84,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     ArrayList<TourPlan> tourPlans;
     GeoApiContext mGeoApiContext;
     int currDay = 0;
+    double bounds;
 
 
     //TODO: check for all permissions
@@ -107,9 +108,11 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         tt = findViewById(R.id.itinerary);
         if (type.equals("usc")){
             tt.setText("USC Itinerary");
+            bounds = 0.0075;
         }
         else if (type.equals("la")){
             tt.setText("LA Itinerary");
+            bounds = 0.1;
         }
 
 
@@ -189,12 +192,12 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
 
     }
 
-    private void setCameraView(double lat, double lon) {
+    private void setCameraView(double lat, double lon, double bounds) {
         //Overall map view window: 0.2 * 0.2 = 0.04
-        double bottomBoundary = lat - 0.1;
-        double leftBoundary = lon - 0.1;
-        double topBoundary = lat + 0.1;
-        double rightBoundary = lon + 0.1;
+        double bottomBoundary = lat - bounds;
+        double leftBoundary = lon - bounds;
+        double topBoundary = lat + bounds;
+        double rightBoundary = lon + bounds;
         mMapBoundary = new LatLngBounds(
                 new LatLng(bottomBoundary, leftBoundary),
                 new LatLng(topBoundary, rightBoundary)
@@ -252,7 +255,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         //Log.d("AtLat", String.valueOf(attractions.get(0).getLatitude()));
         map = googleMap;
         updateStops();
-        setCameraView(34.0224, 118.2851);
+        setCameraView(34.0224, 118.2851, bounds);
         map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(34.0224, -118.2851)));
     }
 
