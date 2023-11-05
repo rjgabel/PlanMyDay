@@ -106,6 +106,7 @@ public class DurationActivity extends AppCompatActivity {
         else if (type.equals("la")){
             intent.putExtra(Intent.EXTRA_TEXT, "la");
         }
+        intent.putExtra("Days", currentDay);
 
         Bundle args2 = new Bundle();
         Log.d("SIZER", String.valueOf(attractions.size()));
