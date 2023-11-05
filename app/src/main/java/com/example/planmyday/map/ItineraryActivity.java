@@ -5,6 +5,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -19,13 +20,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.planmyday.R;
+import com.example.planmyday.home.HomepageActivity;
 import com.example.planmyday.models.Attraction;
 import com.example.planmyday.models.TourPlan;
 import com.example.planmyday.models.TourStop;
 import com.example.planmyday.models.UserAccount;
+import com.example.planmyday.planning.LATour;
+import com.example.planmyday.planning.USCTour;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
@@ -57,10 +63,20 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     //FusedLocationProviderClient mFusionLocationProviderClient;
     LatLngBounds mMapBoundary;
     Location userLocation;
+
+    TextView tt;
+
     ArrayList<Attraction> attractions;
+    AppCompatButton home;
+
+    TextView back;
+    TextView front;
+    TextView day;
+
     ArrayList<TourPlan> tourPlans;
     GeoApiContext mGeoApiContext;
-    private int currDay = 0;
+    int currDay = 0;
+
 
     //TODO: check for all permissions
     @Override
@@ -77,7 +93,65 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         ArrayList<Attraction> attractionsCopy = new ArrayList<>(attractions);
         tourPlans = TourOptimizer.optimizeTour(attractionsCopy);
 
-        //getLastKnownLocation();
+        String type = intent.getStringExtra(Intent.EXTRA_TEXT);
+        tt = findViewById(R.id.itinerary);
+
+        if (type.equals("usc")){
+            tt.setText("USC Itinerary");
+        }
+        else if (type.equals("la")){
+            tt.setText("LA Itinerary");
+        }
+
+        home = findViewById(R.id.homeButton);
+
+        home.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+               goHome();
+            }
+        });
+
+        back = findViewById(R.id.back);
+        front = findViewById(R.id.forward);
+        day = findViewById(R.id.day);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(currDay >1) {
+
+                    if(currDay == 5){
+                        front.setText("→");
+                    }
+                    currDay--;
+                    day.setText("Day " + currDay);
+
+                    if(currDay == 1){
+                        back.setText("");
+                    }
+                }
+            }
+        });
+
+        front.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                if(currDay == 1){
+                    back.setText("←");
+                }
+
+                if(currDay <5) {
+                    currDay++;
+                    day.setText("Day "+currDay);
+
+                    if(currDay == 5){
+                        front.setText("");
+                    }
+                }
+            }
+        });
+
+                //getLastKnownLocation();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
@@ -100,6 +174,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         //map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(userLocation.getLatitude(), userLocation.getLongitude())));
     }
 
+
     public void updateDay(int diff){
         currDay += diff;
     }
@@ -116,6 +191,13 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         }
         //create lines
     }
+
+    public void goHome(){
+        Intent intentHome = new Intent(ItineraryActivity.this, HomepageActivity.class);
+        startActivity(intentHome);
+        finish();
+    }
+
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {

@@ -111,17 +111,22 @@ public class LocationsActivity extends AppCompatActivity {
         else {
             Intent intent = new Intent(this, DurationActivity.class);
 
-//        if (type.equals("usc")){
-//            intent.putExtra(Intent.EXTRA_TEXT, "usc");
-//        }
-//        else if (type.equals("la")){
-//            intent.putExtra(Intent.EXTRA_TEXT, "la");
-//        }
+            if (type.equals("usc")){
+               intent.putExtra(Intent.EXTRA_TEXT, "usc");
+            }
+            else if (type.equals("la")){
+                intent.putExtra(Intent.EXTRA_TEXT, "la");
+            }
+
             Bundle args = new Bundle();
             args.putSerializable("ARRAYLIST", (Serializable) selectedAttractions);
             intent.putExtra("BUNDLE", args);
 
+            Intent secondIntent = new Intent(this, DurationActivity.class);
+
+
             startActivity(intent);
+
         }
     }
 }
