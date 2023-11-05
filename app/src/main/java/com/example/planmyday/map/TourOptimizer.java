@@ -1,5 +1,7 @@
 package com.example.planmyday.map;
 
+import android.util.Log;
+
 import com.example.planmyday.models.Attraction;
 import com.example.planmyday.models.TourPlan;
 import com.example.planmyday.models.TourStop;
@@ -106,6 +108,7 @@ public class TourOptimizer {
                 num_consecutive_failures = 0;
             } else {
                 if (num_consecutive_failures > num_days) {
+                    Log.d("TourOptimizer", "Going to crash now, check TourOptimizer for info");
                     return null;
                 }
                 num_consecutive_failures++;
