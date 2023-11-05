@@ -24,6 +24,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,8 @@ import com.example.planmyday.models.TourPlan;
 import com.example.planmyday.models.TourStop;
 import com.example.planmyday.models.UserAccount;
 import com.example.planmyday.planning.LATour;
+import com.example.planmyday.planning.LocationsActivity;
+import com.example.planmyday.planning.MyAdapter;
 import com.example.planmyday.planning.USCTour;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -75,6 +78,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
 
     ArrayList<Attraction> attractions;
     AppCompatButton home;
+    ListView itineraryList;
 
     TextView back;
     TextView front;
@@ -132,6 +136,9 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         day = findViewById(R.id.day);
         dir = findViewById(R.id.redirect);
 
+
+        itineraryList = findViewById(R.id.itineraryList);
+
         if(tourPlans.size() == 1){
             front.setText("");
         }
@@ -152,6 +159,8 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                         back.setText("");
                     }
                 }
+
+               goToAdapter();
             }
         });
 
@@ -170,6 +179,8 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                 if(currDay == tourPlans.size() - 1){
                     front.setText("");
                 }
+
+                goToAdapter();
             }
         });
 
@@ -180,11 +191,16 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
             }
         });
 
+        goToAdapter();
+
+
+
         if (mGeoApiContext == null){
             mGeoApiContext = new GeoApiContext.Builder()
                     .apiKey(getString(R.string.maps_key))
                     .build();
         }
+
                 //getLastKnownLocation();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -383,5 +399,13 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                 Toast.makeText(this, "Please allow permissions to view map", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public void goToAdapter(){
+        ArrayList<TourStop> tourStops = tourPlans.get(currDay).getStops();
+        TourStop[] stops = new TourStop[tourStops.size()];
+        stops = tourStops.toArray(stops);
+        ItineraryAdapter itineraryAdapter = new ItineraryAdapter(ItineraryActivity.this, stops);
+        itineraryList.setAdapter(itineraryAdapter);
     }
 }
