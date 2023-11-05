@@ -106,7 +106,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         }
         //Set TourOptimizer
         ArrayList<Attraction> attractionsCopy = new ArrayList<>(attractions);
-        tourPlans = TourOptimizer.optimizeTour(attractionsCopy);
+        tourPlans = TourOptimizer.optimizeTour(attractionsCopy, 7); // TODO PASS THE CORRECT PARAMETER
 
         String type = intent.getStringExtra(Intent.EXTRA_TEXT);
         tt = findViewById(R.id.itinerary);
