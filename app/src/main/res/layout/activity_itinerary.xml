@@ -183,7 +183,7 @@
           app:layout_constraintHorizontal_bias="0.497"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/itineraryList"
-          app:layout_constraintVertical_bias="0.55" />
+          app:layout_constraintVertical_bias="0.42" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
