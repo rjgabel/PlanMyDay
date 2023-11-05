@@ -322,7 +322,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                 )
         );
 
-        if (type.equals("usc")){
+        if (type != null && type.equals("usc")){
             directions.mode(TravelMode.WALKING);
         }
 
