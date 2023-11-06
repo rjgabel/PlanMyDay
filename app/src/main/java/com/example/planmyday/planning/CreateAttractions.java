@@ -77,6 +77,14 @@ public class CreateAttractions {
         Log.d("JSONRESULT",jsonString);
     }
 
+    public ArrayList<Attraction> getAttractions() {
+        return attractions;
+    }
+
+    public void setAttractions(ArrayList<Attraction> attractions) {
+        this.attractions = attractions;
+    }
+
     public void addToDB(Attraction attraction){
         System.out.println(attraction);
     }

@@ -33,6 +33,7 @@ import com.example.planmyday.R;
 import com.example.planmyday.home.HomepageActivity;
 import com.example.planmyday.home.MainActivity;
 import com.example.planmyday.models.Attraction;
+import com.example.planmyday.models.SavedPlan;
 import com.example.planmyday.models.TourPlan;
 import com.example.planmyday.models.TourStop;
 import com.example.planmyday.models.UserAccount;
@@ -88,6 +89,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     TextView front;
     TextView day;
     Button dir;
+    Button saveButton;
     ArrayList<TourPlan> tourPlans;
     GeoApiContext mGeoApiContext;
     int currDay = 0;
@@ -148,6 +150,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         front = findViewById(R.id.forward);
         day = findViewById(R.id.day);
         dir = findViewById(R.id.redirect);
+        saveButton = findViewById(R.id.saveButton);
 
 
         itineraryList = findViewById(R.id.itineraryList);
@@ -206,7 +209,12 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
 
         goToAdapter();
 
-
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveToDB();
+            }
+        });
 
         if (mGeoApiContext == null){
             mGeoApiContext = new GeoApiContext.Builder()
@@ -214,8 +222,9 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                     .build();
         }
 
-        //mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
                 //getLastKnownLocation();
+        //saveToDB();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
@@ -223,21 +232,29 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     }
     //save TourPlan to user's file
     public void saveToDB(){
+        DatabaseReference userRef = dbRef.child("users").child(uid);
+        DatabaseReference toursRef = userRef.child("tours");
+        String newPlanKey = toursRef.push().getKey();
+        Log.d("FIREBASE", newPlanKey);
+        //SavedPlan sp = new SavedPlan(attractions, tourPlans.size(), "Jan 31, 2003");
+
+        //toursRef.child(newPlanKey.toString()).setValue(sp);
+        Log.d("FIREBASE", "saved to account");
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        uid = currentUser.getUid();
+        Log.d("FIREBASE", uid);
+        Log.d("FIREBASE", currentUser.getDisplayName());
+        if(currentUser == null){
+            //send to mainActivity
+            startActivity(new Intent(this, MainActivity.class));
+        }
 
     }
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        // Check if user is signed in (non-null) and update UI accordingly.
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        uid = currentUser.getUid();
-//
-//        if(currentUser == null){
-//            //send to mainActivity
-//            startActivity(new Intent(this, MainActivity.class));
-//        }
-//
-//    }
     private void setCameraView(double lat, double lon, double bounds) {
         //Overall map view window: 0.2 * 0.2 = 0.04
         double bottomBoundary = lat - bounds;
