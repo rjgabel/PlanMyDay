@@ -36,11 +36,13 @@ public class MyAdapter extends ArrayAdapter<String> {
     Attraction[] attractions;
     String[] isAdded;
     Context mContext;
-    public MyAdapter(Context context, Attraction[] attractions) {
+    String tourType;
+    public MyAdapter(Context context, Attraction[] attractions, String tourType) {
         super(context, R.layout.individual_location);
         this.attractions=attractions;
         this.mContext=context;
         this.isAdded = new String[attractions.length];
+        this.tourType = tourType;
         Arrays.fill(isAdded, "ADD");
         for (String str : isAdded) {
             Log.d("str13", str);
@@ -64,6 +66,8 @@ public class MyAdapter extends ArrayAdapter<String> {
             mViewHolder.locationName = (TextView) convertView.findViewById(R.id.locationName);
             mViewHolder.locationDesc = (TextView) convertView.findViewById(R.id.locationDescription);
             mViewHolder.favoritesButton = convertView.findViewById(R.id.favoritesButton);
+            mViewHolder.duration = (TextView) convertView.findViewById(R.id.estimatedDuration);
+            mViewHolder.distFromUSC = (TextView) convertView.findViewById(R.id.distFromUSC);
 
             convertView.setTag(mViewHolder);
         }
@@ -81,6 +85,11 @@ public class MyAdapter extends ArrayAdapter<String> {
             mViewHolder.locationName.setText(attractions[position].getName());
             mViewHolder.locationDesc.setText(attractions[position].getDescription());
             mViewHolder.favoritesButton.setText(isAdded[position]);
+            mViewHolder.duration.setText("recommended duration: "+attractions[position].getTime() + " min");
+
+            if(tourType.equals("la")){
+                mViewHolder.distFromUSC.setText("distance from USC: "+attractions[position].getDistUSC() + " miles");
+            }
 
         // Get background drawable
         Drawable buttonBackground = mViewHolder.favoritesButton.getBackground();
@@ -121,6 +130,9 @@ public class MyAdapter extends ArrayAdapter<String> {
         TextView locationName;
         TextView locationDesc;
         androidx.appcompat.widget.AppCompatButton favoritesButton;
+        TextView duration;
+
+        TextView distFromUSC;
 
     }
 }
