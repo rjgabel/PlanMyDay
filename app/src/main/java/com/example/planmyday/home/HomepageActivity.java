@@ -8,10 +8,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.planmyday.R;
 import com.example.planmyday.models.UserAccount;
+import com.example.planmyday.planning.LocationsActivity;
+import com.example.planmyday.planning.MyAdapter;
 import com.example.planmyday.planning.PlanActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,6 +32,7 @@ public class HomepageActivity extends AppCompatActivity {
     String uid;
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://planmyday-16506-default-rtdb.firebaseio.com/");
     TextView welcome, logout;
+    ListView oldPlansList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +83,10 @@ public class HomepageActivity extends AppCompatActivity {
                 toPlan();
             }
         });
+
+//        oldPlansList = findViewById(R.id.oldPlansList);
+//        HomeAdapter myAdapter = new HomeAdapter(HomepageActivity.this, null);
+//        oldPlansList.setAdapter(myAdapter);
     }
 
     @Override

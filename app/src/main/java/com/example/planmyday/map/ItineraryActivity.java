@@ -88,6 +88,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     TextView back;
     TextView front;
     TextView day;
+    TextView estimated;
     Button dir;
     Button saveButton;
     ArrayList<TourPlan> tourPlans;
@@ -119,7 +120,9 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         ArrayList<Attraction> attractionsCopy = new ArrayList<>(attractions);
         Log.d("DaysIntent", String.valueOf(numDays));
         tourPlans = TourOptimizer.optimizeTour(attractionsCopy, numDays); // TODO PASS THE CORRECT PARAMETER
-        if (tourPlans == null) return;
+        if (tourPlans == null) {
+            Toast.makeText(this, "Itinerary is not feasible, please try again", Toast.LENGTH_SHORT).show();
+            goHome();}
 
         String type = intent.getStringExtra(Intent.EXTRA_TEXT);
         tt = findViewById(R.id.itinerary);
@@ -133,6 +136,10 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
             this.type = "la";
             bounds = 0.1;
         }
+
+        estimated = findViewById(R.id.estimatedRouteTime);
+        Log.d("hello", TourOptimizer.calculateTotalTime(tourPlans.get(currDay))+"");
+        estimated.setText("estimated route time: "+TourOptimizer.calculateTotalTime(tourPlans.get(currDay))+"");
 
 
 
@@ -150,7 +157,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         front = findViewById(R.id.forward);
         day = findViewById(R.id.day);
         dir = findViewById(R.id.redirect);
-        saveButton = findViewById(R.id.saveButton);
+//        saveButton = findViewById(R.id.saveButton);
 
 
         itineraryList = findViewById(R.id.itineraryList);
@@ -170,6 +177,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                     currDay--;
                     updateStops();
                     day.setText("Day " + (currDay+1));
+                    estimated.setText("estimated route time: "+TourOptimizer.calculateTotalTime(tourPlans.get(currDay))+"");
 
                     if(currDay == 0){
                         back.setText("");
@@ -187,6 +195,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                     currDay++;
                     updateStops();
                     day.setText("Day "+(currDay+1));
+                    estimated.setText("estimated route time: "+TourOptimizer.calculateTotalTime(tourPlans.get(currDay))+"" + " min");
                 }
                 if(currDay > 0){
                     back.setText("←");
@@ -209,12 +218,12 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
 
         goToAdapter();
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                saveToDB();
-            }
-        });
+//        saveButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                saveToDB();
+//            }
+//        });
 
         if (mGeoApiContext == null){
             mGeoApiContext = new GeoApiContext.Builder()
@@ -395,7 +404,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     }
     public void toGoogleMaps(TourPlan tp){
         ArrayList<TourStop> stops = tp.getStops();
-        stops.get(currDay).getAttraction().getLatitude();
+        //stops.get(currDay).getAttraction().getLatitude();
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Open itinerary in Google Maps?")
                 .setCancelable(true)
