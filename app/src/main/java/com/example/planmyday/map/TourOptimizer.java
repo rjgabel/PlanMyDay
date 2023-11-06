@@ -85,8 +85,8 @@ public class TourOptimizer {
             for (int i = 0; i < attractions.size(); i++) {
                 Attraction attraction = attractions.get(i);
                 int attraction_id = getAttractionID(attraction);
-                int open_time = attraction.getHours().get(cur_day).get(0);
-                int close_time = attraction.getHours().get(cur_day).get(1);
+                int open_time = attraction.getHours().get(Integer.toString(cur_day)).get(0);
+                int close_time = attraction.getHours().get(Integer.toString(cur_day)).get(1);
                 int arrival_time = cur_time + getDuration(cur_attraction_id, attraction_id);
                 if (arrival_time < open_time) {
                     arrival_time = open_time;

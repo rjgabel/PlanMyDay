@@ -22,7 +22,7 @@ public class Attraction implements Serializable {
     private double distUSC;
     //0:mon, 1:tues...6:sun
     //hours are formatted as an int as HHMM
-    private HashMap<Integer, ArrayList<Integer>> hours;
+    private HashMap<String, ArrayList<Integer>> hours;
     private String imageUrl;
 
     private double latitude;
@@ -32,7 +32,7 @@ public class Attraction implements Serializable {
 
     }
 
-    public Attraction(String name, String address, Boolean usc, String description, int time, double distUSC, HashMap<Integer, ArrayList<Integer>> hours, String imageUrl, double latitude, double longitude) {
+    public Attraction(String name, String address, Boolean usc, String description, int time, double distUSC, HashMap<String, ArrayList<Integer>> hours, String imageUrl, double latitude, double longitude) {
         this.name = name;
         this.address = address;
         this.usc = usc;
@@ -92,11 +92,11 @@ public class Attraction implements Serializable {
         this.distUSC = distUSC;
     }
 
-    public HashMap<Integer, ArrayList<Integer>> getHours() {
+    public HashMap<String, ArrayList<Integer>> getHours() {
         return hours;
     }
 
-    public void setHours(HashMap<Integer, ArrayList<Integer>> hours) {
+    public void setHours(HashMap<String, ArrayList<Integer>> hours) {
         this.hours = hours;
     }
 

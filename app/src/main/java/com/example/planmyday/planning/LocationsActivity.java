@@ -64,7 +64,7 @@ public class LocationsActivity extends AppCompatActivity {
         CreateAttractions ca = new CreateAttractions(this);
         ca.generate();
         ArrayList<Attraction> rawAttractions = ca.attractions;
-
+        Log.d("ATTRACTIONDEBUG", rawAttractions.get(0).getName());
 
         //make the correct type of Tour
         if (type.equals("usc")){
