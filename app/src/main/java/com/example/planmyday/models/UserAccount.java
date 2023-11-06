@@ -13,13 +13,13 @@ public class UserAccount {
     private String password;
 
     //TODO: Change to arraylist of TourPlans
-    private ArrayList<TourPlan> tours;
+    private ArrayList<SavedPlan> tours;
 
     public UserAccount(){
 
     }
 
-    public UserAccount(String name, String email, String password, ArrayList<TourPlan> tours){
+    public UserAccount(String name, String email, String password, ArrayList<SavedPlan> tours){
         this.name = name;
         this.email = email;
         this.password = password;
@@ -50,11 +50,11 @@ public class UserAccount {
         this.password = password;
     }
 
-    public ArrayList<TourPlan> getTours() {
+    public ArrayList<SavedPlan> getTours() {
         return tours;
     }
 
-    public void setTours(ArrayList<TourPlan> tours) {
+    public void setTours(ArrayList<SavedPlan> tours) {
         this.tours = tours;
     }
 
