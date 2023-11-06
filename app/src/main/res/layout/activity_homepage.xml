@@ -4,41 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FDF6EC"
+    android:background="#11CA9D"
     tools:context=".home.HomepageActivity">
 
 
     <TextView
         android:id="@+id/welcome"
-        android:layout_width="313dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:fontFamily="@font/rubikone"
         android:text="Welcome!"
         android:textAlignment="center"
-        android:textColor="#11CA9D"
-        android:textSize="35sp"
+        android:textColor="#FFD159"
+        android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/desc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.03" />
-
+        app:layout_constraintVertical_bias="0.962" />
 
     <TextView
         android:id="@+id/desc"
         android:layout_width="285dp"
         android:layout_height="36dp"
         android:fontFamily="@font/rubikone"
-        android:text="Previous itineraries..."
+        android:text="to Plan My Day"
         android:textAlignment="center"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.223" />
+        app:layout_constraintVertical_bias="0.574" />
 
     <TextView
         android:id="@+id/logout"
@@ -48,12 +47,14 @@
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/ruda"
         android:text="Logout"
-        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/welcome"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.059" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/newitinerary"
@@ -74,16 +75,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
-        android:id="@+id/oldPlansList"
-        android:layout_width="343dp"
-        android:layout_height="476dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="123dp"
+        android:layout_height="110dp"
+        app:layout_constraintBottom_toTopOf="@+id/welcome"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/desc"
-        app:layout_constraintVertical_bias="0.5"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.907"
+        app:srcCompat="@drawable/paper_airplane" />
+
+    <!--    <ListView-->
+    <!--        android:id="@+id/oldPlansList"-->
+    <!--        android:layout_width="343dp"-->
+    <!--        android:layout_height="476dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.5"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/desc"-->
+    <!--        app:layout_constraintVertical_bias="0.5"/>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

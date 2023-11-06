@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#80FFD159"
+    android:layout_height="250dp"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/locationImage"
         android:layout_width="match_parent"
         android:layout_height="132dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/lapolaroid"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
         android:alpha="0.8"
-        />
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/locationName"
@@ -25,8 +27,12 @@
         android:fontFamily="@font/ruda"
         android:text="Location Name"
         android:textSize="18sp"
-        android:layout_marginLeft="20dp"
-        />
+        app:layout_constraintBottom_toTopOf="@+id/locationDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationImage"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/locationDescription"
@@ -35,24 +41,60 @@
         android:fontFamily="@font/ruda"
         android:text="Location Description"
         android:textSize="12sp"
-        android:layout_marginLeft="20dp"
-    />
+        app:layout_constraintBottom_toTopOf="@+id/favoritesButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationName"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <TextView
+        android:id="@+id/estimatedDuration"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/ruda"
+        android:text="estimated duration:"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationDescription"
+        app:layout_constraintVertical_bias="0.333" />
+
+    <TextView
+        android:id="@+id/distFromUSC"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ruda"
+        android:text=""
+        android:textSize="12sp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/favoritesButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/estimatedDuration"
+        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/favoritesButton"
         android:layout_width="75dp"
-        android:layout_height="30dp"
+        android:layout_height="28dp"
         android:layout_gravity="end"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/round"
         android:backgroundTint="#11CA9D"
-        android:textSize="12sp"
         android:fontFamily="@font/rubikone"
         android:text="Add"
-        android:layout_marginLeft="20dp"
-    />
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.882"
+        app:layout_constraintStart_toEndOf="@+id/estimatedDuration"
+        app:layout_constraintTop_toBottomOf="@+id/locationDescription"
+        app:layout_constraintVertical_bias="0.5" />
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -84,18 +84,18 @@ public class LocationsActivity extends AppCompatActivity {
         Attraction[] aattractions = new Attraction[attractions.size()];
         aattractions = attractions.toArray(aattractions);
 
-        MyAdapter myAdapter = new MyAdapter(LocationsActivity.this, aattractions);
+        MyAdapter myAdapter = new MyAdapter(LocationsActivity.this, aattractions, type);
         locationList.setAdapter(myAdapter);
     }
 
     public void addToFavorites(Attraction attraction) {
         if (selectedAttractions.contains(attraction)) {
             selectedAttractions.remove(attraction);
-            Toast.makeText(this, "Removed from favorites: " + attraction.getName(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Removed from favorites: " + attraction.getName(), Toast.LENGTH_SHORT).show();
             Log.d("LocationsActivity", "removed, Item clicked at position: ");
         } else {
             selectedAttractions.add(attraction);
-            Toast.makeText(this, "Added to favorites: " + attraction.getName(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Added to favorites: " + attraction.getName(), Toast.LENGTH_SHORT).show();
             Log.d("LocationsActivity", "Item clicked at position: " );
         }
         Log.d("LocationsActivity", "received");
