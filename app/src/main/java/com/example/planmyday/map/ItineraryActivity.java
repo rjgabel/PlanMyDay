@@ -157,7 +157,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         front = findViewById(R.id.forward);
         day = findViewById(R.id.day);
         dir = findViewById(R.id.redirect);
-        saveButton = findViewById(R.id.saveButton);
+//        saveButton = findViewById(R.id.saveButton);
 
 
         itineraryList = findViewById(R.id.itineraryList);
@@ -218,12 +218,12 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
 
         goToAdapter();
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                saveToDB();
-            }
-        });
+//        saveButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                saveToDB();
+//            }
+//        });
 
         if (mGeoApiContext == null){
             mGeoApiContext = new GeoApiContext.Builder()
