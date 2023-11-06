@@ -139,7 +139,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
 
         estimated = findViewById(R.id.estimatedRouteTime);
         Log.d("hello", TourOptimizer.calculateTotalTime(tourPlans.get(currDay))+"");
-        estimated.setText("estimated route time: "+TourOptimizer.calculateTotalTime(tourPlans.get(currDay))+"");
+        estimated.setText("estimated route time: "+TourOptimizer.calculateTotalTime(tourPlans.get(currDay))+"" + " min");
 
 
 
@@ -177,7 +177,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                     currDay--;
                     updateStops();
                     day.setText("Day " + (currDay+1));
-                    estimated.setText("estimated route time: "+TourOptimizer.calculateTotalTime(tourPlans.get(currDay))+"");
+                    estimated.setText("estimated route time: "+TourOptimizer.calculateTotalTime(tourPlans.get(currDay))+"" + " min");
 
                     if(currDay == 0){
                         back.setText("");
