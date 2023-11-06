@@ -3,6 +3,7 @@ package com.example.planmyday.registration;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,8 +14,11 @@ import android.widget.Toast;
 
 import com.example.planmyday.R;
 import com.example.planmyday.home.HomepageActivity;
+import com.example.planmyday.models.Attraction;
+import com.example.planmyday.models.SavedPlan;
 import com.example.planmyday.models.TourPlan;
 import com.example.planmyday.models.UserAccount;
+import com.example.planmyday.planning.CreateAttractions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -24,6 +28,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.w3c.dom.Attr;
 
 import java.util.ArrayList;
 
@@ -55,7 +61,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 toLogin();
             }
         });
-
+        Context context = this;
         //set off registration when button is clicked
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,8 +95,12 @@ public class RegistrationActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationActivity.this,"Passwords do not match", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                ArrayList<TourPlan> temp = new ArrayList<>();
-                //temp.add();
+                ArrayList<SavedPlan> temp = new ArrayList<>();
+                CreateAttractions ca = new CreateAttractions(context);
+                ca.generate();
+                ArrayList<Attraction> arr = ca.getAttractions();
+                SavedPlan sp = new SavedPlan("hi", arr, 5, "Jan 31, 2003");
+                temp.add(sp);
                 UserAccount userAccount = new UserAccount(name, email, password, temp);
 
                 mAuth.createUserWithEmailAndPassword(email, password)
