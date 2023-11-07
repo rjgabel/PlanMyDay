@@ -20,7 +20,7 @@ Steps on running this application:
 4. Open and run the application with the "run button"
 5. You can use the credentials provided above to log in, or make a new account
 6. If you forget your password, you can reset it by sending an reset email to your account
-![forgetpassword!](../forgetpassword.jpg)
+![forgetpassword!](app/src/main/res/drawable/forgetpassword.jpg)
 7. You will be logged in automatically when you register, but you can log out if desired
 8. Start creating an itinerary by clicking the "+" button on the bottom right
 9. Specify which attractions to choose from and over how many days
