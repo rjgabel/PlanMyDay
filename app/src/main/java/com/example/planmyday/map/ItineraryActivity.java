@@ -56,6 +56,7 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -100,13 +101,21 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     String uid;
     String type;
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://planmyday-16506-default-rtdb.firebaseio.com/");
-
+    TravelMode travelMode;
+    SwitchMaterial toggle;
 
     //TODO: check for all permissions
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_itinerary);
+
+        back = findViewById(R.id.back);
+        front = findViewById(R.id.forward);
+        day = findViewById(R.id.day);
+        dir = findViewById(R.id.redirect);
+//        saveButton = findViewById(R.id.saveButton);
+        toggle = findViewById(R.id.toggleTransit);
 
         //GET INTENTS
         Intent intent = getIntent();
@@ -128,11 +137,14 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         tt = findViewById(R.id.itinerary);
         if (type.equals("usc")){
             tt.setText("USC Itinerary");
+            travelMode = TravelMode.WALKING;
             this.type = "usc";
             bounds = 0.0075;
+            toggle.setVisibility(View.GONE);
         }
         else if (type.equals("la")){
             tt.setText("LA Itinerary");
+            travelMode = TravelMode.DRIVING;
             this.type = "la";
             bounds = 0.1;
         }
@@ -153,11 +165,6 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
             }
         });
 
-        back = findViewById(R.id.back);
-        front = findViewById(R.id.forward);
-        day = findViewById(R.id.day);
-        dir = findViewById(R.id.redirect);
-//        saveButton = findViewById(R.id.saveButton);
 
 
         itineraryList = findViewById(R.id.itineraryList);
@@ -213,6 +220,18 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
             @Override
             public void onClick(View view) {
                 toGoogleMaps(tourPlans.get(currDay));
+            }
+        });
+
+        toggle.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                // The switch is checked
+                travelMode = TravelMode.TRANSIT;
+                updateStops();
+            } else {
+                // The switch isn't checked.
+                travelMode = TravelMode.DRIVING;
+                updateStops();
             }
         });
 
@@ -297,11 +316,11 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
             //create path between curr and last one
             if (num == 2){
                 calculateDirections(lastAttraction.getLatitude(), lastAttraction.getLongitude(),
-                        currAttraction.getLatitude(), currAttraction.getLongitude(), true);
+                        currAttraction.getLatitude(), currAttraction.getLongitude(), true, travelMode);
             }
             else if (num > 2) {
                 calculateDirections(lastAttraction.getLatitude(), lastAttraction.getLongitude(),
-                        currAttraction.getLatitude(), currAttraction.getLongitude(), false);
+                        currAttraction.getLatitude(), currAttraction.getLongitude(), false, travelMode);
             }
             lastAttraction = currAttraction;
             num++;
@@ -331,7 +350,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     }
 
     //must give credit to coding w mitch
-    private void calculateDirections(double oLat, double oLng, double dLat, double dLng, boolean first){
+    private void calculateDirections(double oLat, double oLng, double dLat, double dLng, boolean first, TravelMode travelMode){
         String TAG = "Dir";
         Log.d(TAG, "calculateDirections: calculating directions.");
 
@@ -353,17 +372,17 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
             directions.mode(TravelMode.WALKING);
         }
         else {
-            directions.mode(TravelMode.DRIVING);
+            directions.mode(travelMode);
         }
 
         Log.d(TAG, "calculateDirections: destination: " + destination.toString());
         directions.destination(destination).setCallback(new PendingResult.Callback<DirectionsResult>() {
             @Override
             public void onResult(DirectionsResult result) {
-//                Log.d(TAG, "calculateDirections: routes: " + result.routes[0].toString());
-//                Log.d(TAG, "calculateDirections: duration: " + result.routes[0].legs[0].duration);
-//                Log.d(TAG, "calculateDirections: distance: " + result.routes[0].legs[0].distance);
-//                Log.d(TAG, "calculateDirections: geocodedWayPoints: " + result.geocodedWaypoints[0].toString());
+                Log.d(TAG, "calculateDirections: routes: " + result.routes[0].toString());
+                Log.d(TAG, "calculateDirections: duration: " + result.routes[0].legs[0].duration);
+                Log.d(TAG, "calculateDirections: distance: " + result.routes[0].legs[0].distance);
+                Log.d(TAG, "calculateDirections: geocodedWayPoints: " + result.geocodedWaypoints[0].toString());
                 addPolylinesToMap(result, first);
             }
 
