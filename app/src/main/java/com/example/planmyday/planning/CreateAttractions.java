@@ -63,14 +63,14 @@ public class CreateAttractions {
             //dbRef.child("attractions").child(attraction.getName()).setValue(attraction);
             Log.d("Names", attraction.getName());
             // Convert hours from HHMM to minutes since midnight
-            HashMap<Integer, ArrayList<Integer>> hours = attraction.getHours();
+            HashMap<String, ArrayList<Integer>> hours = attraction.getHours();
             for (int i = 0; i < 7; i++) {
-                ArrayList<Integer> hour = hours.get(i);
+                ArrayList<Integer> hour = hours.get(Integer.toString(i));
                 for (int j = 0; j < hour.size(); j++) {
                     int time = hour.get(j);
                     hour.set(j, (time / 100) * 60 + (time % 100));
                 }
-                hours.put(i, hour);
+                hours.put(Integer.toString(i), hour);
             }
             this.attractions.add(attraction);
         }

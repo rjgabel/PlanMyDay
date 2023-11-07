@@ -6,13 +6,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class SavedPlan {
-    private String key;
     private ArrayList<Attraction> attractions;
     private int numDays;
     private String date;
 
-    public SavedPlan(String key, ArrayList<Attraction> attractions, int numDays, String date){
-        this.key = key;
+    public SavedPlan(ArrayList<Attraction> attractions, int numDays, String date){
         this.attractions = attractions;
         this.numDays = numDays;
         this.date = date;
@@ -46,11 +44,4 @@ public class SavedPlan {
         this.date = date;
     }
 
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
 }
