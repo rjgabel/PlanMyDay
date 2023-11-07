@@ -96,11 +96,11 @@ public class RegistrationActivity extends AppCompatActivity {
                     return;
                 }
                 ArrayList<SavedPlan> temp = new ArrayList<>();
-                CreateAttractions ca = new CreateAttractions(context);
-                ca.generate();
-                ArrayList<Attraction> arr = ca.getAttractions();
-                SavedPlan sp = new SavedPlan("hi", arr, 5, "Jan 31, 2003");
-                temp.add(sp);
+//                CreateAttractions ca = new CreateAttractions(context);
+//                ca.generate();
+//                ArrayList<Attraction> arr = ca.getAttractions();
+//                SavedPlan sp = new SavedPlan(arr, 5, "Jan 31, 2003");
+//                temp.add(sp);
                 UserAccount userAccount = new UserAccount(name, email, password, temp);
 
                 mAuth.createUserWithEmailAndPassword(email, password)
