@@ -96,11 +96,11 @@ public class RegistrationActivity extends AppCompatActivity {
                     return;
                 }
                 ArrayList<SavedPlan> temp = new ArrayList<>();
-                CreateAttractions ca = new CreateAttractions(context);
-                ca.generate();
-                ArrayList<Attraction> arr = ca.getAttractions();
-                SavedPlan sp = new SavedPlan("hi", arr, 5, "Jan 31, 2003");
-                temp.add(sp);
+//                CreateAttractions ca = new CreateAttractions(context);
+//                ca.generate();
+//                ArrayList<Attraction> arr = ca.getAttractions();
+//                SavedPlan sp = new SavedPlan("hi", arr, 5, "Jan 31, 2003");
+//                temp.add(sp);
                 UserAccount userAccount = new UserAccount(name, email, password, temp);
 
                 mAuth.createUserWithEmailAndPassword(email, password)
@@ -113,7 +113,8 @@ public class RegistrationActivity extends AppCompatActivity {
                                     String uid = user.getUid();
                                     dbRef.child("users").child(uid).setValue(userAccount);
                                     Toast.makeText(RegistrationActivity.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
-                                    toHome();
+                                    mAuth.signOut();
+                                    toLogin();
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     if (task.getException() != null) {
@@ -131,7 +132,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
     }
-
 
     private void toLogin(){
         Intent intent = new Intent(this, LoginActivity.class);
