@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_gravity="end"
-        android:fontFamily="@font/rubikone"
+        android:fontFamily="@font/ruda"
         android:text="Travel Time"
         android:textColor="#000000"
         android:textSize="18dp"

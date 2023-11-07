@@ -31,3 +31,4 @@ image was placed into the implementation documentation to show what the email lo
 - Travel time between places includes the time it takes for places to open
 - The itinerary assumes starting the route at the earliest time the first place opens
 - All times are in drive time despite the routes being shown as walking or public transport
+- In our app, Day One Represents Sunday
