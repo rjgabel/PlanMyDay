@@ -20,6 +20,7 @@ Steps on running this application:
 4. Open and run the application with the "run button"
 5. You can use the credentials provided above to log in, or make a new account
 6. If you forget your password, you can reset it by sending an reset email to your account
+![forgetpassword!](app/src/main/res/drawable/forgetpassword.jpg)
 7. You will be logged in automatically when you register, but you can log out if desired
 8. Start creating an itinerary by clicking the "+" button on the bottom right
 9. Specify which attractions to choose from and over how many days
@@ -31,3 +32,4 @@ image was placed into the implementation documentation to show what the email lo
 - Travel time between places includes the time it takes for places to open
 - The itinerary assumes starting the route at the earliest time the first place opens
 - All times are in drive time despite the routes being shown as walking or public transport
+- In our app, Day One Represents Sunday

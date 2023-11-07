@@ -86,7 +86,7 @@ public class ItineraryAdapter extends ArrayAdapter<TourStop> {
             mViewHolder.travel.setText("");
         }
         else{
-            mViewHolder.travel.setText(TourOptimizer.getTravelTime(stop, stops[position+1]) +" min travel time");
+            mViewHolder.travel.setText(TourOptimizer.getTravelTime(stop, stops[position+1]) +" min travel/wait time");
         }
 
         Log.d("check", "got here3");

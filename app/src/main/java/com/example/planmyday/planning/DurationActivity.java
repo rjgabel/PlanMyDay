@@ -127,8 +127,7 @@ public class DurationActivity extends AppCompatActivity {
             currentDay++;
             updateDayTextView();
         } else {
-            // Day count can't go beyond 7, show a toast
-            Toast.makeText(this, "Maximum 7 days allowed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Maximum 5 days allowed", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -137,7 +136,6 @@ public class DurationActivity extends AppCompatActivity {
             currentDay--;
             updateDayTextView();
         } else {
-            // Day count can't go below 1, show a toast
             Toast.makeText(this, "Minimum 1 day allowed", Toast.LENGTH_SHORT).show();
         }
     }
