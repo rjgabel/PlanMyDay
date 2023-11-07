@@ -4,16 +4,16 @@
     "address": "3505 McClintock Avenue, Los Angeles, CA 90089",
     "usc": true,
     "description": "Great for exercising",
-    "time": 45,
+    "time": 60,
     "distUSC": 0.0,
     "hours": {
-      "0": [600, 2400],
+      "0": [630, 2400],
       "1": [1800, 2400],
       "2": [1800, 2400],
       "3": [1800, 2400],
       "4": [1800, 2400],
       "5": [1800, 2400],
-      "6": [600, 2400]
+      "6": [630, 2400]
     },
     "imageUrl": "https://live.staticflickr.com/583/21576077862_cdd7fdcb53_b.jpg",
     "latitude": 34.022256234206694,
