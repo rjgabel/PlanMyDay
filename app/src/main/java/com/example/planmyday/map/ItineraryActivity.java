@@ -131,6 +131,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         tourPlans = TourOptimizer.optimizeTour(attractionsCopy, numDays); // TODO PASS THE CORRECT PARAMETER
         if (tourPlans == null) {
             Toast.makeText(this, "Itinerary is not feasible, please try again", Toast.LENGTH_SHORT).show();
+            goHome();
             return;
         }
 
@@ -147,7 +148,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
             tt.setText("LA Itinerary");
             travelMode = TravelMode.DRIVING;
             this.type = "la";
-            bounds = 0.1;
+            bounds = 0.15;
         }
 
         estimated = findViewById(R.id.estimatedRouteTime);

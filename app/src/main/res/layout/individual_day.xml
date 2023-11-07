@@ -61,7 +61,7 @@
         android:layout_height="80dp"
         android:layout_below="@+id/timeTextView"
         android:layout_gravity="center_horizontal"
-        android:background="#11CA9D"
+        android:background="#FFD159"
         android:orientation="vertical"
         android:padding="8dp"
         app:layout_constraintBottom_toTopOf="@+id/travelTimeTextView"
@@ -79,7 +79,7 @@
             android:layout_marginBottom="4dp"
             android:fontFamily="@font/ruda"
             android:text="Location Name"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="18dp" />
 
 
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/ruda"
             android:text="Location Address"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="11dp" />
 
     </LinearLayout>
