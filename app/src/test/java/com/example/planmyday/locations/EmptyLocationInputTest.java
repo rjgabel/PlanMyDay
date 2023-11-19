@@ -13,7 +13,7 @@ import com.example.planmyday.planning.LocationsActivity;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest=Config.NONE)
-public class EmptyLocationInputTest_wb {
+public class EmptyLocationInputTest {
 
     private LocationsActivity locationsActivity;
 

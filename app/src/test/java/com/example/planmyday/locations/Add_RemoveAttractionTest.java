@@ -7,14 +7,12 @@ import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.assertEquals;
 
-import android.os.Build;
-
 import com.example.planmyday.models.Attraction;
 import com.example.planmyday.planning.LocationsActivity;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest=Config.NONE)
-public class Add_RemoveAttractionTest_wb {
+public class Add_RemoveAttractionTest {
 
     private LocationsActivity locationsActivity;
 

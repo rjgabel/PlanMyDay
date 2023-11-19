@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest=Config.NONE)
-public class DecrementOverMinDays_wb {
+public class IncrementOverMaxDays {
 
     private DurationActivity durationActivity;
 
@@ -26,23 +26,22 @@ public class DecrementOverMinDays_wb {
     }
 
     @Test
-    public void testDecrementOverMinDays() {
+    public void testIncrementOverMaxDays() {
 
-        durationActivity.setCurrentDay(5);
-        assertEquals(5, durationActivity.getCurrentDay());
+        assertEquals(1, durationActivity.getCurrentDay());
 
 
-        for(int i = 4; i <= 1; i--) {
-            durationActivity.decrementDay();
+        for(int i = 2; i <= 5; i++) {
+            durationActivity.incrementDay();
             assertEquals(i, durationActivity.getCurrentDay());
         }
 
-        //once we hit the min at 1, current day should stay at 1
-        durationActivity.decrementDay();
-        assertEquals(1, durationActivity.getCurrentDay());
+        //once we max out at 5, current day should stay at 5
+        durationActivity.incrementDay();
+        assertEquals(5, durationActivity.getCurrentDay());
 
         //Toast is shown
-        assertEquals(true, ShadowToast.showedToast("Minimum 1 day allowed"));
+        assertEquals(true, ShadowToast.showedToast("Maximum 5 days allowed"));
 
         ArrayList<Attraction> attractions = new ArrayList<Attraction>();
         Attraction attraction = new Attraction();
