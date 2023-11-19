@@ -31,11 +31,8 @@ public class LocationsActivity extends AppCompatActivity {
     TextView tt;
     ImageView arrow;
     ListView locationList;
-
-
-
-
-    ArrayList<Attraction> selectedAttractions = new ArrayList<Attraction>();
+    public boolean nextPage = false;
+    public ArrayList<Attraction> selectedAttractions = new ArrayList<Attraction>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +104,7 @@ public class LocationsActivity extends AppCompatActivity {
 
         if(selectedAttractions.size() == 0){
             Toast.makeText(this, "No selected attractions", Toast.LENGTH_SHORT).show();
+            nextPage = false;
         }
         else {
             Intent intent = new Intent(this, DurationActivity.class);
@@ -123,7 +121,7 @@ public class LocationsActivity extends AppCompatActivity {
             intent.putExtra("BUNDLE", args);
 
             Intent secondIntent = new Intent(this, DurationActivity.class);
-
+            nextPage = true;
 
             startActivity(intent);
 

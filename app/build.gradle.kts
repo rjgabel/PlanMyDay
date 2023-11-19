@@ -56,4 +56,5 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.12.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
     implementation("com.sothree.slidinguppanel:library:3.4.0")
+    testImplementation ("org.robolectric:robolectric:4.7.1")
 }
