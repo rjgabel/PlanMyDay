@@ -33,8 +33,10 @@ public class DurationActivity extends AppCompatActivity {
     String type;
     ArrayList<Attraction> attractions = new ArrayList<>();
 
+    public boolean nextPage = false;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_duration);
         Intent intent = getIntent();
@@ -99,7 +101,7 @@ public class DurationActivity extends AppCompatActivity {
         });
     }
 
-    private void toMap(ArrayList<Attraction> attractions){
+    public void toMap(ArrayList<Attraction> attractions){
         Intent intent = new Intent(this, ItineraryActivity.class);
         if (type.equals("usc")){
             intent.putExtra(Intent.EXTRA_TEXT, "usc");
@@ -114,6 +116,8 @@ public class DurationActivity extends AppCompatActivity {
         args2.putSerializable("ARRAYLIST2", (Serializable) attractions);
         intent.putExtra("BUNDLE2", args2);
 
+        nextPage = true;
+
         startActivity(intent);
     }
 
@@ -122,7 +126,7 @@ public class DurationActivity extends AppCompatActivity {
         dayTextView.setText(dayText);
     }
 
-    private void incrementDay() {
+    public void incrementDay() {
         if (currentDay < 5) {
             currentDay++;
             updateDayTextView();
@@ -131,12 +135,20 @@ public class DurationActivity extends AppCompatActivity {
         }
     }
 
-    private void decrementDay() {
+    public void decrementDay() {
         if (currentDay > 1) {
             currentDay--;
             updateDayTextView();
         } else {
             Toast.makeText(this, "Minimum 1 day allowed", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public int getCurrentDay(){
+        return currentDay;
+    }
+
+    public void setCurrentDay(int day){
+        currentDay = day;
     }
 }
