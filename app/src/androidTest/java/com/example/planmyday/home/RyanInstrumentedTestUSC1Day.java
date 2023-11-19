@@ -31,7 +31,7 @@ import org.junit.runner.RunWith;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class RyanInstrumentedTest2 {
+public class RyanInstrumentedTestUSC1Day {
 
     @Rule
     public ActivityScenarioRule<MainActivity> mActivityScenarioRule = new ActivityScenarioRule<>(MainActivity.class);
@@ -54,7 +54,7 @@ public class RyanInstrumentedTest2 {
     }
 
     @Test
-    public void ryanInstrumentedTest2() {
+    public void ryanInstrumentedTestUSC1Day() {
         ViewInteraction appCompatButton = onView(allOf(withId(R.id.loginButton), withText("LOG IN"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 2), isDisplayed()));
         appCompatButton.perform(click());
 
@@ -67,6 +67,12 @@ public class RyanInstrumentedTest2 {
         ViewInteraction appCompatButton2 = onView(allOf(withId(R.id.btn_login), withText("LOG IN"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 4), isDisplayed()));
         appCompatButton2.perform(click());
 
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         ViewInteraction appCompatButton3 = onView(allOf(withId(R.id.newitinerary), withText("+"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 3), isDisplayed()));
         appCompatButton3.perform(click());
 
@@ -76,31 +82,10 @@ public class RyanInstrumentedTest2 {
         ViewInteraction appCompatButton4 = onView(allOf(withId(R.id.favoritesButton), withText("ADD"), childAtPosition(withParent(withId(R.id.locationList)), 5), isDisplayed()));
         appCompatButton4.perform(click());
 
-        ViewInteraction appCompatButton5 = onView(allOf(withId(R.id.favoritesButton), withText("ADD"), childAtPosition(withParent(withId(R.id.locationList)), 5), isDisplayed()));
+        ViewInteraction appCompatButton5 = onView(allOf(withId(R.id.nextButton), withText("NEXT"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 0), isDisplayed()));
         appCompatButton5.perform(click());
 
-        ViewInteraction appCompatButton6 = onView(allOf(withId(R.id.favoritesButton), withText("ADD"), childAtPosition(withParent(withId(R.id.locationList)), 5), isDisplayed()));
+        ViewInteraction appCompatButton6 = onView(allOf(withId(R.id.reviewItineraryButton), withText("CREATE TOUR"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 2), isDisplayed()));
         appCompatButton6.perform(click());
-
-        ViewInteraction appCompatButton7 = onView(allOf(withId(R.id.favoritesButton), withText("ADD"), childAtPosition(withParent(withId(R.id.locationList)), 5), isDisplayed()));
-        appCompatButton7.perform(click());
-
-        ViewInteraction appCompatButton8 = onView(allOf(withId(R.id.favoritesButton), withText("ADD"), childAtPosition(withParent(withId(R.id.locationList)), 5), isDisplayed()));
-        appCompatButton8.perform(click());
-
-        ViewInteraction appCompatButton9 = onView(allOf(withId(R.id.favoritesButton), withText("ADD"), childAtPosition(withParent(withId(R.id.locationList)), 5), isDisplayed()));
-        appCompatButton9.perform(click());
-
-        ViewInteraction appCompatButton10 = onView(allOf(withId(R.id.favoritesButton), withText("ADD"), childAtPosition(withParent(withId(R.id.locationList)), 5), isDisplayed()));
-        appCompatButton10.perform(click());
-
-        ViewInteraction appCompatButton11 = onView(allOf(withId(R.id.favoritesButton), withText("ADD"), childAtPosition(withParent(withId(R.id.locationList)), 5), isDisplayed()));
-        appCompatButton11.perform(click());
-
-        ViewInteraction appCompatButton12 = onView(allOf(withId(R.id.nextButton), withText("NEXT"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 0), isDisplayed()));
-        appCompatButton12.perform(click());
-
-        ViewInteraction appCompatButton13 = onView(allOf(withId(R.id.reviewItineraryButton), withText("CREATE TOUR"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 2), isDisplayed()));
-        appCompatButton13.perform(click());
     }
 }
