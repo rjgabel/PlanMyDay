@@ -278,7 +278,9 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         FirebaseUser currentUser = mAuth.getCurrentUser();
         uid = currentUser.getUid();
         Log.d("FIREBASE", uid);
-        Log.d("FIREBASE", currentUser.getDisplayName());
+        if (currentUser.getDisplayName() != null) {
+            Log.d("FIREBASE", currentUser.getDisplayName());
+        }
         if(currentUser == null){
             //send to mainActivity
             startActivity(new Intent(this, MainActivity.class));
