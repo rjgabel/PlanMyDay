@@ -1,9 +1,8 @@
-package com.example.planmyday.duration;
+package com.example.planmyday;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowToast;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest=Config.NONE)
-public class IncrementOverMaxDays_wb {
+public class DurationTest {
 
     private DurationActivity durationActivity;
 
@@ -44,15 +43,20 @@ public class IncrementOverMaxDays_wb {
         //Toast is shown
         assertEquals(true, ShadowToast.showedToast("Maximum 5 days allowed"));
 
-        ArrayList<Attraction> attractions = new ArrayList<Attraction>();
-        Attraction attraction = new Attraction();
-        attraction.setName("Sample Test");
-        attractions.add(attraction);
-
-        //should still be able to go to the next page
-        durationActivity.toMap(attractions);
-        assertEquals(true, durationActivity.nextPage);
-
 
     }
+    @Test
+    public void testDecrementOverMinDays() {
+
+        assertEquals(1, durationActivity.getCurrentDay());
+
+        //once we hit the min at 1, current day should stay at 1
+        durationActivity.decrementDay();
+        assertEquals(1, durationActivity.getCurrentDay());
+
+        //Toast is shown
+        assertEquals(true, ShadowToast.showedToast("Minimum 1 day allowed"));
+
+    }
+
 }

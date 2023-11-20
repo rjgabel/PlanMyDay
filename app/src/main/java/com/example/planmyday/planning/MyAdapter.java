@@ -93,13 +93,15 @@ public class MyAdapter extends ArrayAdapter<String> {
 
         // Get background drawable
         Drawable buttonBackground = mViewHolder.favoritesButton.getBackground();
+        Button button = mViewHolder.favoritesButton;
 
         if(isAdded[position].equals("ADD")) {
             // Set color on drawable
             buttonBackground.setColorFilter(Color.parseColor("#c2c4c3"), PorterDuff.Mode.SRC_IN);
-
+            button.setTextColor(Color.parseColor("#000001"));
         } else {
             buttonBackground.setColorFilter(Color.parseColor("#11CA9D"), PorterDuff.Mode.SRC_IN);
+            button.setTextColor(Color.parseColor("#000000"));
         }
 
 // Set colored drawable as background

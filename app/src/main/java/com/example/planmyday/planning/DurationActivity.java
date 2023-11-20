@@ -90,6 +90,7 @@ public class DurationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 incrementDay();
+                updateDayTextView();
             }
         });
 
@@ -97,6 +98,7 @@ public class DurationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 decrementDay();
+                updateDayTextView();
             }
         });
     }
@@ -129,7 +131,6 @@ public class DurationActivity extends AppCompatActivity {
     public void incrementDay() {
         if (currentDay < 5) {
             currentDay++;
-            updateDayTextView();
         } else {
             Toast.makeText(this, "Maximum 5 days allowed", Toast.LENGTH_SHORT).show();
         }
@@ -138,7 +139,6 @@ public class DurationActivity extends AppCompatActivity {
     public void decrementDay() {
         if (currentDay > 1) {
             currentDay--;
-            updateDayTextView();
         } else {
             Toast.makeText(this, "Minimum 1 day allowed", Toast.LENGTH_SHORT).show();
         }
@@ -148,7 +148,4 @@ public class DurationActivity extends AppCompatActivity {
         return currentDay;
     }
 
-    public void setCurrentDay(int day){
-        currentDay = day;
-    }
 }

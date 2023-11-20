@@ -273,6 +273,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         //toursRef.child(newPlanKey.toString()).setValue(sp);
         Log.d("FIREBASE", "saved to account");
     }
+
 //    @Override
 //    public void onStart() {
 //        super.onStart();
@@ -287,6 +288,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
 //        }
 //
 //    }
+
     private void setCameraView(double lat, double lon, double bounds) {
         //Overall map view window: 0.2 * 0.2 = 0.04
         double bottomBoundary = lat - bounds;
