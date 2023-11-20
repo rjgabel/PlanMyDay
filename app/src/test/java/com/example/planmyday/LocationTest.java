@@ -1,9 +1,10 @@
-package com.example.planmyday.locations;
+package com.example.planmyday;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowToast;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,7 +13,7 @@ import com.example.planmyday.planning.LocationsActivity;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest=Config.NONE)
-public class Add_RemoveAttractionTest {
+public class LocationTest {
 
     private LocationsActivity locationsActivity;
 
@@ -22,10 +23,7 @@ public class Add_RemoveAttractionTest {
     }
 
     @Test
-    public void testAddRemoveAttraction() {
-
-
-       //Test add to favorites
+    public void testAddAttraction() {
         Attraction attraction = new Attraction();
         attraction.setName("Sample Test");
         locationsActivity.addToFavorites(attraction);
@@ -41,5 +39,32 @@ public class Add_RemoveAttractionTest {
 
         // Verify that the attraction is removed from selectedAttractions. There should be no more attractions
         assertEquals(0, locationsActivity.selectedAttractions.size());
+    }
+
+    @Test
+    public void testRemoveAttraction() {
+        Attraction attraction = new Attraction();
+        attraction.setName("Sample Test");
+        locationsActivity.addToFavorites(attraction);
+
+        //Test remove from favorites
+        locationsActivity.addToFavorites(attraction);
+
+        // Verify that the attraction is removed from selectedAttractions. There should be no more attractions
+        assertEquals(0, locationsActivity.selectedAttractions.size());
+    }
+
+    @Test
+    public void testEmptyLocationInput() {
+
+        // Call the toDuration function while selectedAttractions is empty
+        locationsActivity.toDuration("usc");
+
+        assertEquals(0, locationsActivity.selectedAttractions.size());
+
+        //Toast is shown
+        assertEquals(true, ShadowToast.showedToast("No selected attractions"));
+        //Does not go to the next page
+        assertEquals(false, locationsActivity.nextPage);
     }
 }
