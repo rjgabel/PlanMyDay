@@ -77,7 +77,7 @@ import java.util.List;
 
 public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    GoogleMap map;
+    public GoogleMap map;
     //FusedLocationProviderClient mFusionLocationProviderClient;
     LatLngBounds mMapBoundary;
     Location userLocation;
@@ -92,23 +92,25 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     TextView estimated;
     Button dir;
     Button saveButton;
-    ArrayList<TourPlan> tourPlans;
+    public ArrayList<TourPlan> tourPlans;
     GeoApiContext mGeoApiContext;
-    int currDay = 0;
+    public int currDay = 0;
     double bounds;
     FirebaseAuth mAuth;
     UserAccount userAccount;
     String uid;
     String type;
-    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://planmyday-16506-default-rtdb.firebaseio.com/");
+    //DatabaseReference dbRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://planmyday-16506-default-rtdb.firebaseio.com/");
     TravelMode travelMode;
     SwitchMaterial toggle;
+    private static Context context;
 
     //TODO: check for all permissions
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_itinerary);
+        ItineraryActivity.context = this;
 
         back = findViewById(R.id.back);
         front = findViewById(R.id.forward);
@@ -252,7 +254,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                     .build();
         }
 
-        mAuth = FirebaseAuth.getInstance();
+        //mAuth = FirebaseAuth.getInstance();
                 //getLastKnownLocation();
         //saveToDB();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -262,29 +264,29 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     }
     //save TourPlan to user's file
     public void saveToDB(){
-        DatabaseReference userRef = dbRef.child("users").child(uid);
-        DatabaseReference toursRef = userRef.child("tours");
-        String newPlanKey = toursRef.push().getKey();
-        Log.d("FIREBASE", newPlanKey);
+        //DatabaseReference userRef = dbRef.child("users").child(uid);
+        //DatabaseReference toursRef = userRef.child("tours");
+        //String newPlanKey = toursRef.push().getKey();
+        //Log.d("FIREBASE", newPlanKey);
         //SavedPlan sp = new SavedPlan(attractions, tourPlans.size(), "Jan 31, 2003");
 
         //toursRef.child(newPlanKey.toString()).setValue(sp);
         Log.d("FIREBASE", "saved to account");
     }
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        uid = currentUser.getUid();
-        Log.d("FIREBASE", uid);
-        Log.d("FIREBASE", currentUser.getDisplayName());
-        if(currentUser == null){
-            //send to mainActivity
-            startActivity(new Intent(this, MainActivity.class));
-        }
-
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        // Check if user is signed in (non-null) and update UI accordingly.
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        uid = currentUser.getUid();
+//        Log.d("FIREBASE", uid);
+//        Log.d("FIREBASE", currentUser.getDisplayName());
+//        if(currentUser == null){
+//            //send to mainActivity
+//            startActivity(new Intent(this, MainActivity.class));
+//        }
+//
+//    }
     private void setCameraView(double lat, double lon, double bounds) {
         //Overall map view window: 0.2 * 0.2 = 0.04
         double bottomBoundary = lat - bounds;
@@ -346,13 +348,14 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
 
         //Log.d("AtLat", String.valueOf(attractions.get(0).getLatitude()));
         map = googleMap;
+        map.clear();
         updateStops();
         setCameraView(34.0224, 118.2851, bounds);
         map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(34.0224, -118.2851)));
     }
 
     //must give credit to coding w mitch
-    private void calculateDirections(double oLat, double oLng, double dLat, double dLng, boolean first, TravelMode travelMode){
+    public void calculateDirections(double oLat, double oLng, double dLat, double dLng, boolean first, TravelMode travelMode){
         String TAG = "Dir";
         Log.d(TAG, "calculateDirections: calculating directions.");
 

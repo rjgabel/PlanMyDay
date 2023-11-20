@@ -21,7 +21,7 @@ import java.util.HashMap;
 public class CreateAttractions {
     Context context;
     ArrayList<Attraction> attractions;
-    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://planmyday-16506-default-rtdb.firebaseio.com/");
+
 
     public CreateAttractions(Context context){
         attractions = new ArrayList<>();

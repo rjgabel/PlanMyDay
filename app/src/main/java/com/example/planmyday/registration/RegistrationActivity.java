@@ -41,7 +41,7 @@ public class RegistrationActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     String uid;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         //TODO: add name for registration
@@ -132,6 +132,63 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void finishRegister(String name, String email, String password, String confirmPassword){
+        //check if they are empty
+        if (TextUtils.isEmpty(name)){
+            Toast.makeText(RegistrationActivity.this,"Enter name", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(email)){
+            Toast.makeText(RegistrationActivity.this,"Enter email", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //TODO: check for email formatting
+        if (TextUtils.isEmpty(password)){
+            Toast.makeText(RegistrationActivity.this,"Enter password", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (password.length() < 6){
+            Toast.makeText(RegistrationActivity.this,"Password must be at least 6 characters long", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!password.equals(confirmPassword)){
+            Toast.makeText(RegistrationActivity.this,"Passwords do not match", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        ArrayList<SavedPlan> temp = new ArrayList<>();
+//                CreateAttractions ca = new CreateAttractions(context);
+//                ca.generate();
+//                ArrayList<Attraction> arr = ca.getAttractions();
+//                SavedPlan sp = new SavedPlan("hi", arr, 5, "Jan 31, 2003");
+//                SavedPlan sp = new SavedPlan(arr, 5, "Jan 31, 2003");
+//                temp.add(sp);
+        UserAccount userAccount = new UserAccount(name, email, password, temp);
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            String uid = user.getUid();
+                            dbRef.child("users").child(uid).setValue(userAccount);
+                            Toast.makeText(RegistrationActivity.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
+                            mAuth.signOut();
+                            toLogin();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            if (task.getException() != null) {
+                                Log.e("FirebaseAuth", task.getException().getMessage());
+                                String str = task.getException().getMessage();
+                                Toast.makeText(RegistrationActivity.this, str,
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
     }
 
     private void toLogin(){

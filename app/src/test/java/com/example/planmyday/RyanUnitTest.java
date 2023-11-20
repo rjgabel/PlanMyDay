@@ -1,16 +1,46 @@
 package com.example.planmyday;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.example.planmyday.map.TourOptimizer;
 import com.example.planmyday.models.Attraction;
+import com.example.planmyday.models.TourPlan;
+import com.example.planmyday.planning.CreateAttractions;
+import com.example.planmyday.planning.LATour;
+import com.example.planmyday.planning.USCTour;
+import com.google.firebase.FirebaseApp;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
+import org.w3c.dom.Attr;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+@RunWith(RobolectricTestRunner.class)
 public class RyanUnitTest {
+    @Before
+    public void setUp(){
+    }
+
+    //WRITTEN BY TYLER TRAN
+    @Test
+    public void tours_on_multiple_days(){
+        ArrayList<Attraction> attractions = new ArrayList<>();
+        for (int i = 0; i < 12; i++){
+            Attraction attraction =
+                    new Attraction("1", "address", false, "description", 1, 1, null, "image", 34.022415, -118.285530);
+        }
+
+        //ArrayList<TourPlan> optimizedTour =
+    }
+
     @Test
     public void tourOptimizer_attractionsNull() {
         assertNull(TourOptimizer.optimizeTour(null, 1));
