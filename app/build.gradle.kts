@@ -11,6 +11,7 @@ android {
 
     testOptions {
         unitTests.isReturnDefaultValues = true
+        animationsDisabled = true
     }
     defaultConfig {
         applicationId = "com.example.planmyday"

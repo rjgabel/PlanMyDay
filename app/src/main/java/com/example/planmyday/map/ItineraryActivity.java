@@ -185,7 +185,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                     if(currDay < tourPlans.size()){
                         front.setText("→");
                     }
-                    currDay--;
+                    updateDay(-1);
                     updateStops();
                     day.setText("Day " + (currDay+1));
                     estimated.setText("estimated route time: "+TourOptimizer.calculateTotalTime(tourPlans.get(currDay))+"" + " min");
@@ -203,7 +203,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
             public void onClick(View v) {
 
                 if(currDay < tourPlans.size() - 1) {
-                    currDay++;
+                    updateDay(1);
                     updateStops();
                     day.setText("Day "+(currDay+1));
                     estimated.setText("estimated route time: "+TourOptimizer.calculateTotalTime(tourPlans.get(currDay))+"" + " min");

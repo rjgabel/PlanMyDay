@@ -23,23 +23,11 @@ import org.w3c.dom.Attr;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-@RunWith(RobolectricTestRunner.class)
 public class RyanUnitTest {
     @Before
     public void setUp(){
     }
 
-    //WRITTEN BY TYLER TRAN
-    @Test
-    public void tours_on_multiple_days(){
-        ArrayList<Attraction> attractions = new ArrayList<>();
-        for (int i = 0; i < 12; i++){
-            Attraction attraction =
-                    new Attraction("1", "address", false, "description", 1, 1, null, "image", 34.022415, -118.285530);
-        }
-
-        //ArrayList<TourPlan> optimizedTour =
-    }
 
     @Test
     public void tourOptimizer_attractionsNull() {
