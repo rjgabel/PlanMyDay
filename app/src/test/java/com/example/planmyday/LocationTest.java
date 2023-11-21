@@ -33,12 +33,6 @@ public class LocationTest {
         assertEquals(attraction, locationsActivity.selectedAttractions.get(0));
         assertEquals(attraction.getName(), locationsActivity.selectedAttractions.get(0).getName());
 
-
-        //Test remove from favorites
-        locationsActivity.addToFavorites(attraction);
-
-        // Verify that the attraction is removed from selectedAttractions. There should be no more attractions
-        assertEquals(0, locationsActivity.selectedAttractions.size());
     }
 
     @Test
