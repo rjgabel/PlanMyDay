@@ -35,7 +35,7 @@ public class LocationsActivity extends AppCompatActivity {
     public ArrayList<Attraction> selectedAttractions = new ArrayList<Attraction>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_locations);
         Intent intent = getIntent();
