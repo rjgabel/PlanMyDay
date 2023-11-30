@@ -55,6 +55,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.auth.FirebaseAuth;
@@ -105,6 +106,8 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     SwitchMaterial toggle;
     private static Context context;
 
+    private FusedLocationProviderClient fusedLocationClient;
+
     //TODO: check for all permissions
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +126,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         Intent intent = getIntent();
         Bundle args2 = intent.getBundleExtra("BUNDLE2");
         attractions = (ArrayList<Attraction>) args2.getSerializable("ARRAYLIST2");
-        for (int i = 0; i < attractions.size(); i++){
+        for (int i = 0; i < attractions.size(); i++) {
             Log.d("SA2", attractions.get(i).getName());
         }
         //Set TourOptimizer
@@ -139,14 +142,13 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
 
         String type = intent.getStringExtra(Intent.EXTRA_TEXT);
         tt = findViewById(R.id.itinerary);
-        if (type.equals("usc")){
+        if (type.equals("usc")) {
             tt.setText("USC Itinerary");
             travelMode = TravelMode.WALKING;
             this.type = "usc";
             bounds = 0.0075;
             toggle.setVisibility(View.GONE);
-        }
-        else if (type.equals("la")){
+        } else if (type.equals("la")) {
             tt.setText("LA Itinerary");
             travelMode = TravelMode.DRIVING;
             this.type = "la";
@@ -154,9 +156,8 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         }
 
         estimated = findViewById(R.id.estimatedRouteTime);
-        Log.d("hello", TourOptimizer.calculateTotalTime(tourPlans.get(currDay))+"");
-        estimated.setText("estimated route time: "+TourOptimizer.calculateTotalTime(tourPlans.get(currDay))+"" + " min");
-
+        Log.d("hello", TourOptimizer.calculateTotalTime(tourPlans.get(currDay)) + "");
+        estimated.setText("estimated route time: " + TourOptimizer.calculateTotalTime(tourPlans.get(currDay)) + "" + " min");
 
 
         //VIEWS AND ONCLICKLISTENERS
@@ -165,54 +166,53 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         home.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-               goHome();
+                goHome();
             }
         });
 
 
-
         itineraryList = findViewById(R.id.itineraryList);
 
-        if(tourPlans.size() == 1){
+        if (tourPlans.size() == 1) {
             front.setText("");
         }
 
         //set onClickListeners
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(currDay > 0) {
+                if (currDay > 0) {
 
-                    if(currDay < tourPlans.size()){
+                    if (currDay < tourPlans.size()) {
                         front.setText("→");
                     }
                     updateDay(-1);
                     updateStops();
-                    day.setText("Day " + (currDay+1));
-                    estimated.setText("estimated route time: "+TourOptimizer.calculateTotalTime(tourPlans.get(currDay))+"" + " min");
+                    day.setText("Day " + (currDay + 1));
+                    estimated.setText("estimated route time: " + TourOptimizer.calculateTotalTime(tourPlans.get(currDay)) + "" + " min");
 
-                    if(currDay == 0){
+                    if (currDay == 0) {
                         back.setText("");
                     }
                 }
 
-               goToAdapter();
+                goToAdapter();
             }
         });
 
         front.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                if(currDay < tourPlans.size() - 1) {
+                if (currDay < tourPlans.size() - 1) {
                     updateDay(1);
                     updateStops();
-                    day.setText("Day "+(currDay+1));
-                    estimated.setText("estimated route time: "+TourOptimizer.calculateTotalTime(tourPlans.get(currDay))+"" + " min");
+                    day.setText("Day " + (currDay + 1));
+                    estimated.setText("estimated route time: " + TourOptimizer.calculateTotalTime(tourPlans.get(currDay)) + "" + " min");
                 }
-                if(currDay > 0){
+                if (currDay > 0) {
                     back.setText("←");
                 }
 
-                if(currDay == tourPlans.size() - 1){
+                if (currDay == tourPlans.size() - 1) {
                     front.setText("");
                 }
 
@@ -248,22 +248,22 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
 //            }
 //        });
 
-        if (mGeoApiContext == null){
+        if (mGeoApiContext == null) {
             mGeoApiContext = new GeoApiContext.Builder()
                     .apiKey(getString(R.string.maps_key))
                     .build();
         }
 
         //mAuth = FirebaseAuth.getInstance();
-                //getLastKnownLocation();
+        //getLastKnownLocation();
         //saveToDB();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
     }
+
     //save TourPlan to user's file
-    public void saveToDB(){
+    public void saveToDB() {
         //DatabaseReference userRef = dbRef.child("users").child(uid);
         //DatabaseReference toursRef = userRef.child("tours");
         //String newPlanKey = toursRef.push().getKey();
@@ -304,27 +304,26 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         //map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(userLocation.getLatitude(), userLocation.getLongitude())));
     }
 
-    public void updateDay(int diff){
+    public void updateDay(int diff) {
         currDay += diff;
     }
 
-    public void updateStops(){
+    public void updateStops() {
         //reset the map markers
         map.clear();
         //set the new stops
         ArrayList<TourStop> stops = tourPlans.get(currDay).getStops();
         Attraction lastAttraction = null;
         int num = 1;
-        for (TourStop stop : stops){
+        for (TourStop stop : stops) {
             Attraction currAttraction = stop.getAttraction();
             LatLng curr = new LatLng(currAttraction.getLatitude(), currAttraction.getLongitude());
-            Marker marker = map.addMarker(new MarkerOptions().position(curr).title(num+": "+currAttraction.getName()));
+            Marker marker = map.addMarker(new MarkerOptions().position(curr).title(num + ": " + currAttraction.getName()));
             //create path between curr and last one
-            if (num == 2){
+            if (num == 2) {
                 calculateDirections(lastAttraction.getLatitude(), lastAttraction.getLongitude(),
                         currAttraction.getLatitude(), currAttraction.getLongitude(), true, travelMode);
-            }
-            else if (num > 2) {
+            } else if (num > 2) {
                 calculateDirections(lastAttraction.getLatitude(), lastAttraction.getLongitude(),
                         currAttraction.getLatitude(), currAttraction.getLongitude(), false, travelMode);
             }
@@ -341,7 +340,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
 //        }
     }
 
-    public void goHome(){
+    public void goHome() {
         Intent intentHome = new Intent(ItineraryActivity.this, HomepageActivity.class);
         startActivity(intentHome);
         finish();
@@ -364,7 +363,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     }
 
     //must give credit to coding w mitch
-    public void calculateDirections(double oLat, double oLng, double dLat, double dLng, boolean first, TravelMode travelMode){
+    public void calculateDirections(double oLat, double oLng, double dLat, double dLng, boolean first, TravelMode travelMode) {
         String TAG = "Dir";
         Log.d(TAG, "calculateDirections: calculating directions.");
 
@@ -382,10 +381,9 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                 )
         );
         Log.d("TOURTYPE", type);
-        if (type != null && type.equals("usc")){
+        if (type != null && type.equals("usc")) {
             directions.mode(TravelMode.WALKING);
-        }
-        else {
+        } else {
             directions.mode(travelMode);
         }
 
@@ -402,25 +400,25 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
 
             @Override
             public void onFailure(Throwable e) {
-                Log.e(TAG, "calculateDirections: Failed to get directions: " + e.getMessage() );
+                Log.e(TAG, "calculateDirections: Failed to get directions: " + e.getMessage());
 
             }
         });
     }
 
-    private void addPolylinesToMap(final DirectionsResult result, boolean first){
+    private void addPolylinesToMap(final DirectionsResult result, boolean first) {
         Context context = this;
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
                 String TAG = "POLYLINE";
                 Log.d(TAG, "run: result routes: " + result.routes.length);
-                for(DirectionsRoute route: result.routes){
+                for (DirectionsRoute route : result.routes) {
                     Log.d(TAG, "run: leg: " + route.legs[0].toString());
                     List<com.google.maps.model.LatLng> decodedPath = PolylineEncoding.decode(route.overviewPolyline.getEncodedPath());
                     List<LatLng> newDecodedPath = new ArrayList<>();
 // This loops through all the LatLng coordinates of ONE polyline.
-                    for(com.google.maps.model.LatLng latLng: decodedPath){
+                    for (com.google.maps.model.LatLng latLng : decodedPath) {
 //                        Log.d(TAG, "run: latlng: " + latLng.toString());
                         newDecodedPath.add(new LatLng(
                                 latLng.lat,
@@ -435,7 +433,8 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
             }
         });
     }
-    public void toGoogleMaps(TourPlan tp){
+
+    public void toGoogleMaps(TourPlan tp) {
         ArrayList<TourStop> stops = tp.getStops();
         //stops.get(currDay).getAttraction().getLatitude();
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -447,7 +446,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                         //if (currLoc != null) origin = String.valueOf(currLoc.latitude) + "," + String.valueOf(currLoc.longitude);
                         //last location
                         //String destination = "34.136555,-118.294197";
-                        Attraction lastDest = stops.get(stops.size()-1).getAttraction();
+                        Attraction lastDest = stops.get(stops.size() - 1).getAttraction();
                         String dest = lastDest.getLatitude() + "," + lastDest.getLongitude();
                         //intermediary
                         Log.d("SS1", String.valueOf(stops.size()));
@@ -456,7 +455,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                             waypts += "|" + stops.get(i).getAttraction().getLatitude() + "," + stops.get(i).getAttraction().getLongitude();
                         }
                         //String query = "origin=my location"+ "&destination=" + dest + "&waypoints=" + waypts;
-                        String query = "origin="+ origin + "&destination=" + dest + "&waypoints=" + waypts;
+                        String query = "origin=" + origin + "&destination=" + dest + "&waypoints=" + waypts;
 
                         String latitude = String.valueOf(stops.get(0).getAttraction().getLatitude());
                         String longitude = String.valueOf(stops.get(0).getAttraction().getLongitude());
@@ -466,12 +465,12 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                         mapIntent.setPackage("com.google.android.apps.maps");
 
-                        try{
+                        try {
                             if (mapIntent.resolveActivity(getPackageManager()) != null) {
                                 startActivity(mapIntent);
                             }
-                        }catch (NullPointerException e){
-                            Log.e("MapErr", "onClick: NullPointerException: Couldn't open map." + e.getMessage() );
+                        } catch (NullPointerException e) {
+                            Log.e("MapErr", "onClick: NullPointerException: Couldn't open map." + e.getMessage());
                             //Toast.makeText("Please allow permissions to view map", Toast.LENGTH_SHORT).show();
                         }
 
@@ -489,21 +488,43 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 1){
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //getLastKnownLocation();
-            }
-            else {
+            } else {
                 Toast.makeText(this, "Please allow permissions to view map", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    public void goToAdapter(){
+    public void goToAdapter() {
         ArrayList<TourStop> tourStops = tourPlans.get(currDay).getStops();
         TourStop[] stops = new TourStop[tourStops.size()];
         stops = tourStops.toArray(stops);
         ItineraryAdapter itineraryAdapter = new ItineraryAdapter(ItineraryActivity.this, stops);
         itineraryList.setAdapter(itineraryAdapter);
+    }
+
+    public void getLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            // Logic to handle location object
+                        }
+                    }
+                });
     }
 }
