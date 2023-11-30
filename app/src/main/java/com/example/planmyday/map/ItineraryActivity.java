@@ -331,7 +331,14 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
             lastAttraction = currAttraction;
             num++;
         }
-        //create lines
+        //current location, if available
+        //make sure if (num==2 && currLoc != null)
+//        LatLng currLoc = new LatLng();
+//        if (currLoc != null){
+//            Marker maker = map.addMarker(new MarkerOptions().position(currLoc).title("Your location");
+//            calculateDirections(currLoc.latitude, currLoc.longitude, stops.get(0).getAttraction().getLatitude(),
+//                    stops.get(0).getAttraction().getLongitude(),true, travelMode);
+//        }
     }
 
     public void goHome(){
@@ -437,6 +444,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         String origin = "34.0224,-118.2851";
+                        //if (currLoc != null) origin = String.valueOf(currLoc.latitude) + "," + String.valueOf(currLoc.longitude);
                         //last location
                         //String destination = "34.136555,-118.294197";
                         Attraction lastDest = stops.get(stops.size()-1).getAttraction();
