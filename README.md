@@ -36,5 +36,5 @@ image was placed into the implementation documentation to show what the email lo
 
 -------------------------------------------------------------------------------------------------------
 # Improvements made in Project 2.5 Sprint
-PlanMyDay now accounts for user's location! In the itinerary page, the user will be asked permission to access their current location. 
-Our app shows the route from the user's current location to the first attraction in their itinerary.
+PlanMyDay now accounts for user's location! In the itinerary page, the user will be asked permission for the app to access their current location. 
+PlanMyDay then shows the route from the user's current location to the first attraction in their itinerary.
