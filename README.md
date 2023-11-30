@@ -33,3 +33,8 @@ image was placed into the implementation documentation to show what the email lo
 - The itinerary assumes starting the route at the earliest time the first place opens
 - All times are in drive time despite the routes being shown as walking or public transport
 - In our app, Day One Represents Sunday
+
+-------------------------------------------------------------------------------------------------------
+Improvements made in Project 2.5 Sprint
+PlanMyDay now accounts for user's location! In the itinerary page, user will be asked permission to access their current location. 
+Our app shows the route from the user's current location to the first attraction in their itinerary.
