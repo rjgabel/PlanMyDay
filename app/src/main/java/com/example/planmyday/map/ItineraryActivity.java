@@ -106,7 +106,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
     SwitchMaterial toggle;
     private static Context context;
 
-    private LatLng currLoc;
+    LatLng currLoc;
 
     private FusedLocationProviderClient fusedLocationClient;
 
@@ -119,7 +119,6 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         getLocationPermission();
-        //getLocation();
 
         back = findViewById(R.id.back);
         front = findViewById(R.id.forward);
@@ -325,10 +324,15 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
             LatLng curr = new LatLng(currAttraction.getLatitude(), currAttraction.getLongitude());
             Marker marker = map.addMarker(new MarkerOptions().position(curr).title(num + ": " + currAttraction.getName()));
             //create path between curr and last one
-            if (num == 2) {
+            if (num == 2 && currLoc == null) {
                 calculateDirections(lastAttraction.getLatitude(), lastAttraction.getLongitude(),
                         currAttraction.getLatitude(), currAttraction.getLongitude(), true, travelMode);
-            } else if (num > 2) {
+            }
+            else if (num == 2 && currLoc != null){
+                calculateDirections(lastAttraction.getLatitude(), lastAttraction.getLongitude(),
+                        currAttraction.getLatitude(), currAttraction.getLongitude(), false, travelMode);
+            }
+            else if (num > 2) {
                 calculateDirections(lastAttraction.getLatitude(), lastAttraction.getLongitude(),
                         currAttraction.getLatitude(), currAttraction.getLongitude(), false, travelMode);
             }
@@ -337,12 +341,12 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         }
         //current location, if available
         //make sure if (num==2 && currLoc != null)
-//        LatLng currLoc = new LatLng();
-//        if (currLoc != null){
-//            Marker maker = map.addMarker(new MarkerOptions().position(currLoc).title("Your location");
-//            calculateDirections(currLoc.latitude, currLoc.longitude, stops.get(0).getAttraction().getLatitude(),
-//                    stops.get(0).getAttraction().getLongitude(),true, travelMode);
-//        }
+        Log.d("LOC_PERM", String.valueOf(currLoc != null));
+        if (currLoc != null){
+            Marker maker = map.addMarker(new MarkerOptions().position(currLoc).title("Your location"));
+            calculateDirections(currLoc.latitude, currLoc.longitude, stops.get(0).getAttraction().getLatitude(),
+                    stops.get(0).getAttraction().getLongitude(),true, travelMode);
+        }
     }
 
     public void goHome() {
@@ -362,7 +366,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         //Log.d("AtLat", String.valueOf(attractions.get(0).getLatitude()));
         map = googleMap;
         map.clear();
-        updateStops();
+        getLocation();
         setCameraView(34.0224, 118.2851, bounds);
         map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(34.0224, -118.2851)));
     }
@@ -448,7 +452,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         String origin = "34.0224,-118.2851";
-                        //if (currLoc != null) origin = String.valueOf(currLoc.latitude) + "," + String.valueOf(currLoc.longitude);
+                        if (currLoc != null) origin = String.valueOf(currLoc.latitude) + "," + String.valueOf(currLoc.longitude);
                         //last location
                         //String destination = "34.136555,-118.294197";
                         Attraction lastDest = stops.get(stops.size() - 1).getAttraction();
@@ -531,10 +535,13 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                                     Manifest.permission.ACCESS_COARSE_LOCATION,false);
                             if (fineLocationGranted != null && fineLocationGranted) {
                                 // Precise location access granted.
+                                getLocation();
                             } else if (coarseLocationGranted != null && coarseLocationGranted) {
                                 // Only approximate location access granted.
+                                getLocation();
                             } else {
                                 // No location access granted.
+                                getLocation();
                             }
                         }
                 );
@@ -549,36 +556,29 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                 Manifest.permission.ACCESS_COARSE_LOCATION
         });
 
+    }
 
-        getLocation();
+    public void setLoc(LatLng loc){
+        currLoc = loc;
     }
 
     public void getLocation() {
-        Log.d("LOC_PERMISSIONS", "Starting to get location");
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            Log.d("LOC_PERMISSIONS", "No location permission");
+            updateStops();
             return;
         }
-        Log.d("LOC_PERMISSIONS", "Permissions granted, Getting Location");
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location location) {
                         // Got last known location. In some rare situations this can be null.
-
-                        currLoc = new LatLng(location.getLatitude(), location.getLongitude());
-                        Log.d("LOC_PERMISSIONS", String.valueOf(currLoc.latitude));
                         if (location != null) {
-                            Log.d("LOC_PERMISSIONS", "Got Location");
+                            setLoc(new LatLng(location.getLatitude(), location.getLongitude()));
+                            Log.d("LOC_PERMISSIONS", String.valueOf(currLoc.latitude));
+                            updateStops();
                         }
                     }
                 });
+        // CAUSES CRASH -> Log.d("LOC_PERMISSIONS", String.valueOf(currLoc.latitude));
     }
 }
