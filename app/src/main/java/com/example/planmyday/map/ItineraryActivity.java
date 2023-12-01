@@ -573,8 +573,8 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
                     public void onSuccess(Location location) {
                         // Got last known location. In some rare situations this can be null.
 
-                        //currLoc = new LatLng(location.getLatitude(), location.getLongitude());
-                        //Log.d("LOC_PERMISSIONS", String.valueOf(currLoc.latitude));
+                        currLoc = new LatLng(location.getLatitude(), location.getLongitude());
+                        Log.d("LOC_PERMISSIONS", String.valueOf(currLoc.latitude));
                         if (location != null) {
                             Log.d("LOC_PERMISSIONS", "Got Location");
                         }
