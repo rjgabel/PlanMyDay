@@ -117,6 +117,7 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         setContentView(R.layout.activity_itinerary);
         ItineraryActivity.context = this;
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         getLocationPermission();
         //getLocation();
 
@@ -264,7 +265,6 @@ public class ItineraryActivity extends AppCompatActivity implements OnMapReadyCa
         //saveToDB();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
     //save TourPlan to user's file
