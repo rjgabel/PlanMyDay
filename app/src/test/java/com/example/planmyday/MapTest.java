@@ -77,10 +77,10 @@ public class MapTest {
         itineraryActivity = new ItineraryActivity();
         mockItineraryActivity = mock(ItineraryActivity.class);
 
-        mockedGeoApiContext = new GeoApiContext.Builder().apiKey(String.valueOf(R.string.maps_key)).build();
-        mockMap = mock(GoogleMap.class);
+        //mockedGeoApiContext = new GeoApiContext.Builder().apiKey(String.valueOf(R.string.maps_key)).build();
+        //mockMap = mock(GoogleMap.class);
 //        mockedDirectionsApiRequest = Mockito.mock(DirectionsApiRequest.class);
-        mockItineraryActivity.map = mockMap;
+        //mockItineraryActivity.map = mockMap;
     }
 
 
